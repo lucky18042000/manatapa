@@ -3,31 +3,188 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  background-color: #F6F1EB;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.blurinheader {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+/* Small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .material-bubble {
+    display: none;
+  }
+
+  .material-bubble1 {
+    background-color: transparent;
+    color: #A80018;
+    /* Adjusted for darken($darkblue, 10%) */
+    border: 1px;
+    padding: 8px 12px;
+    overflow: hidden;
+    box-shadow: none;
+    position: relative;
+    border-radius: 24px;
+    font-size: 12px;
+    line-height: 11px;
+  }
+
+  .material-bubble1:hover {
+    color: #f8f8f8;
+    /* Adjusted for $offwhite */
+  }
+
+  .material-bubble1::before {
+    content: "";
+    position: absolute;
+    border-radius: 24px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #A80018;
+    /* Adjusted for darken($darkblue, 10%) */
+    transition: opacity 0.3s, border 0.3s;
+  }
+
+  .material-bubble1:hover::before {
+    opacity: 0;
+  }
+
+  .material-bubble1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background-color: #A80018;
+    /* Adjusted for lighten($darkblue, 10%) */
+    border-color: transparent;
+    border-radius: 50%;
+    transform: translate(-10px, -70px) scale(0.1);
+    opacity: 0;
+    z-index: -1;
+    transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+  }
+
+  .material-bubble1:hover::after {
+    opacity: 1;
+    transform-origin: 100px 100px;
+    transform: scale(1) translate(-10px, -70px);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Medium devices (tablets, 600px to 768px) */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .material-bubble {
+    background-color: transparent;
+    color: #A80018;
+    /* Adjusted for darken($darkblue, 10%) */
+    border: 1px;
+    padding: 8px 12px;
+    overflow: hidden;
+    box-shadow: none;
+    position: relative;
+    border-radius: 24px;
+    font-size: 12px;
+    line-height: 11px;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Large devices (desktops, 769px and up) */
+@media only screen and (min-width: 769px) {
+  .material-bubble {
+    background-color: transparent;
+    color: #A80018;
+    /* Adjusted for darken($darkblue, 10%) */
+    border: 1px;
+    padding: 10px 14px;
+    overflow: hidden;
+    box-shadow: none;
+    position: relative;
+    border-radius: 24px;
+    font-size: 14px;
+    line-height: 11px;
   }
+
+  .homepagesection1 {
+    position: relative;
+    margin-top: 75px;
+    padding: 0px 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .homepagesection1video {
+    border-radius: 32px;
+    width: 100%;
+    height: 639px;
+    object-fit: cover;
+    background-image: linear-gradient(to bottom, #0E1012, #0E1012);
+  }
+
+  .homepagesection1text {
+    position: absolute;
+    font-size: 82px;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    line-height: 98px;
+  }
+}
+
+
+
+.material-bubble:hover {
+  color: #f8f8f8;
+  /* Adjusted for $offwhite */
+}
+
+.material-bubble::before {
+  content: "";
+  position: absolute;
+  border-radius: 24px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #A80018;
+  /* Adjusted for darken($darkblue, 10%) */
+  transition: opacity 0.3s, border 0.3s;
+}
+
+.material-bubble:hover::before {
+  opacity: 0;
+}
+
+.material-bubble::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  background-color: #A80018;
+  /* Adjusted for lighten($darkblue, 10%) */
+  border-color: transparent;
+  border-radius: 50%;
+  transform: translate(-10px, -70px) scale(0.1);
+  opacity: 0;
+  z-index: -1;
+  transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+}
+
+.material-bubble:hover::after {
+  opacity: 1;
+  transform-origin: 100px 100px;
+  transform: scale(1) translate(-10px, -70px);
 }
