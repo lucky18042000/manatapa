@@ -1,6 +1,6 @@
 import React from 'react'
 import localFont from 'next/font/local';
-import Header from '@/components/Header';
+import Header from '@/Components/Header';
 
 const roslindaleFont = localFont({
     src: '../fonts/Roslindale-DisplayNarrowRegular-Testing.ttf',
