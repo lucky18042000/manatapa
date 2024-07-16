@@ -22,9 +22,11 @@ function Header() {
                     <p className='material-bubble1 '>MENU</p>
                 </div>
             </div>
-            <div className='lg:hidden md:hidden block absolute bg-white rounded-[23px] w-full'>
+            <div className='lg:hidden md:hidden hidden absolute  bg-white rounded-[23px] w-full'>
                 <p className='text-center'>Stills</p>
                 <p className='text-center'>Motion</p>
+                <p className='text-center'>About</p>
+                <p className='text-center'>Contact</p>
             </div>
         </div>
     );
