@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import localFont from 'next/font/local';
 import Header from '@/Components/Header';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { db } from '@/lib/firebaseConfig';
 
 const roslindaleFont = localFont({
     src: '../fonts/Roslindale-DisplayNarrowRegular-Testing.ttf',
@@ -13,7 +13,6 @@ const roslindaleFont = localFont({
 function HomePage() {
     const [videoLinks, setVideoLinks] = useState([]);
     const [zoomoutImages, setZoomImages] = useState([])
-    const db = getFirestore(); // Assuming you've initialized Firebase properly
     const homepageVideoCollectionRef = collection(db, 'homepageVideo');
     const homepageZoomOutImagesCollectionRef = collection(db, 'homepageZoomOutImages');
 
