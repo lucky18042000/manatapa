@@ -1,0 +1,15 @@
+/* Small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Medium devices (tablets, 600px to 768px) */
+@media only screen and (min-width: 601px) and (max-width: 768px) {}
+
+/* Large devices (desktops, 769px and up) */
+@media only screen and (min-width: 769px) {
+    .aboutussection1{
+        margin-top: 150px;
+    }
+    .aboutussection1Title{
+        
+    }
+}

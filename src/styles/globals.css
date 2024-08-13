@@ -185,6 +185,19 @@ html {
     font-size: 14px;
     line-height: 11px;
   }
+  .material-bubble1 {
+    background-color: #A80018;
+    color: #FFF;
+    /* Adjusted for darken($darkblue, 10%) */
+    border: 1px;
+    padding: 10px 14px;
+    overflow: hidden;
+    box-shadow: none;
+    position: relative;
+    border-radius: 24px;
+    font-size: 14px;
+    line-height: 11px;
+  }
 
   .homepagesection1 {
     position: relative;

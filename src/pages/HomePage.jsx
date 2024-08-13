@@ -56,8 +56,8 @@ function HomePage() {
                 <video
                     ref={videoRef}
                     className='homepagesection1video border'
-                    poster={videoLinks.thumbnail}
-                    src={videoLinks.video}
+                    poster={videoLinks?.thumbnail}
+                    src={videoLinks?.video}
                     autoPlay
                     loop
                     muted

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 function Header() {
@@ -11,12 +12,12 @@ function Header() {
                     <p className='material-bubble '>STILLS</p>
                     <p className='material-bubble'>MOTION</p>
                 </div>
-                <div className='hidden md:block lg:block'>
+                <Link href={'/'} className='hidden md:block lg:block'>
                     <img className='w-[52px] h-[52px] ' src="/logo.png" alt="mantapalogo" />
-                </div>
+                </Link>
                 <div className='flex gap-[10px]'>
-                    <p className='material-bubble '>ABOUT</p>
-                    <p className='material-bubble'>CONTACT</p>
+                    <Link href={'/AboutUs'} className='material-bubble '>ABOUT</Link>
+                    <p className='material-bubble1'>CONTACT</p>
                 </div>
                 <div className='lg:hidden md:hidden block'>
                     <p className='material-bubble1 '>MENU</p>
