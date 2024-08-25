@@ -6,7 +6,7 @@
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
-    .aboutussection1 {
+    .motionsection1 {
         margin-top: 150px;
         display: flex;
         flex-direction: column;
@@ -14,7 +14,7 @@
         align-items: center;
     }
 
-    .aboutussection1Title {
+    .motionsection1Title {
         font-weight: 700;
         font-size: 128px;
         line-height: 98px;
@@ -22,14 +22,7 @@
         color: #A80018;
     }
 
-    .aboutussection1Image {
-        margin-top: 59px;
-        width: 498px;
-        height: 564px;
-        border-radius: 48px;
-    }
-
-    .aboutussection1para {
+    .motionsection1para {
         margin-top: 67px;
         width: 1083px;
         font-weight: 500;
@@ -37,17 +30,5 @@
         line-height: 45px;
         text-align: center;
         color: #A80018;
-    }
-
-    .aboutussection3 {
-        width: 100%;
-        height: 1200px;
-        display: flex;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-    }
-    .aboutussection4{
-        padding:0px 150px;
     }
 }

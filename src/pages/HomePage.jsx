@@ -138,7 +138,7 @@ function HomePage() {
                     <p className='material-bubble lg:mt-[29px]'>WATCH VIDEO</p>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
