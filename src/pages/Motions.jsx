@@ -26,7 +26,7 @@ function Motions() {
                     </h1>
                     <div className='homepagesection5motion 3dtiltingcardeffect'>
                         <div className='w-[780px] h-[480px] z-10'>
-                            <div class="motion-cms-play">
+                            <div className="motion-cms-play">
                                 <svg width="20%" viewBox="0 0 20 23" fill="#FFF" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19 9.76795C20.3333 10.5378 20.3333 12.4623 19 13.2321L3.25 22.3253C1.91667 23.0951 0.250001 22.1329 0.250001 20.5933L0.250002 2.40673C0.250002 0.867131 1.91667 -0.0951185 3.25 0.674682L19 9.76795Z" fill="#FFF"></path>
                                 </svg>

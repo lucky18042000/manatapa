@@ -28,12 +28,12 @@ function Header() {
                 <Link href={'/'} className='hidden md:block lg:block'>
                     <img className='w-[52px] h-[52px] cursor-pointer' src="/logo.png" alt="mantapalogo" />
                 </Link>
-                <div className='flex gap-[10px]'>
+                <div className=' gap-[10px] hidden md:flex lg:flex'>
                     <Link href={'/AboutUs'} className='material-bubble cursor-pointer'>ABOUT</Link>
-                    <p onClick={() => { setOpenContactForm(!openContactForm) }} className='material-bubble1 cursor-pointer'>CONTACT</p>
+                    <p onClick={() => { setOpenContactForm(!openContactForm) }} className='material-bubble !text-white !bg-[#A80018] cursor-pointer'>CONTACT</p>
                 </div>
                 <div className='lg:hidden md:hidden block'>
-                    <p className='material-bubble1 '>MENU</p>
+                    <p onClick={() => { setOpenContactForm(!openContactForm) }} className='material-bubble1 '>MENU</p>
                 </div>
             </div>
             <div className='lg:hidden md:hidden hidden absolute  bg-white rounded-[23px] w-full'>
@@ -43,7 +43,7 @@ function Header() {
                 <p className='text-center'>Contact</p>
             </div>
             <CustomModal isOpen={openContactForm} onClose={() => setOpenContactForm(!openContactForm)}>
-                <div className='w-[607px]  bg-[#A80018] py-[44px]'>
+                <div className='w-[307px] lg:w-[607px]  bg-[#A80018] py-[44px]'>
                     <h1 className={`headerConatctTitle ${roslindaleFont.className}`}>
                         Contact Us
                     </h1>
