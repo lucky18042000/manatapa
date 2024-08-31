@@ -47,7 +47,7 @@ input[type=number] {
 }
 
 /* Small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .material-bubble {
     display: none;
   }
@@ -258,49 +258,6 @@ input[type=number] {
     transform: translateZ(64px);
   }
 
-}
-
-/* Medium devices (tablets, 600px to 768px) */
-@media only screen and (min-width: 601px) and (max-width: 768px) {
-  .material-bubble {
-    background-color: transparent;
-    color: #A80018;
-    /* Adjusted for darken($darkblue, 10%) */
-    border: 1px;
-    padding: 8px 12px;
-    overflow: hidden;
-    box-shadow: none;
-    position: relative;
-    border-radius: 24px;
-    font-size: 12px;
-    line-height: 11px;
-  }
-
-  .homepagesection1 {
-    position: relative;
-    margin-top: 75px;
-    padding: 0px 56px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .homepagesection1video {
-    border-radius: 32px;
-    width: 100%;
-    height: 639px;
-    object-fit: cover;
-    background-image: linear-gradient(to bottom, #0E1012, #0E1012);
-  }
-
-  .homepagesection1text {
-    position: absolute;
-    font-size: 82px;
-    color: white;
-    text-align: center;
-    font-weight: 600;
-    line-height: 98px;
-  }
 }
 
 /* Large devices (desktops, 769px and up) */
