@@ -1,8 +1,31 @@
 /* Small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 768px) {
+    .motionsection1 {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-/* Medium devices (tablets, 600px to 768px) */
-@media only screen and (min-width: 601px) and (max-width: 768px) {}
+    .motionsection1Title {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 98px;
+        text-align: center;
+        color: #A80018;
+    }
+
+    .motionsection1para {
+        /* margin-top: 67px; */
+        width: 349px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        color: #A80018;
+    }
+}
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {

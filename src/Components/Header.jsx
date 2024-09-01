@@ -10,6 +10,8 @@ const roslindaleFont = localFont({
 });
 function Header() {
     const [openContactForm, setOpenContactForm] = useState(false)
+    const [openMenu, setOpenMenu] = useState(false)
+
     const [conatctData, setConatctData] = useState({
         name: '',
         phone: '',
@@ -18,9 +20,9 @@ function Header() {
     return (
         <div className=' blurinheader lg:px-[64px] lg:py-[6px] px-[22px] py-[6px] '>
             <div className='flex justify-between items-center'>
-                <div className='lg:hidden md:hidden block'>
+                <Link href={'/'} className='lg:hidden md:hidden block'>
                     <img className='w-[39px] h-[42px] ' src="/logo.png" alt="mantapalogo" />
-                </div>
+                </Link>
                 <div className='flex gap-[10px]'>
                     <Link href={'/Stills'} className='material-bubble cursor-pointer'>STILLS</Link>
                     <Link href={'/Motions'} className='material-bubble cursor-pointer'>MOTION</Link>
@@ -33,7 +35,7 @@ function Header() {
                     <p onClick={() => { setOpenContactForm(!openContactForm) }} className='material-bubble !text-white !bg-[#A80018] cursor-pointer'>CONTACT</p>
                 </div>
                 <div className='lg:hidden md:hidden block'>
-                    <p onClick={() => { setOpenContactForm(!openContactForm) }} className='material-bubble1 '>MENU</p>
+                    <p onClick={() => { setOpenMenu(!openMenu) }} className='material-bubble1 '>MENU</p>
                 </div>
             </div>
             <div className='lg:hidden md:hidden hidden absolute  bg-white rounded-[23px] w-full'>
@@ -99,10 +101,32 @@ function Header() {
                             <p className={`bg-[#FFF] py-[15px] cursor-pointer text-[#A80018] rounded-[23px] px-[40px] text-[24px] text-center ${roslindaleFont.className}`}>
                                 Send
                             </p>
-                            <p className={`text-center cursor-pointer text-white  py-[10px] mt-6 ${roslindaleFont.className} `}>Close</p>
+                            <p onClick={() => setOpenContactForm(!openContactForm)} className={`text-center cursor-pointer text-white  py-[10px] mt-6 ${roslindaleFont.className} `}>Close</p>
                         </div>
                     </div>
 
+                </div>
+            </CustomModal>
+            <CustomModal isOpen={openMenu} onClose={() => setOpenMenu(!openMenu)}>
+                <div className='w-[307px] flex justify-center items-center bg-[#A80018] py-[44px]'>
+                    <ul>
+                        <li>
+                            <Link href={'/Stills'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                                Stills
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={'/Motions'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                                Motions
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={'/AboutUs'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                                About
+                            </Link>
+                        </li>
+
+                    </ul>
                 </div>
             </CustomModal>
         </div>
