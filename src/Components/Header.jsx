@@ -108,28 +108,20 @@ function Header() {
                 </div>
             </CustomModal>
             <CustomModal isOpen={openMenu} onClose={() => setOpenMenu(!openMenu)}>
-                <div className='w-[307px] flex justify-center items-center bg-[#A80018] py-[44px]'>
-                    <ul>
-                        <li>
-                            <Link href={'/Stills'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
-                                Stills
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={'/Motions'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
-                                Motions
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={'/AboutUs'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
-                                About
-                            </Link>
-                        </li>
+                <div className='w-[307px] flex flex-col justify-center items-center bg-[#A80018] py-[44px]'>
+                    <Link href={'/Stills'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                        Stills
+                    </Link>
+                    <Link href={'/Motions'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                        Motions
+                    </Link>
+                    <Link href={'/AboutUs'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                        About
+                    </Link>
 
-                    </ul>
                 </div>
-            </CustomModal>
-        </div>
+            </CustomModal >
+        </div >
 
     );
 }
