@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomModal from './CustomModal';
 import localFont from 'next/font/local';
 const roslindaleFont = localFont({
@@ -17,6 +17,23 @@ function Header() {
         phone: '',
         messgae: ''
     })
+
+    useEffect(() => {
+        // Select the header by its class or ID and apply the GSAP animation
+        gsap.fromTo(
+            '.blurinheader', // Target the element with class 'blurinheader'
+            {
+                y: -100, // Start from 100px above its original position
+                opacity: 0, // Start with opacity 0
+            },
+            {
+                y: 0, // End at its original position
+                opacity: 1, // Set opacity to 0.5
+                duration: 1, // Animation duration in seconds
+                ease: 'power2.out', // Add easing for a smoother effect
+            }
+        );
+    }, []);
     return (
         <div className=' blurinheader lg:px-[64px] lg:py-[6px] px-[22px] py-[6px] '>
             <div className='flex justify-between items-center'>
