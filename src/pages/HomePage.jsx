@@ -6,6 +6,7 @@ import { db } from '@/lib/firebaseConfig';
 import { gsap } from "gsap";
 import Footer from '@/Components/Footer';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
 
 
@@ -15,6 +16,9 @@ const roslindaleFont = localFont({
     style: 'normal',
     variable: '--font-roslindale'
 });
+
+gsap.registerPlugin(ScrollTrigger);
+
 function HomePage() {
     const [videoLinks, setVideoLinks] = useState([]);
     const [zoomoutImages, setZoomImages] = useState([])
@@ -44,6 +48,7 @@ function HomePage() {
         fetchZoomOutImages();
     }, []);
     const videoRef = useRef(null);
+    const textRef = useRef(null);
 
     useEffect(() => {
         // Animate the video from the center to full size
@@ -52,49 +57,74 @@ function HomePage() {
             { scale: 1, duration: 1, ease: 'power2.out' }
         );
     }, []);
-
-    const el = useRef(); // Reference for the container element
-
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            // GSAP ScrollTrigger for left image
+        // Apply the ScrambleText animation to the text element
+        gsap.fromTo(
+          textRef.current,
+          { opacity: 0 }, // Initial state
+          {
+            opacity: 1, // End state
+            duration: 2,
+            scrambleText: {
+              text: "Your, Majestic Matrimonial Miracles.", // The target text
+              chars: "lowerCase", // Scramble effect with lowercase letters
+              speed: 0.6, // Speed of the scramble
+            },
+            scrollTrigger: {
+              trigger: textRef.current,
+              start: 'top 80%', // Start when the text is 80% into the viewport
+              end: 'bottom 50%',
+              scrub: 1, // Smooth scrubbing effect
+            },
+          }
+        );
+      }, []);
+    const main = useRef(); // Reference for the container element
+
+
+    useGSAP(() => {
+        // Select all left-image elements and apply the animation
+        const leftImages = gsap.utils.toArray('.left-image');
+        leftImages.forEach((leftImage) => {
             gsap.fromTo(
-                ".left-image",
-                { x: "50%", opacity: 0 }, // Initial state
+                leftImage,
+                { x: '50%', opacity: 0 }, // Start from the center and opacity 0
                 {
-                    x: "-100px", // End position
-                    opacity: 1,
+                    x: '-100px', // Move to the left
+                    opacity: 1, // Fade in
                     duration: 1.5,
                     scrollTrigger: {
-                        trigger: ".left-image",
-                        start: "top center",
-                        end: "top 100px",
-                        scrub: true, // Allows smooth scrubbing during scroll
+                        trigger: leftImage,
+                        start: 'top 50%', // Start when the top of the image hits 50% of the viewport
+                        end: 'bottom 50%', // End when the bottom of the image hits 50% of the viewport
+                        scrub: true, // Smooth scrubbing based on scroll
                     },
                 }
             );
+        });
 
-            // GSAP ScrollTrigger for right image
+        // Select all right-image elements and apply the animation
+        const rightImages = gsap.utils.toArray('.right-image');
+        rightImages.forEach((rightImage) => {
             gsap.fromTo(
-                ".right-image",
-                { x: "-50%", opacity: 0 }, // Initial state
+                rightImage,
+                { x: '-50%', opacity: 0 }, // Start from the center and opacity 0
                 {
-                    x: "100px", // End position
-                    opacity: 1,
+                    x: '100px', // Move to the right
+                    opacity: 1, // Fade in
                     duration: 1.5,
                     scrollTrigger: {
-                        trigger: ".homepagesection3",
-                        start: "top 80%",
-                        end: "top 50%",
-                        scrub: true, // Smooth scroll animation
-                        toggleActions: "play reverse play reverse", // Play forward on scroll down, reverse on scroll up
+                        trigger: rightImage,
+                        start: 'top 50%', // Start when the top of the image hits 50% of the viewport
+                        end: 'bottom 50%', // End when the bottom of the image hits 50% of the viewport
+                        scrub: true, // Smooth scrubbing based on scroll
+                        toggleActions: 'play reverse play reverse', // Play when scrolling down, reverse when scrolling up
+                        markers: false, // Disable markers
                     },
                 }
             );
-        }, el); // Scope GSAP context to the 'el' reference
-
-        return () => ctx.revert(); // Cleanup when component unmounts
-    }, []);
+        });
+    }, { scope: main });
 
     const mapNumberRange = (n, a, b, c, d) => {
         return ((n - a) * (d - c)) / (b - a) + c;
@@ -169,7 +199,7 @@ function HomePage() {
             <div className="homepagesection1">
                 <video
                     ref={videoRef}
-                    className='homepagesection1video border'
+                    className="homepagesection1video border"
                     poster={videoLinks?.thumbnail}
                     src={videoLinks?.video}
                     autoPlay
@@ -178,7 +208,9 @@ function HomePage() {
                 >
                     Your browser does not support the video tag.
                 </video>
-                <p className={`homepagesection1text uppercase ${roslindaleFont.className}`}>Your, Majestic <br /> Matrimonial Miracles.</p>
+                <p ref={textRef} className={`homepagesection1text uppercase ${roslindaleFont.className}`}>
+                    Your, Majestic <br /> Matrimonial Miracles.
+                </p>
             </div>
             <div className='homepagesection2'>
                 <div className='text-center'>
@@ -201,46 +233,55 @@ function HomePage() {
                     </div>
                 </div>
             </div>
-            <div className="homepagesection3" ref={el}>
-            <div className="absolute lg:left-[-100px] left-[-100px] h-full flex items-center">
-                <img
-                    className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
-                    src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
-                    alt="Left Image"
-                />
-            </div>
-            <div className="flex flex-col justify-center items-center w-[413px]">
-                <h1
-                    className={`lg:text-[84.9px] text-[26px] text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}
-                >
-                    Heartfelt <br className="lg:hidden block" /> Captures
-                </h1>
-                <p className="material-bubble lg:mt-[61px] !w-max uppercase">
-                    Visual archive
-                </p>
-                <p className="material-bubble1 mt-[24px] !w-max uppercase">
-                    Visual archive
-                </p>
-            </div>
-            <div className="absolute lg:right-[-100px] right-[-115px] h-full flex items-center">
-                <img
-                    className="right-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
-                    src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
-                    alt="Right Image"
-                />
-            </div>
-        </div>
-            <div className='homepagesection4'>
-                <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
-                    <img className='lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612' alt="" />
+            <div className='' ref={main}>
+                <div className="homepagesection3" >
+                    <div className="absolute lg:left-[-100px] left-[-100px] h-full flex items-center">
+                        <img
+                            className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
+                            src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
+                            alt="Left Image"
+                        />
+                    </div>
+                    <div className="flex flex-col justify-center items-center w-[413px]">
+                        <h1
+                            className={`lg:text-[84.9px] text-[26px] text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}
+                        >
+                            Heartfelt <br className="lg:hidden block" /> Captures
+                        </h1>
+                        <p className="material-bubble lg:mt-[61px] !w-max uppercase">
+                            Visual archive
+                        </p>
+                        <p className="material-bubble1 mt-[24px] !w-max uppercase">
+                            Visual archive
+                        </p>
+                    </div>
+                    <div className="absolute lg:right-[-100px] right-[-115px] h-full flex items-center">
+                        <img
+                            className="right-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                            src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
+                            alt="Right Image"
+                        />
+                    </div>
                 </div>
-                <div className=' flex flex-col justify-center items-center w-[413px]' >
-                    <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
-                    <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
-                    <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p>
-                </div>
-                <div className='absolute lg:right-[-100px] right-[-115px] h-full flex items-center'>
-                    <img className='lg:w-[600px] lg:h-[700px] w-[216px] h-[347px]  object-cover rotate-[2.8deg] rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612' alt="" />
+                <div className='homepagesection4'>
+                    <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
+                        <img
+                            className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
+                            src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612'
+                            alt="" />
+                    </div>
+                    <div className=' flex flex-col justify-center items-center w-[413px]' >
+                        <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
+                        <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
+                        <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p>
+                    </div>
+                    <div className="absolute lg:right-[-100px] right-[-115px] h-full flex items-center">
+                        <img
+                            className="right-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                            src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
+                            alt="Right Image"
+                        />
+                    </div>
                 </div>
             </div>
             <div className="homepagesection5">

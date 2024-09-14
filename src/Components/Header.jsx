@@ -34,6 +34,23 @@ function Header() {
             }
         );
     }, []);
+
+    useEffect(() => {
+        // Select the header by its class or ID and apply the GSAP animation
+        gsap.fromTo(
+            '.blurinheader', // Target the element with class 'blurinheader'
+            {
+                y: -100, // Start from 100px above its original position
+                opacity: 0, // Start with opacity 0
+            },
+            {
+                y: 0, // End at its original position
+                opacity: 1, // Set opacity to 0.5
+                duration: 1, // Animation duration in seconds
+                ease: 'power2.out', // Add easing for a smoother effect
+            }
+        );
+    }, []);
     return (
         <div className=' blurinheader lg:px-[64px] lg:py-[6px] px-[22px] py-[6px] '>
             <div className='flex justify-between items-center'>
@@ -62,7 +79,7 @@ function Header() {
                 <p className='text-center'>Contact</p>
             </div>
             <CustomModal isOpen={openContactForm} onClose={() => setOpenContactForm(!openContactForm)}>
-                <div className='w-[307px] lg:w-[607px]  bg-[#A80018] py-[44px]'>
+                <div className='w-[307px] lg:w-[607px] m  bg-[#A80018] py-[44px]'>
                     <h1 className={`headerConatctTitle ${roslindaleFont.className}`}>
                         Contact Us
                     </h1>

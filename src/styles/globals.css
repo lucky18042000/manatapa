@@ -204,6 +204,7 @@ input[type=number] {
     position: relative;
     overflow: hidden;
   }
+
   .homepagesection4 {
     margin-top: 150px;
     width: 100%;
@@ -213,6 +214,7 @@ input[type=number] {
     position: relative;
     overflow: hidden;
   }
+
   .homepagesection5 {
     margin-top: 49px;
     width: 100%;
@@ -231,9 +233,11 @@ input[type=number] {
     position: relative;
     margin-top: 70px;
   }
-  .motion-cms-play{
+
+  .motion-cms-play {
     display: none;
   }
+
   .motion-cms-playmobile {
     z-index: 6;
     width: 100px;
@@ -262,9 +266,10 @@ input[type=number] {
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
-  .motion-cms-playmobile{
+  .motion-cms-playmobile {
     display: none;
   }
+
   .headerConatctTitle {
     font-weight: 700;
     font-size: 64px;
@@ -455,7 +460,7 @@ input[type=number] {
 
 .card__content {
   overflow: hidden;
-  
+
 
   border-radius: 10px;
   width: 100%;
@@ -487,12 +492,10 @@ input[type=number] {
   left: 0;
   top: 0;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0) 100%);
   position: absolute;
   will-change: opacity;
 }
