@@ -16,12 +16,37 @@ const roslindaleFont = localFont({
 });
 
 gsap.registerPlugin(ScrollTrigger);
+const scrambleText = (el, text, duration = 2) => {
+    if (!el || !text) return; // Ensure element and text are defined
 
+    const chars = "!<>-_\\/[]{}—=+*^?#________";
+    let iterations = 0;
+
+    const interval = setInterval(() => {
+        // Scramble the text
+        el.innerText = text
+            .split("")
+            .map((char, i) => {
+                if (i < iterations) {
+                    return text[i];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+
+        if (iterations >= text.length) {
+            clearInterval(interval);
+        }
+
+        iterations += 1 / duration; // Increase iterations progressively
+    }, 50); // Scramble speed (50ms interval)
+};
 function HomePage() {
     const [videoLinks, setVideoLinks] = useState([]);
     const [zoomoutImages, setZoomImages] = useState([])
     const homepageVideoCollectionRef = collection(db, 'homepageVideo');
     const homepageZoomOutImagesCollectionRef = collection(db, 'homepageZoomOutImages');
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false); // State to track video load status
 
     const fetchVideoData = async () => {
         try {
@@ -47,23 +72,23 @@ function HomePage() {
     }, []);
     useEffect(() => {
         if (typeof window !== 'undefined') {
-          gsap.registerPlugin(ScrollTrigger);
-          // Your GSAP animations go here
-        }
-      }, []);
-      useEffect(() => {
-        const loadGSAP = async () => {
-          if (typeof window !== 'undefined') {
-            const { gsap } = await import('gsap');
-            const { ScrollTrigger } = await import('gsap/dist/ScrollTrigger');
             gsap.registerPlugin(ScrollTrigger);
-            // Add your GSAP animation logic here
-          }
+            // Your GSAP animations go here
+        }
+    }, []);
+    useEffect(() => {
+        const loadGSAP = async () => {
+            if (typeof window !== 'undefined') {
+                const { gsap } = await import('gsap');
+                const { ScrollTrigger } = await import('gsap/dist/ScrollTrigger');
+                gsap.registerPlugin(ScrollTrigger);
+                // Add your GSAP animation logic here
+            }
         };
         loadGSAP();
-      }, []);
-      
-      
+    }, []);
+
+
     const videoRef = useRef(null);
     const textRef = useRef(null);
 
@@ -77,25 +102,25 @@ function HomePage() {
     useEffect(() => {
         // Apply the ScrambleText animation to the text element
         gsap.fromTo(
-          textRef.current,
-          { opacity: 0 }, // Initial state
-          {
-            opacity: 1, // End state
-            duration: 2,
-            scrambleText: {
-              text: "Your, Majestic Matrimonial Miracles.", // The target text
-              chars: "lowerCase", // Scramble effect with lowercase letters
-              speed: 0.6, // Speed of the scramble
-            },
-            scrollTrigger: {
-              trigger: textRef.current,
-              start: 'top 80%', // Start when the text is 80% into the viewport
-              end: 'bottom 50%',
-              scrub: 1, // Smooth scrubbing effect
-            },
-          }
+            textRef.current,
+            { opacity: 0 }, // Initial state
+            {
+                opacity: 1, // End state
+                duration: 2,
+                scrambleText: {
+                    text: "Your, Majestic Matrimonial Miracles.", // The target text
+                    chars: "lowerCase", // Scramble effect with lowercase letters
+                    speed: 0.6, // Speed of the scramble
+                },
+                scrollTrigger: {
+                    trigger: textRef.current,
+                    start: 'top 80%', // Start when the text is 80% into the viewport
+                    end: 'bottom 50%',
+                    scrub: 1, // Smooth scrubbing effect
+                },
+            }
         );
-      }, []);
+    }, []);
     const main = useRef(); // Reference for the container element
 
 
@@ -118,7 +143,7 @@ function HomePage() {
                 }
             );
         });
-    
+
         const rightImages = gsap.utils.toArray('.right-image');
         rightImages.forEach((rightImage) => {
             gsap.fromTo(
@@ -138,7 +163,7 @@ function HomePage() {
             );
         });
     }, []); // Empty array ensures this runs only once
-    
+
 
     const mapNumberRange = (n, a, b, c, d) => {
         return ((n - a) * (d - c)) / (b - a) + c;
@@ -207,6 +232,33 @@ function HomePage() {
         const cardElements = document.querySelectorAll('.card');
         cardElements.forEach((cardEl) => initCard(cardEl));
     }, []);
+    
+
+
+    useEffect(() => {
+        const videoElement = videoRef.current;
+
+        const handleVideoLoad = () => {
+            setIsVideoLoaded(true); // Update state once video is loaded
+
+            // Trigger the custom scramble effect
+            scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
+        };
+
+        if (videoElement) {
+            videoElement.addEventListener('loadeddata', handleVideoLoad);
+        }
+
+        return () => {
+            if (videoElement) {
+                videoElement.removeEventListener('loadeddata', handleVideoLoad);
+            }
+        };
+    }, []);
+    useEffect(() => {
+        // Trigger the scramble effect after the component is mounted
+        scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
+    }, []);
     return (
         <div className=''>
             <Header />
@@ -222,9 +274,14 @@ function HomePage() {
                 >
                     Your browser does not support the video tag.
                 </video>
+
+                {/* Conditionally show text once the video is fully loaded */}
+                {isVideoLoaded && (
                 <p ref={textRef} className={`homepagesection1text uppercase ${roslindaleFont.className}`}>
+                    {/* Placeholder text */}
                     Your, Majestic <br /> Matrimonial Miracles.
                 </p>
+            )}
             </div>
             <div className='homepagesection2'>
                 <div className='text-center'>

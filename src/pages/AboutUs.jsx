@@ -41,9 +41,9 @@ function AboutUs() {
                     <img className='w-[256px] lg:w-[600px] h-[290px] lg:h-[700px]  object-cover rounded-[32px] -z-10' src='https://s3-alpha-sig.figma.com/img/391a/0753/75497c545d7e5af511caf2a98ffe8dbb?Expires=1724630400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=REZZqH-tavKR3cYd4DrTHgr43OguK1MahrcdT-02GvXHmoXMjGyo5cOjXC0b5LTLHfRY3quUqJ99hpdCkYj~RcKPbBY220E8ZpShjNKZ5Gjiq1pN3v7ABZSd3-OhDJb2R8tZmi9MJxFy0Nsoh8BNquL~jh03MdLcpHkJp4glEmuX4GLxxyn2ijO~-4nPkegHQyXqB49Fx4s72DRZdoW61WOCjHMNL9f85Dpnr1qzbS2yuTjowSxQM~WTYuMXGWB4KCaKFVh27XCZQNxyuM-canXEOeFgnyPpPG6QLoOQHr4hiQJFl6KkIFU9fEHQSo0blmpkwswOiN4GunjsGLT17Q__' alt="" />
                     <p className=' lg:w-[712px] text-[18px] text-[#A80018] leading-[29px] lg:mt-[61px] capitalize'>
                         Mantapa is the heart's symphony, harmonizing the ephemeral beauty of tradition with the eternal essence of love. We sculpt memories with the delicate brushstrokes of innovation, infusing each frame with the soulful melody of cherished moments.
-                        <hr className='my-2 border-none' />
+                        <br className='my-2 border-none' />
                         Mantapa is the heart's symphony, harmonizing the ephemeral beauty of tradition with the eternal essence of love. We sculpt memories with the delicate brushstrokes of innovati
-                        <hr className='my-2 border-none' />
+                        <br className='my-2 border-none' />
                         Mantapa is the heart's symphony, harmonizing the ephemeral beauty of tradition with the eternal essence of love. We sculpt memories with the delicate brushstrokes of innovati
                     </p>
                 </div>
