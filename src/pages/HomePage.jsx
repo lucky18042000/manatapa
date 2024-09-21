@@ -45,6 +45,25 @@ function HomePage() {
         fetchVideoData();
         fetchZoomOutImages();
     }, []);
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          // Your GSAP animations go here
+        }
+      }, []);
+      useEffect(() => {
+        const loadGSAP = async () => {
+          if (typeof window !== 'undefined') {
+            const { gsap } = await import('gsap');
+            const { ScrollTrigger } = await import('gsap/dist/ScrollTrigger');
+            gsap.registerPlugin(ScrollTrigger);
+            // Add your GSAP animation logic here
+          }
+        };
+        loadGSAP();
+      }, []);
+      
+      
     const videoRef = useRef(null);
     const textRef = useRef(null);
 
