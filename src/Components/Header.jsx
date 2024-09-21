@@ -2,12 +2,15 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import CustomModal from './CustomModal';
 import localFont from 'next/font/local';
+import emailjs from 'emailjs-com';
+
 const roslindaleFont = localFont({
     src: '../fonts/Roslindale-DisplayNarrowRegular-Testing.ttf',
     weight: '400',
     style: 'normal',
     variable: '--font-roslindale'
 });
+
 function Header() {
     const [openContactForm, setOpenContactForm] = useState(false)
     const [openMenu, setOpenMenu] = useState(false)
@@ -51,6 +54,20 @@ function Header() {
             }
         );
     }, []);
+
+    const sendEmail = (e) => {
+        e.preventDefault(); // Prevent default form submission
+        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', conatctData, 'YOUR_USER_ID')
+            .then((response) => {
+                console.log('Email successfully sent!', response.status, response.text);
+                // Clear the form after sending
+                setConatctData({ name: '', phone: '', message: '' });
+                setOpenContactForm(false); // Close modal
+            })
+            .catch((err) => {
+                console.error('Failed to send email. Error:', err);
+            });
+    };
     return (
         <div className=' blurinheader lg:px-[64px] lg:py-[6px] px-[22px] py-[6px] '>
             <div className='flex justify-between items-center'>
@@ -132,7 +149,7 @@ function Header() {
                             }}
                         />
                         <div className='w-full mt-6 '>
-                            <p className={`bg-[#FFF] py-[15px] cursor-pointer text-[#A80018] rounded-[23px] px-[40px] text-[24px] text-center ${roslindaleFont.className}`}>
+                            <p onClick={(e) => { sendEmail(e) }} className={`bg-[#FFF] py-[15px] cursor-pointer text-[#A80018] rounded-[23px] px-[40px] text-[24px] text-center ${roslindaleFont.className}`}>
                                 Send
                             </p>
                             <p onClick={() => setOpenContactForm(!openContactForm)} className={`text-center cursor-pointer text-white  py-[10px] mt-6 ${roslindaleFont.className} `}>Close</p>
