@@ -81,48 +81,45 @@ function HomePage() {
 
 
     useGSAP(() => {
-        // Select all left-image elements and apply the animation
         const leftImages = gsap.utils.toArray('.left-image');
         leftImages.forEach((leftImage) => {
             gsap.fromTo(
                 leftImage,
-                { x: '50%', opacity: 0 }, // Start from the center and opacity 0
+                { x: '50%', opacity: 0 },
                 {
-                    x: '-100px', // Move to the left
-                    opacity: 1, // Fade in
+                    x: '-100px',
+                    opacity: 1,
                     duration: 1.5,
                     scrollTrigger: {
                         trigger: leftImage,
-                        start: 'top 50%', // Start when the top of the image hits 50% of the viewport
-                        end: 'bottom 50%', // End when the bottom of the image hits 50% of the viewport
-                        scrub: true, // Smooth scrubbing based on scroll
+                        start: 'top 50%',
+                        end: 'bottom 50%',
+                        scrub: true,
                     },
                 }
             );
         });
-
-        // Select all right-image elements and apply the animation
+    
         const rightImages = gsap.utils.toArray('.right-image');
         rightImages.forEach((rightImage) => {
             gsap.fromTo(
                 rightImage,
-                { x: '-50%', opacity: 0 }, // Start from the center and opacity 0
+                { x: '-50%', opacity: 0 },
                 {
-                    x: '100px', // Move to the right
-                    opacity: 1, // Fade in
+                    x: '100px',
+                    opacity: 1,
                     duration: 1.5,
                     scrollTrigger: {
                         trigger: rightImage,
-                        start: 'top 50%', // Start when the top of the image hits 50% of the viewport
-                        end: 'bottom 50%', // End when the bottom of the image hits 50% of the viewport
-                        scrub: true, // Smooth scrubbing based on scroll
-                        toggleActions: 'play reverse play reverse', // Play when scrolling down, reverse when scrolling up
-                        markers: false, // Disable markers
+                        start: 'top 50%',
+                        end: 'bottom 50%',
+                        scrub: true,
                     },
                 }
             );
         });
-    }, { scope: main });
+    }, []); // Empty array ensures this runs only once
+    
 
     const mapNumberRange = (n, a, b, c, d) => {
         return ((n - a) * (d - c)) / (b - a) + c;
