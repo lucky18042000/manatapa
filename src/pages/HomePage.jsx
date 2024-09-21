@@ -5,7 +5,7 @@ import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import { gsap } from "gsap";
 import Footer from '@/Components/Footer';
-import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'; // Ensure ScrollTrigger is imported from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react';
 
 const roslindaleFont = localFont({
