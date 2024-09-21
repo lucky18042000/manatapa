@@ -15,13 +15,13 @@ const roslindaleFont = localFont({
     variable: '--font-roslindale'
 });
 
+gsap.registerPlugin(ScrollTrigger);
 
 function HomePage() {
     const [videoLinks, setVideoLinks] = useState([]);
     const [zoomoutImages, setZoomImages] = useState([])
     const homepageVideoCollectionRef = collection(db, 'homepageVideo');
     const homepageZoomOutImagesCollectionRef = collection(db, 'homepageZoomOutImages');
-    gsap.registerPlugin(ScrollTrigger);
 
     const fetchVideoData = async () => {
         try {
