@@ -57,7 +57,7 @@ function Header() {
 
     const sendEmail = (e) => {
         e.preventDefault(); // Prevent default form submission
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', conatctData, 'YOUR_USER_ID')
+        emailjs.send('service_6qgdkwi', 'template_2wcl128', conatctData, '_AqFyLIuk2rfH6qWK')
             .then((response) => {
                 console.log('Email successfully sent!', response.status, response.text);
                 // Clear the form after sending
@@ -68,6 +68,7 @@ function Header() {
                 console.error('Failed to send email. Error:', err);
             });
     };
+    
     return (
         <div className=' blurinheader lg:px-[64px] lg:py-[6px] px-[22px] py-[6px] '>
             <div className='flex justify-between items-center'>
