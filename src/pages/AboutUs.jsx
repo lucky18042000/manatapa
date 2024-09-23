@@ -28,6 +28,8 @@ function AboutUs() {
     }, []);
 
     useGSAP(() => {
+        if (typeof window === 'undefined') return; // Ensure this code runs only on the client side
+
         const leftImages = gsap.utils.toArray('.left-image');
         leftImages.forEach((leftImage) => {
             gsap.fromTo(
@@ -65,7 +67,7 @@ function AboutUs() {
                 }
             );
         });
-    }, [isMounted]); // Empty array ensures this runs only once
+    }, [isMounted]); 
 
 
     // Ensure component doesn't render server-side
