@@ -15,9 +15,7 @@ const roslindaleFont = localFont({
 function Stills() {
     const stillsdb = collection(db, 'stills');
     const [stills, setStills] = useState([]);
-    const [visibleIndex, setVisibleIndex] = useState(null); // To track visible image index
-
-    const imgRefs = useRef([]); // To store references to each image
+    const imgRefs = useRef([]); // Store references to each image
 
     const fetchStills = async () => {
         try {
@@ -34,17 +32,18 @@ function Stills() {
     }, []);
 
     useEffect(() => {
-        // Intersection Observer to track which image is in view
+        // Intersection Observer to animate images on scroll in and out
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const index = Number(entry.target.dataset.index);
-                        setVisibleIndex(index);
+                        entry.target.classList.add('visible'); // Add class when in view
+                    } else {
+                        entry.target.classList.remove('visible'); // Remove class when out of view (for reverse animation)
                     }
                 });
             },
-            { threshold: 0.5 } // Trigger when 50% of the image is visible
+            { threshold: 0.3 } // Trigger when 50% of the image is visible
         );
 
         // Observe each image
@@ -72,7 +71,7 @@ function Stills() {
                     Stills
                 </h1>
                 <p className={`stillsection1para ${roslindaleFont.className}`}>
-                In every photo, we find the invisible threads that bind love, culture, and memory. Our photography goes beyond documenting moments; it captures the essence of the day, turning raw emotions and rituals into timeless, artful expressions.
+                    In every photo, we find the invisible threads that bind love, culture, and memory. Our photography goes beyond documenting moments; it captures the essence of the day, turning raw emotions and rituals into timeless, artful expressions.
                 </p>
             </div>
 
@@ -84,9 +83,6 @@ function Stills() {
                         className={`w-[66px] h-[32px] mb-4 transition-all duration-500 ${ind % 2 === 0 ? 'ml-5' : 'mr-5'}`}
                         src={item?.img}
                         alt=""
-                        style={{
-                            filter: visibleIndex === ind ? 'brightness(1)' : 'brightness(0.5)', // Highlight the corresponding image
-                        }}
                     />
                 ))}
             </div>
@@ -98,7 +94,7 @@ function Stills() {
                         key={ind}
                         ref={(el) => (imgRefs.current[ind] = el)} // Store each image ref
                         data-index={ind} // Attach the index to each image for tracking
-                        className={`w-[869px] rounded-[32px] mb-6 transition-all duration-500 ${ind % 2 === 0 ? 'ml-40' : 'mr-40'}`}
+                        className={`still-image w-[869px] rounded-[32px] mb-6 transition-all duration-1000 ease-out ${ind % 2 === 0 ? 'slide-in-left ml-40' : 'slide-in-right mr-40'}`}
                         src={item?.img}
                         alt=""
                     />

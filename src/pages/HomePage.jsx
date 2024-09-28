@@ -269,7 +269,6 @@ function HomePage() {
         };
     }, []);
     useEffect(() => {
-        // Trigger the scramble effect after the component is mounted
         scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
     }, [isMounted]);
     return (
@@ -355,6 +354,15 @@ function HomePage() {
                             alt="" />
                     </div>
                     <div className=' flex flex-col justify-center items-center w-[413px]' >
+                        <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium text-[20px]  text-[#A80018]'>
+                            NEW YORK
+                            <span><svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
+                            </svg>
+                            </span>
+                            LONDON
+                        </p>
+
                         <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
                         <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
                         <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p>
@@ -376,7 +384,7 @@ function HomePage() {
                 <div class="card">
                     <div class="card__content">
                         <div class="card__gloss"></div>
-                        <div className='homepagesection5motion 3dtiltingcardeffect'>
+                        <div className='homepagesection5motion '>
                             <div className='lg:w-[780px] lg:h-[480px] w-[349px] h-[295px] z-10'>
                                 <div className="motion-cms-play">
                                     <svg width="20%" viewBox="0 0 20 23" fill="#FFF" xmlns="http://www.w3.org/2000/svg">
@@ -408,7 +416,7 @@ function HomePage() {
                             <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute top-[-10%] right-[15%] -z-[10px]'>
                                 <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa' alt="" />
                             </div>
-                            <div className='lg:w-[223px] lg:h-[154px] absolute bottom-[-5%] right-[27%] z-20'>
+                            <div className='lg:w-[223px] lg:h-[154px] absolute bottom-[-20%] right-[27%] z-20'>
                                 <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f' alt="" />
                             </div>
                         </div>

@@ -6,6 +6,8 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'; // Ensure ScrollTrigger
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import dynamic from 'next/dynamic';
+import { collection } from 'firebase/firestore';
+import { db } from '@/lib/firebaseConfig';
 
 // Dynamically import the AboutUs component with SSR disabled
 const DynamicAboutUs = dynamic(() => import('@/pages/AboutUs'), { ssr: false });
@@ -21,9 +23,22 @@ gsap.registerPlugin(ScrollTrigger);
 function AboutUs() {
     const mainRef = useRef(null); // Reference for the main container
     const [isMounted, setIsMounted] = useState(false);
+    const [aboutUs, setAboutUs] = useState([]);
 
+
+    const fetchAboutUs = async () => {
+        try {
+            const querySnapshot = await getDocs(aboutuspage);
+            const links = querySnapshot.docs.map(doc => doc.data());
+            setAboutUs(links);
+        } catch (error) {
+            console.error('Error fetching data: ', error);
+        }
+    };
     // Mark the component as mounted to ensure it's client-side only
     useEffect(() => {
+        fetchAboutUs()
+
         setIsMounted(true);
         if (!isMounted) return; // Ensure this code runs only on the client side
 
@@ -97,6 +112,8 @@ function AboutUs() {
     if (!isMounted) {
         return null;
     }
+    const aboutuspage = collection(db, 'homepageVideo');
+
 
 
     return (
@@ -127,27 +144,35 @@ function AboutUs() {
             <div className='aboutussection3 section'>
                 <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
                     <img
-                        className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
-                        src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612'
+                        className="left-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
+                        src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/6.png?alt=media&token=02a0ca4b-e024-4eec-890f-b60abac9990c'
                         alt="" />
                 </div>
                 <div className=' flex flex-col justify-center items-center w-[413px]' >
+                    <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium text-[20px]  text-[#A80018]'>
+                        NEW YORK
+                        <span><svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
+                        </svg>
+                        </span>
+                        LONDON
+                    </p>
                     <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Where we Work</h1>
                     <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
                 </div>
                 <div className="absolute lg:right-[-100px] right-[-115px] h-full flex items-center">
                     <img
-                        className="right-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
-                        src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
+                        className="right-image  bg-[#E6DADB] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                        src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/7.png?alt=media&token=f91f083f-3038-4178-8c31-37d3968c4e25"
                         alt="Right Image"
                     />
                 </div>
             </div>
             <div className='aboutussection4 section'>
-                <h1 className={`text-[36px] lg:text-[84.9px] text-[#A80018] leading-[98px] font-bold ${roslindaleFont.className}`}>Nature of Mantapa</h1>
+                <h1 className={`text-[36px] lg:text-[84.9px] text-center text-[#A80018] leading-[98px] font-bold ${roslindaleFont.className}`}>Nature of Mantapa</h1>
                 <div className='flex lg:flex-row flex-col gap-[65px] mt-[54px]'>
-                    <img className='w-[256px] lg:w-[600px] h-[290px] lg:h-[700px]  object-cover rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/dsdsds.png?alt=media&token=4a8804fb-428b-42c1-bf14-c2feeb1c64f7' alt="" />
-                    <p className={` lg:w-[712px] text-[18px] text-[#A80018] leading-[29px] lg:mt-[61px] capitalize ${roslindaleFont.className}`}>
+                    {/* <img className='w-[256px] lg:w-[600px] h-[290px] lg:h-[700px]  object-cover rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/dsdsds.png?alt=media&token=4a8804fb-428b-42c1-bf14-c2feeb1c64f7' alt="" /> */}
+                    <p className={` lg:w-full text-center text-[18px] text-[#A80018] leading-[29px] lg:mt-[61px] capitalize ${roslindaleFont.className}`}>
                         At Mantapa, we weave the essence of Indian weddings into cinematic narratives that touch the heart. Our story began in India, where our passion for storytelling was ignited. This journey took us through advanced studies in the UK and the USA, each chapter refining our craft and deepening our connection to the art of visual storytelling.
                         <hr className='py-2 border-none' />
                         Our work is driven by a desire to capture the soul of each wedding. We focus on the genuine moments and intimate emotions that define your celebration. With a keen eye for detail and a commitment to using the finest equipment, we craft films that highlight the beauty of each moment with a subtle yet powerful elegance.
