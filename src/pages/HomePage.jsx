@@ -3,10 +3,9 @@ import localFont from 'next/font/local';
 import Header from '@/Components/Header';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
-import { gsap } from "gsap";
 import Footer from '@/Components/Footer';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'; // Ensure ScrollTrigger is imported from 'gsap/dist/ScrollTrigger'
-import { useGSAP } from '@gsap/react';
+import { gsap } from "gsap";
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 const roslindaleFont = localFont({
     src: '../fonts/Roslindale-DisplayNarrowRegular-Testing.ttf',
@@ -15,7 +14,6 @@ const roslindaleFont = localFont({
     variable: '--font-roslindale'
 });
 
-gsap.registerPlugin(ScrollTrigger);
 const scrambleText = (el, text, duration = 2) => {
     if (!el || !text) return; // Ensure element and text are defined
 
@@ -42,6 +40,8 @@ const scrambleText = (el, text, duration = 2) => {
     }, 50); // Scramble speed (50ms interval)
 };
 function HomePage() {
+    gsap.registerPlugin(ScrollTrigger);
+
     const [videoLinks, setVideoLinks] = useState([]);
     const [zoomoutImages, setZoomImages] = useState([])
     const homepageVideoCollectionRef = collection(db, 'homepageVideo');
@@ -271,7 +271,7 @@ function HomePage() {
     useEffect(() => {
         // Trigger the scramble effect after the component is mounted
         scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
-    }, []);
+    }, [isMounted]);
     return (
         <div className=''>
             <Header />
