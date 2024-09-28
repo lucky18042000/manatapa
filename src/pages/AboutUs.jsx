@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'; // Ensure ScrollTrigger
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import dynamic from 'next/dynamic';
-import { collection } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 
 // Dynamically import the AboutUs component with SSR disabled
@@ -24,6 +24,7 @@ function AboutUs() {
     const mainRef = useRef(null); // Reference for the main container
     const [isMounted, setIsMounted] = useState(false);
     const [aboutUs, setAboutUs] = useState([]);
+    const aboutuspage = collection(db, 'homepageVideo');
 
 
     const fetchAboutUs = async () => {
@@ -35,10 +36,23 @@ function AboutUs() {
             console.error('Error fetching data: ', error);
         }
     };
+    const stillsdb = collection(db, 'stills');
+    const [stills, setStills] = useState([]);
+    const imgRefs = useRef([]); // Store references to each image
+
+    const fetchStills = async () => {
+        try {
+            const querySnapshot = await getDocs(stillsdb);
+            const links = querySnapshot.docs.map(doc => doc.data());
+            setStills(links);
+        } catch (error) {
+            console.error('Error fetching data: ', error);
+        }
+    };
     // Mark the component as mounted to ensure it's client-side only
     useEffect(() => {
         fetchAboutUs()
-
+        fetchStills()
         setIsMounted(true);
         if (!isMounted) return; // Ensure this code runs only on the client side
 
@@ -112,9 +126,6 @@ function AboutUs() {
     if (!isMounted) {
         return null;
     }
-    const aboutuspage = collection(db, 'homepageVideo');
-
-
 
     return (
         <div>
@@ -126,6 +137,17 @@ function AboutUs() {
                 <img className='aboutussection1Image' src="" alt="" />
                 <p className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
             </div>
+            <div className='aboutussection1'>
+            <div className='flex gap-2 rotate-[-2deg]  overflow-scroll overflow-x-scroll'>
+                {stills?.map((item, index) => (
+                    <img
+                        className='lg:w-[370px] lg:h-[256px] lg:rounded-[12px]'
+                        src={item?.img}
+                        alt=""
+                    />))}
+            </div>
+            </div>
+           
             <div className='aboutussection2 section'>
                 <img src="" alt="" srcset="" />
             </div>

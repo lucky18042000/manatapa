@@ -47,6 +47,17 @@
     }
 }
 
+/* Stills Section */
+.stills-section-wrapper {
+    /* margin: 10px; */
+    width: 100%;
+    /* overflow: hidden; */
+    overflow-y: hidden;
+    /* position: relative; */
+    padding: 50px 50px;
+    /* Space for padding on top and bottom */
+}
+
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {

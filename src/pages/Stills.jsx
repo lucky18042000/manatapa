@@ -43,7 +43,7 @@ function Stills() {
                     }
                 });
             },
-            { threshold: 0.3 } // Trigger when 50% of the image is visible
+            { threshold: 0.2 } // Trigger when 50% of the image is visible
         );
 
         // Observe each image
