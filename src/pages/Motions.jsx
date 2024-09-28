@@ -85,7 +85,9 @@ function Motions() {
                 <h1 className={`motionsection1Title ${roslindaleFont.className}`}>
                     Motion
                 </h1>
-                <p className={`motionsection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
+                <p className={`motionsection1para ${roslindaleFont.className}`}>
+                    Each film we craft is a cinematic tapestry, weaving fleeting moments of love, culture, and emotion. We capture not just grand gestures, but the intimate pauses, the breath before the vow, the tear before the smile—transforming your story into a timeless masterpiece.
+                </p>
             </div>
             <div>
                 <div className="homepagesection5">

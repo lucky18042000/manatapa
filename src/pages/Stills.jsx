@@ -72,7 +72,7 @@ function Stills() {
                     Stills
                 </h1>
                 <p className={`stillsection1para ${roslindaleFont.className}`}>
-                    Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.
+                In every photo, we find the invisible threads that bind love, culture, and memory. Our photography goes beyond documenting moments; it captures the essence of the day, turning raw emotions and rituals into timeless, artful expressions.
                 </p>
             </div>
 

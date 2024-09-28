@@ -122,9 +122,16 @@ function HomePage() {
         );
     }, []);
     const main = useRef(); // Reference for the container element
+    const [isMounted, setIsMounted] = useState(false);
 
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
-    useGSAP(() => {
+    useEffect(() => {
+        if (!isMounted) return;
+
+        // Scroll-triggered animation for left images
         const leftImages = gsap.utils.toArray('.left-image');
         leftImages.forEach((leftImage) => {
             gsap.fromTo(
@@ -144,6 +151,7 @@ function HomePage() {
             );
         });
 
+        // Scroll-triggered animation for right images
         const rightImages = gsap.utils.toArray('.right-image');
         rightImages.forEach((rightImage) => {
             gsap.fromTo(
@@ -162,7 +170,12 @@ function HomePage() {
                 }
             );
         });
-    }, []); // Empty array ensures this runs only once
+
+        // Clean up function to kill ScrollTriggers when the component unmounts
+        return () => {
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        };
+    }, [isMounted]);
 
 
     const mapNumberRange = (n, a, b, c, d) => {
@@ -232,7 +245,7 @@ function HomePage() {
         const cardElements = document.querySelectorAll('.card');
         cardElements.forEach((cardEl) => initCard(cardEl));
     }, []);
-    
+
 
 
     useEffect(() => {
@@ -277,11 +290,11 @@ function HomePage() {
 
                 {/* Conditionally show text once the video is fully loaded */}
                 {isVideoLoaded && (
-                <p ref={textRef} className={`homepagesection1text uppercase ${roslindaleFont.className}`}>
-                    {/* Placeholder text */}
-                    Your, Majestic <br /> Matrimonial Miracles.
-                </p>
-            )}
+                    <p ref={textRef} className={`homepagesection1text uppercase ${roslindaleFont.className}`}>
+                        {/* Placeholder text */}
+                        Your, Majestic <br /> Matrimonial Miracles.
+                    </p>
+                )}
             </div>
             <div className='homepagesection2'>
                 <div className='text-center'>
@@ -395,8 +408,8 @@ function HomePage() {
                             <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute top-[-10%] right-[15%] -z-[10px]'>
                                 <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa' alt="" />
                             </div>
-                            <div className='lg:w-[223px] lg:h-[154px] absolute bottom-[-5%] right-[27%] z-10'>
-                                <img className='rounded-[24px]' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f' alt="" />
+                            <div className='lg:w-[223px] lg:h-[154px] absolute bottom-[-5%] right-[27%] z-20'>
+                                <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f' alt="" />
                             </div>
                         </div>
                     </div>
