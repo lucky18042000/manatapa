@@ -33,9 +33,19 @@
         color: #A80018;
     }
 
+    .aboutussection2 {
+        margin-top: 40px;
+        width: 100%;
+        /* height: 600px; */
+        display: flex;
+        justify-content: center;
+        position: relative;
+        /* overflow: hidden; */
+    }
+
     .aboutussection3 {
         width: 100%;
-        height: 1200px;
+        height: 600px;
         display: flex;
         justify-content: center;
         position: relative;
@@ -93,7 +103,13 @@
         text-align: center;
         color: #A80018;
     }
-
+    .aboutussection2 {
+        margin-top: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .aboutussection3 {
         width: 100%;
         height: 1200px;

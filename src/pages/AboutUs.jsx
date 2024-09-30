@@ -56,26 +56,26 @@ function AboutUs() {
         setIsMounted(true);
         if (!isMounted) return; // Ensure this code runs only on the client side
 
-        const sections = gsap.utils.toArray('.section'); // Adjust this if you have specific class names for sections
+        // const sections = gsap.utils.toArray('.section'); // Adjust this if you have specific class names for sections
 
-        sections.forEach(section => {
-            gsap.fromTo(
-                section,
-                { y: 100 },
-                {
-                    y: 0,
-                    duration: 10,
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 50%',
-                        end: 'bottom 50%',
-                        scrub: true,
-                        onEnter: () => gsap.to(section, { y: 0 }),
-                        onLeaveBack: () => gsap.to(section, { y: -100 }),
-                    },
-                }
-            );
-        });
+        // sections.forEach(section => {
+        //     gsap.fromTo(
+        //         section,
+        //         { y: 100 },
+        //         {
+        //             y: 0,
+        //             duration: 10,
+        //             scrollTrigger: {
+        //                 trigger: section,
+        //                 start: 'top 50%',
+        //                 end: 'bottom 50%',
+        //                 scrub: true,
+        //                 onEnter: () => gsap.to(section, { y: 0 }),
+        //                 onLeaveBack: () => gsap.to(section, { y: -100 }),
+        //             },
+        //         }
+        //     );
+        // });
 
     }, [isMounted]);
 
@@ -137,20 +137,18 @@ function AboutUs() {
                 <img className='aboutussection1Image' src="" alt="" />
                 <p className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
             </div>
-            <div className='aboutussection1'>
-            <div className='flex gap-2 rotate-[-2deg]  overflow-scroll overflow-x-scroll'>
-                {stills?.map((item, index) => (
-                    <img
-                        className='lg:w-[370px] lg:h-[256px] lg:rounded-[12px]'
-                        src={item?.img}
-                        alt=""
-                    />))}
-            </div>
-            </div>
-           
             <div className='aboutussection2 section'>
-                <img src="" alt="" srcset="" />
+                <div className='flex gap-2 rotate-[-2deg]  overflow-scroll lg:overflow-x-scroll'>
+                    {stills?.map((item, index) => (
+                        <img
+                            className='lg:w-[370px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px]'
+                            src={item?.img}
+                            alt=""
+                        />))}
+                </div>
             </div>
+
+
             {/* <div className='aboutussection3'>
                 <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
                     <img className='lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612' alt="" />
@@ -163,15 +161,15 @@ function AboutUs() {
                     <img className='lg:w-[600px] lg:h-[700px] w-[216px] h-[347px]  object-cover rotate-[2.8deg] rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612' alt="" />
                 </div>
             </div> */}
-            <div className='aboutussection3 section'>
-                <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
+            <div className='aboutussection3 '>
+                <div className="absolute lg:left-[-100px] left-[30px] h-full flex items-center">
                     <img
                         className="left-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
                         src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/6.png?alt=media&token=02a0ca4b-e024-4eec-890f-b60abac9990c'
                         alt="" />
                 </div>
                 <div className=' flex flex-col justify-center items-center w-[413px]' >
-                    <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium text-[20px]  text-[#A80018]'>
+                    <p className='pb-[42px] lg:!w-max uppercase inline-flex items-center gap-3 font-medium text-[20px]  text-[#A80018]'>
                         NEW YORK
                         <span><svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
@@ -182,7 +180,7 @@ function AboutUs() {
                     <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Where we Work</h1>
                     <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
                 </div>
-                <div className="absolute lg:right-[-100px] right-[-115px] h-full flex items-center">
+                <div className="absolute lg:right-[-100px] right-[15px] h-full flex items-center">
                     <img
                         className="right-image  bg-[#E6DADB] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
                         src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/7.png?alt=media&token=f91f083f-3038-4178-8c31-37d3968c4e25"

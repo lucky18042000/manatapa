@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div className='bg-[#F6F1EB] lg:pt-[75px] pt-[35px] lg:pb-[39px] pb-[16px] lg:px-[92px] px-[24px] mt-[84px] lg:mt-[194px]'>
+        <div className='bg-[#F6F1EB] lg:pt-[75px] z-50 pt-[35px] lg:pb-[39px] pb-[16px] lg:px-[92px] px-[24px] mt-[84px] lg:mt-[194px]'>
             <div className='flex w-full justify-between'>
                 <img className='' src="/logo.png" alt="" srcset="" />
                 <ul className='uppercase flex flex-col gap-[14px]'>

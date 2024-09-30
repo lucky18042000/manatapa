@@ -318,7 +318,7 @@ function HomePage() {
             </div>
             <div className='' ref={main}>
                 <div className="homepagesection3" >
-                    <div className="absolute lg:left-[-100px] left-[-100px] h-full flex items-center">
+                    <div className="absolute lg:left-[-100px] left-[30px] h-full flex items-center">
                         <img
                             className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
                             src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
@@ -338,7 +338,7 @@ function HomePage() {
                             Visual archive
                         </p>
                     </div>
-                    <div className="absolute lg:right-[-100px] right-[-115px] h-full flex items-center">
+                    <div className="absolute lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img
                             className="right-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
                             src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
@@ -347,18 +347,19 @@ function HomePage() {
                     </div>
                 </div>
                 <div className='homepagesection4'>
-                    <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
+                    <div className="absolute lg:left-[-100px] left-[30px] h-full flex items-center">
                         <img
                             className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
                             src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612'
                             alt="" />
                     </div>
                     <div className=' flex flex-col justify-center items-center w-[413px]' >
-                        <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium text-[20px]  text-[#A80018]'>
+                        <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium lg:text-[20px] text-[12px]  text-[#A80018]'>
                             NEW YORK
-                            <span><svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
-                            </svg>
+                            <span>
+                                <svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
+                                </svg>
                             </span>
                             LONDON
                         </p>
@@ -367,7 +368,7 @@ function HomePage() {
                         <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
                         <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p>
                     </div>
-                    <div className="absolute lg:right-[-100px] right-[-115px] h-full flex items-center">
+                    <div className="absolute lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img
                             className="right-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
                             src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
@@ -410,13 +411,13 @@ function HomePage() {
                                 </div>
                                 <img className='rounded-[24px] w-[349px] h-[295px] lg:w-[780px] lg:h-[480px] object-cover' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=08b40ad0-8dca-40b0-91f3-97bd3e4bb346" alt="" />
                             </div>
-                            <div className='w-[247px] h-[175px] absolute top-[150px] left-[15%] z-10'>
+                            <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[-10%] z-10'>
                                 <img className='rounded-[24px]' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=08b40ad0-8dca-40b0-91f3-97bd3e4bb346' alt="" />
                             </div>
-                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute top-[-10%] right-[15%] -z-[10px]'>
+                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[-10%] -z-[10px]'>
                                 <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa' alt="" />
                             </div>
-                            <div className='lg:w-[223px] lg:h-[154px] absolute bottom-[-20%] right-[27%] z-20'>
+                            <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[-20%] lg:right-[27%] bottom-[-1%] right-[-0%] z-20'>
                                 <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f' alt="" />
                             </div>
                         </div>

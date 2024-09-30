@@ -91,7 +91,7 @@ function Motions() {
             </div>
             <div>
                 {motionData?.map((item, index) => (<div className="homepagesection5">
-                    <h1 className={`text-[84.9px]  text-[#A80018] leading-[98px] font-bold text-center ${roslindaleFont.className}`}>
+                    <h1 className={`lg:text-[84.9px] text-[26px] text-[#A80018] leading-[28px] lg:leading-[98px] font-bold text-center ${roslindaleFont.className}`}>
                         {item?.title}
                     </h1>
                     <div class="card">
@@ -123,14 +123,14 @@ function Motions() {
                                     </a>
                                     <img className='rounded-[24px] w-[349px] h-[295px] lg:w-[780px] lg:h-[480px] object-cover' src={item?.CenterImage} alt="" />
                                 </div>
-                                <div className='w-[247px] h-[175px] absolute top-[150px] left-[15%] z-10'>
-                                    <img className='rounded-[24px]' src={item?.leftImage} alt="" />
+                                <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[-10%] z-10'>
+                                <img className='rounded-[24px]' src={item?.leftImage} alt="" />
                                 </div>
-                                <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute top-[-10%] right-[15%] -z-[10px]'>
-                                    <img className='rounded-[24px] object-cover' src={item?.topRightCornerImage} alt="" />
+                                <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[-10%] -z-[10px]'>
+                                <img className='rounded-[24px] object-cover' src={item?.topRightCornerImage} alt="" />
                                 </div>
-                                <div className='w-[223px] h-[154px] absolute bottom-[-5%] right-[27%] z-10'>
-                                    <img className='rounded-[24px]' src={item?.bottomImage} alt="" />
+                                <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[-20%] lg:right-[27%] bottom-[-1%] right-[-0%] z-20'>
+                                <img className='rounded-[24px]' src={item?.bottomImage} alt="" />
                                 </div>
                             </div>
                         </div>
