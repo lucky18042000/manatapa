@@ -94,7 +94,7 @@ function Stills() {
                         key={ind}
                         ref={(el) => (imgRefs.current[ind] = el)} // Store each image ref
                         data-index={ind} // Attach the index to each image for tracking
-                        className={`still-image lg:w-[869px] w-[260px] rounded-[32px] mb-6 transition-all duration-1000 ease-out ${ind % 2 === 0 ? 'lg:slide-in-left lg:ml-40' : 'lg:slide-in-right lg:mr-40'}`}
+                        className={`still-image lg:w-[869px] w-[260px] rounded-[32px] mb-6 transition-all duration-1000 ease-out ${ind % 2 === 0 ? 'slide-in-left lg:ml-40' : 'slide-in-right lg:mr-40'}`}
                         src={item?.img}
                         alt=""
                     />
