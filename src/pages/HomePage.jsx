@@ -130,52 +130,74 @@ function HomePage() {
 
     useEffect(() => {
         if (!isMounted) return;
-
-        // Scroll-triggered animation for left images
-        const leftImages = gsap.utils.toArray('.left-image');
-        leftImages.forEach((leftImage) => {
-            gsap.fromTo(
-                leftImage,
-                { x: '50%', opacity: 0 },
-                {
-                    x: '-100px',
-                    opacity: 1,
-                    duration: 1.5,
-                    scrollTrigger: {
-                        trigger: leftImage,
-                        start: 'top 50%',
-                        end: 'bottom 50%',
-                        scrub: true,
-                    },
-                }
-            );
-        });
-
-        // Scroll-triggered animation for right images
-        const rightImages = gsap.utils.toArray('.right-image');
-        rightImages.forEach((rightImage) => {
-            gsap.fromTo(
-                rightImage,
-                { x: '-50%', opacity: 0 },
-                {
-                    x: '100px',
-                    opacity: 1,
-                    duration: 1.5,
-                    scrollTrigger: {
-                        trigger: rightImage,
-                        start: 'top 50%',
-                        end: 'bottom 50%',
-                        scrub: true,
-                    },
-                }
-            );
-        });
-
-        // Clean up function to kill ScrollTriggers when the component unmounts
-        return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    
+        const observerOptions = {
+            root: null, // Use the viewport as the root
+            rootMargin: '0px',
+            threshold: 0.3 // Trigger when 10% of the element is visible
         };
+    
+        // Scroll-triggered animation for left images
+        const leftImages = document.querySelectorAll('.left-image');
+        const rightImages = document.querySelectorAll('.right-image');
+    
+        // Define the function for animating left images
+        const animateLeftImage = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'translateX(-100px)';
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transition = 'transform 1.5s, opacity 1.5s';
+                } else {
+                    // Reset when leaving the viewport (for scrolling up)
+                    entry.target.style.transform = 'translateX(50%)';
+                    entry.target.style.opacity = 0;
+                }
+            });
+        };
+    
+        // Define the function for animating right images
+        const animateRightImage = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'translateX(100px)';
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transition = 'transform 1.5s, opacity 1.5s';
+                } else {
+                    // Reset when leaving the viewport (for scrolling up)
+                    entry.target.style.transform = 'translateX(-50%)';
+                    entry.target.style.opacity = 0;
+                }
+            });
+        };
+    
+        // Create observers for both left and right images
+        const leftObserver = new IntersectionObserver(animateLeftImage, observerOptions);
+        const rightObserver = new IntersectionObserver(animateRightImage, observerOptions);
+    
+        // Observe each left image
+        leftImages.forEach(image => {
+            image.style.opacity = 0; // Set initial opacity to 0
+            image.style.transform = 'translateX(50%)'; // Set initial position
+            leftObserver.observe(image);
+        });
+    
+        // Observe each right image
+        rightImages.forEach(image => {
+            image.style.opacity = 0; // Set initial opacity to 0
+            image.style.transform = 'translateX(-50%)'; // Set initial position
+            rightObserver.observe(image);
+        });
+    
+        // Cleanup the observers when the component unmounts
+        return () => {
+            leftObserver.disconnect();
+            rightObserver.disconnect();
+        };
+    
     }, [isMounted]);
+    
+
 
 
     const mapNumberRange = (n, a, b, c, d) => {
