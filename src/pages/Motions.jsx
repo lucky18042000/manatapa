@@ -129,7 +129,7 @@ function Motions() {
                                 <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[-10%] -z-[10px]'>
                                 <img className='rounded-[24px] object-cover' src={item?.topRightCornerImage} alt="" />
                                 </div>
-                                <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[-20%] lg:right-[27%] bottom-[-1%] right-[-0%] z-20'>
+                                <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[10%] lg:right-[20%] bottom-[-1%] right-[-0%] z-20'>
                                 <img className='rounded-[24px]' src={item?.bottomImage} alt="" />
                                 </div>
                             </div>
