@@ -78,7 +78,38 @@ function AboutUs() {
         // });
 
     }, [isMounted]);
+    const scrollContainerRef = useRef(null);
 
+    useEffect(() => {
+        const scrollContainer = scrollContainerRef.current;
+        const scrollSpeed = 10; // Adjust this value to change the scroll speed
+        let scrollAmount = 0;
+
+        // Duplicate the stills to create an infinite scroll illusion
+        const duplicatedStills = [...stills, ...stills];
+
+        const autoScroll = () => {
+            if (scrollContainer) {
+                scrollAmount += scrollSpeed;
+                scrollContainer.scrollLeft = scrollAmount;
+
+                // If the scroll reaches the halfway point (original length), reset it to the start
+                if (scrollAmount >= scrollContainer.scrollWidth / 2) {
+                    scrollAmount = 0; // Reset scroll position
+                }
+
+                requestAnimationFrame(autoScroll);
+            }
+        };
+
+        // Start the auto-scroll
+        autoScroll();
+
+        return () => {
+            // Cleanup if necessary
+            cancelAnimationFrame(autoScroll);
+        };
+    }, [isMounted]);
     useEffect(() => {
         if (!isMounted) return;
 
@@ -139,16 +170,25 @@ function AboutUs() {
                 <img className='aboutussection1Image' src="" alt="" />
                 <p className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
             </div>
-            <div className='aboutussection2 section'>
-                <div className='scroll-container flex gap-2 rotate-[-2deg] overflow-x-scroll lg:overflow-x-auto'>
-                    {stills?.map((item, index) => (
-                        <img
-                            key={index}
-                            className='lg:w-[370px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px]'
-                            src={item?.img}
-                            alt=""
-                        />
-                    ))}
+            <div className='aboutussection2'>
+                <div
+                    ref={scrollContainerRef}
+                    className='scroll-container flex gap-2 rotate-[-2deg] overflow-hidden'
+                    style={{
+                        scrollBehavior: 'smooth',
+                        overflow: 'hidden', // Hide scrollbar
+                    }}
+                >
+                    {stills && stills.length > 0 ? (
+                        [...stills, ...stills].map((item, index) => (
+                            <img
+                                key={index}
+                                className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px]'
+                                src={item?.img}
+                                alt=""
+                            />
+                        ))
+                    ) : null}
                 </div>
             </div>
             {/* <div className='aboutussection3'>
@@ -184,13 +224,13 @@ function AboutUs() {
                 </div>
                 <div className="absolute lg:right-[-100px] right-[15px] h-full flex items-center">
                     <img
-                        className="right-image  bg-[#E6DADB] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                        className="right-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
                         src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/7.png?alt=media&token=f91f083f-3038-4178-8c31-37d3968c4e25"
                         alt="Right Image"
                     />
                 </div>
             </div>
-            <div className='aboutussection4 section'>
+            <div className='aboutussection4 '>
                 <h1 className={`text-[36px] lg:text-[84.9px] text-center text-[#A80018] leading-[98px] font-bold ${roslindaleFont.className}`}>Nature of Mantapa</h1>
                 <div className='flex lg:flex-row flex-col gap-[65px] mt-[54px]'>
                     {/* <img className='w-[256px] lg:w-[600px] h-[290px] lg:h-[700px]  object-cover rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/dsdsds.png?alt=media&token=4a8804fb-428b-42c1-bf14-c2feeb1c64f7' alt="" /> */}

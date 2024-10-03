@@ -130,23 +130,23 @@ function HomePage() {
 
     useEffect(() => {
         if (!isMounted) return;
-    
+
         // Helper function to calculate scroll progress
         const calculateScrollProgress = (element) => {
             const rect = element.getBoundingClientRect();
             const elementTop = rect.top;
             const elementHeight = rect.height;
             const windowHeight = window.innerHeight;
-            
+
             // Calculate the scroll progress as a value between 0 and 1
             const scrollProgress = Math.min(Math.max((windowHeight - elementTop) / (windowHeight + elementHeight), 0), 1);
             return scrollProgress;
         };
-    
+
         // Scroll-triggered animation for left images
         const leftImages = document.querySelectorAll('.left-image');
         const rightImages = document.querySelectorAll('.right-image');
-    
+
         // Function to handle scrolling and animate based on progress
         const handleScroll = () => {
             leftImages.forEach(image => {
@@ -155,7 +155,7 @@ function HomePage() {
                 image.style.transform = `translateX(${(0.5 - scrollProgress) * 200}px)`;
                 image.style.opacity = scrollProgress;
             });
-    
+
             rightImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
                 // Animate the right image based on scroll progress
@@ -163,17 +163,17 @@ function HomePage() {
                 image.style.opacity = scrollProgress;
             });
         };
-    
+
         // Add the scroll event listener
         window.addEventListener('scroll', handleScroll);
-    
+
         // Clean up the event listener when the component unmounts
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [isMounted]);
-    
-    
+
+
 
 
 
@@ -417,7 +417,7 @@ function HomePage() {
                                 <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa' alt="" />
                             </div>
                             <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[10%] lg:right-[20%] bottom-[-1%] right-[-0%] z-20'>
-                            <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f' alt="" />
+                                <img className='rounded-[24px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f' alt="" />
                             </div>
                         </div>
                     </div>
