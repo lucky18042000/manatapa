@@ -7,6 +7,7 @@
   background-repeat: repeat-y;
 }
 
+
 html {
   scroll-behavior: smooth;
 }
@@ -23,6 +24,24 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background-color: #A80018;
+}
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preloader-video {
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  object-fit: cover; /* Ensure the video covers the whole screen */
 }
 
 .blurinheader {
