@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import '@/styles/aboutus.css';
 import '@/styles/motions.css';
 import '@/styles/stills.css';
-import Preloader from "@/components/Preloader"; // Make sure the path is correct
+import Preloader from "@/Components/Preloader";
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
