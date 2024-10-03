@@ -112,43 +112,53 @@ function AboutUs() {
     }, [isMounted]);
     useEffect(() => {
         if (!isMounted) return;
-
+    
         // Helper function to calculate scroll progress
         const calculateScrollProgress = (element) => {
             const rect = element.getBoundingClientRect();
             const elementTop = rect.top;
             const elementHeight = rect.height;
             const windowHeight = window.innerHeight;
-
+    
             // Calculate the scroll progress as a value between 0 and 1
             const scrollProgress = Math.min(Math.max((windowHeight - elementTop) / (windowHeight + elementHeight), 0), 1);
             return scrollProgress;
         };
-
-        // Scroll-triggered animation for left images
+    
+        // Adjust thresholds for mobile vs laptop
+        const isMobile = window.innerWidth <= 768; // You can adjust this breakpoint
+        const threshold = isMobile ? 0.05 : 0.2;  // Trigger earlier on mobile (10%) and normal on larger screens (20%)
+    
+        // Scroll-triggered animation for left and right images
         const leftImages = document.querySelectorAll('.left-image');
         const rightImages = document.querySelectorAll('.right-image');
-
+    
         // Function to handle scrolling and animate based on progress
         const handleScroll = () => {
             leftImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
+    
                 // Animate the left image based on scroll progress
-                image.style.transform = `translateX(${(0.5 - scrollProgress) * 100}px)`;
-                image.style.opacity = scrollProgress;
+                image.style.transform = isMobile ? `translateX(${(0.05 - scrollProgress) * 200}px)`:`translateX(${(0.5 - scrollProgress) * 200}px)`;
+    
+                // Set opacity: if scrollProgress >= threshold, set opacity to 1
+                image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
-
+    
             rightImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
+    
                 // Animate the right image based on scroll progress
-                image.style.transform = `translateX(${(scrollProgress - 0.5) * 100}px)`;
-                image.style.opacity = scrollProgress;
+                image.style.transform = isMobile ? `translateX(${(scrollProgress - 0.05) * 200}px)`:`translateX(${(scrollProgress - 0.5) * 200}px)`;
+    
+                // Set opacity: if scrollProgress >= threshold, set opacity to 1
+                image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
         };
-
+    
         // Add the scroll event listener
         window.addEventListener('scroll', handleScroll);
-
+    
         // Clean up the event listener when the component unmounts
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -204,13 +214,13 @@ function AboutUs() {
                 </div>
             </div> */}
             <div className='aboutussection3 '>
-                <div className="absolute lg:left-[-100px] left-[30px] h-full flex items-center">
+                <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
                     <img
                         className="left-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
                         src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/6.png?alt=media&token=02a0ca4b-e024-4eec-890f-b60abac9990c'
                         alt="" />
                 </div>
-                <div className=' flex flex-col justify-center items-center w-[413px]' >
+                <div className='-z-10 flex flex-col justify-center items-center w-[413px]' >
                     <p className='pb-[42px] lg:!w-max uppercase inline-flex items-center gap-3 font-medium text-[20px]  text-[#A80018]'>
                         NEW YORK
                         <span><svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +232,7 @@ function AboutUs() {
                     <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Where we Work</h1>
                     <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
                 </div>
-                <div className="absolute lg:right-[-100px] right-[15px] h-full flex items-center">
+                <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                     <img
                         className="right-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
                         src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/7.png?alt=media&token=f91f083f-3038-4178-8c31-37d3968c4e25"
