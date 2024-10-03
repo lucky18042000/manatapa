@@ -68,7 +68,16 @@
     /* Space for padding on top and bottom */
 }
 
-
+.scroll-container {
+    scroll-behavior: smooth; /* Optional for smoother transitions */
+    white-space: nowrap; /* Ensure images are in a single line */
+    overflow: hidden; /* Hide overflow if necessary */
+  }
+  
+  .scroll-container img {
+    display: inline-block;
+  }
+  
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
     .aboutussection1 {

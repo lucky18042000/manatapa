@@ -36,7 +36,7 @@ function AboutUs() {
             console.error('Error fetching data: ', error);
         }
     };
-    const stillsdb = collection(db, 'stills');
+    const stillsdb = collection(db, 'aboutus');
     const [stills, setStills] = useState([]);
     const imgRefs = useRef([]); // Store references to each image
 
@@ -79,48 +79,50 @@ function AboutUs() {
 
     }, [isMounted]);
 
-    useGSAP(() => {
-        if (typeof window === 'undefined') return; // Ensure this code runs only on the client side
+    useEffect(() => {
+        if (!isMounted) return;
 
-        const leftImages = gsap.utils.toArray('.left-image');
-        leftImages.forEach((leftImage) => {
-            gsap.fromTo(
-                leftImage,
-                { x: '50%', opacity: 0 },
-                {
-                    x: '-100px',
-                    opacity: 1,
-                    duration: 1.5,
-                    scrollTrigger: {
-                        trigger: leftImage,
-                        start: 'top 50%',
-                        end: 'bottom 50%',
-                        scrub: true,
-                    },
-                }
-            );
-        });
+        // Helper function to calculate scroll progress
+        const calculateScrollProgress = (element) => {
+            const rect = element.getBoundingClientRect();
+            const elementTop = rect.top;
+            const elementHeight = rect.height;
+            const windowHeight = window.innerHeight;
 
-        const rightImages = gsap.utils.toArray('.right-image');
-        rightImages.forEach((rightImage) => {
-            gsap.fromTo(
-                rightImage,
-                { x: '-50%', opacity: 0 },
-                {
-                    x: '100px',
-                    opacity: 1,
-                    duration: 1.5,
-                    scrollTrigger: {
-                        trigger: rightImage,
-                        start: 'top 50%',
-                        end: 'bottom 50%',
-                        scrub: true,
-                    },
-                }
-            );
-        });
+            // Calculate the scroll progress as a value between 0 and 1
+            const scrollProgress = Math.min(Math.max((windowHeight - elementTop) / (windowHeight + elementHeight), 0), 1);
+            return scrollProgress;
+        };
+
+        // Scroll-triggered animation for left images
+        const leftImages = document.querySelectorAll('.left-image');
+        const rightImages = document.querySelectorAll('.right-image');
+
+        // Function to handle scrolling and animate based on progress
+        const handleScroll = () => {
+            leftImages.forEach(image => {
+                const scrollProgress = calculateScrollProgress(image);
+                // Animate the left image based on scroll progress
+                image.style.transform = `translateX(${(0.5 - scrollProgress) * 100}px)`;
+                image.style.opacity = scrollProgress;
+            });
+
+            rightImages.forEach(image => {
+                const scrollProgress = calculateScrollProgress(image);
+                // Animate the right image based on scroll progress
+                image.style.transform = `translateX(${(scrollProgress - 0.5) * 100}px)`;
+                image.style.opacity = scrollProgress;
+            });
+        };
+
+        // Add the scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, [isMounted]);
-
 
     // Ensure component doesn't render server-side
     if (!isMounted) {
@@ -138,17 +140,17 @@ function AboutUs() {
                 <p className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
             </div>
             <div className='aboutussection2 section'>
-                <div className='flex gap-2 rotate-[-2deg]  overflow-scroll lg:overflow-x-scroll'>
+                <div className='scroll-container flex gap-2 rotate-[-2deg] overflow-x-scroll lg:overflow-x-auto'>
                     {stills?.map((item, index) => (
                         <img
+                            key={index}
                             className='lg:w-[370px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px]'
                             src={item?.img}
                             alt=""
-                        />))}
+                        />
+                    ))}
                 </div>
             </div>
-
-
             {/* <div className='aboutussection3'>
                 <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
                     <img className='lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612' alt="" />

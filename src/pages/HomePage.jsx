@@ -131,71 +131,48 @@ function HomePage() {
     useEffect(() => {
         if (!isMounted) return;
     
-        const observerOptions = {
-            root: null, // Use the viewport as the root
-            rootMargin: '0px',
-            threshold: 0.3 // Trigger when 10% of the element is visible
+        // Helper function to calculate scroll progress
+        const calculateScrollProgress = (element) => {
+            const rect = element.getBoundingClientRect();
+            const elementTop = rect.top;
+            const elementHeight = rect.height;
+            const windowHeight = window.innerHeight;
+            
+            // Calculate the scroll progress as a value between 0 and 1
+            const scrollProgress = Math.min(Math.max((windowHeight - elementTop) / (windowHeight + elementHeight), 0), 1);
+            return scrollProgress;
         };
     
         // Scroll-triggered animation for left images
         const leftImages = document.querySelectorAll('.left-image');
         const rightImages = document.querySelectorAll('.right-image');
     
-        // Define the function for animating left images
-        const animateLeftImage = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.transform = 'translateX(-100px)';
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transition = 'transform 1.5s, opacity 1.5s';
-                } else {
-                    // Reset when leaving the viewport (for scrolling up)
-                    entry.target.style.transform = 'translateX(50%)';
-                    entry.target.style.opacity = 0;
-                }
+        // Function to handle scrolling and animate based on progress
+        const handleScroll = () => {
+            leftImages.forEach(image => {
+                const scrollProgress = calculateScrollProgress(image);
+                // Animate the left image based on scroll progress
+                image.style.transform = `translateX(${(0.5 - scrollProgress) * 200}px)`;
+                image.style.opacity = scrollProgress;
+            });
+    
+            rightImages.forEach(image => {
+                const scrollProgress = calculateScrollProgress(image);
+                // Animate the right image based on scroll progress
+                image.style.transform = `translateX(${(scrollProgress - 0.5) * 200}px)`;
+                image.style.opacity = scrollProgress;
             });
         };
     
-        // Define the function for animating right images
-        const animateRightImage = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.transform = 'translateX(100px)';
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transition = 'transform 1.5s, opacity 1.5s';
-                } else {
-                    // Reset when leaving the viewport (for scrolling up)
-                    entry.target.style.transform = 'translateX(-50%)';
-                    entry.target.style.opacity = 0;
-                }
-            });
-        };
+        // Add the scroll event listener
+        window.addEventListener('scroll', handleScroll);
     
-        // Create observers for both left and right images
-        const leftObserver = new IntersectionObserver(animateLeftImage, observerOptions);
-        const rightObserver = new IntersectionObserver(animateRightImage, observerOptions);
-    
-        // Observe each left image
-        leftImages.forEach(image => {
-            image.style.opacity = 0; // Set initial opacity to 0
-            image.style.transform = 'translateX(50%)'; // Set initial position
-            leftObserver.observe(image);
-        });
-    
-        // Observe each right image
-        rightImages.forEach(image => {
-            image.style.opacity = 0; // Set initial opacity to 0
-            image.style.transform = 'translateX(-50%)'; // Set initial position
-            rightObserver.observe(image);
-        });
-    
-        // Cleanup the observers when the component unmounts
+        // Clean up the event listener when the component unmounts
         return () => {
-            leftObserver.disconnect();
-            rightObserver.disconnect();
+            window.removeEventListener('scroll', handleScroll);
         };
-    
     }, [isMounted]);
+    
     
 
 

@@ -34,6 +34,18 @@ html {
   top: 0;
   z-index: 100;
 }
+.left-image, .right-image {
+  /* opacity: 0; */
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.left-image {
+  transform: translateX(50%);
+}
+
+.right-image {
+  transform: translateX(-50%);
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
