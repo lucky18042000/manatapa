@@ -112,58 +112,70 @@ function AboutUs() {
     }, [isMounted]);
     useEffect(() => {
         if (!isMounted) return;
-
+    
         // Helper function to calculate scroll progress
         const calculateScrollProgress = (element) => {
             const rect = element.getBoundingClientRect();
             const elementTop = rect.top;
             const elementHeight = rect.height;
             const windowHeight = window.innerHeight;
-
+    
             // Calculate the scroll progress as a value between 0 and 1
             const scrollProgress = Math.min(Math.max((windowHeight - elementTop) / (windowHeight + elementHeight), 0), 1);
             return scrollProgress;
         };
-
+    
         // Adjust thresholds for mobile vs laptop
-        const isMobile = window.innerWidth <= 768; // You can adjust this breakpoint
+        const isMobile = window.innerWidth <= 768;
         const threshold = isMobile ? 0.05 : 0.2;  // Trigger earlier on mobile (10%) and normal on larger screens (20%)
-
+    
         // Scroll-triggered animation for left and right images
         const leftImages = document.querySelectorAll('.left-image');
         const rightImages = document.querySelectorAll('.right-image');
-
+    
         // Function to handle scrolling and animate based on progress
         const handleScroll = () => {
             leftImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
-
-                // Animate the left image based on scroll progress
-                image.style.transform = isMobile ? `translateX(${(0.01 - scrollProgress) * 300}px)` : `translateX(${(0.5 - scrollProgress) * 200}px)`;
-
-                // Set opacity: if scrollProgress >= threshold, set opacity to 1
-                image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
+    
+                // Smooth transition with requestAnimationFrame
+                requestAnimationFrame(() => {
+                    // Smooth transform and opacity based on scroll progress
+                    image.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
+                    image.style.transform = isMobile 
+                        ? `translateX(${(0.01 - scrollProgress) * 300}px)` 
+                        : `translateX(${(0.5 - scrollProgress) * 200}px)`;
+                    
+                    // Set opacity: if scrollProgress >= threshold, set opacity to 1
+                    image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
+                });
             });
-
+    
             rightImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
-
-                // Animate the right image based on scroll progress
-                image.style.transform = isMobile ? `translateX(${(scrollProgress - 0.01) * 300}px)` : `translateX(${(scrollProgress - 0.5) * 200}px)`;
-
-                // Set opacity: if scrollProgress >= threshold, set opacity to 1
-                image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
+    
+                requestAnimationFrame(() => {
+                    // Smooth transform and opacity based on scroll progress
+                    image.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
+                    image.style.transform = isMobile 
+                        ? `translateX(${(scrollProgress - 0.01) * 300}px)` 
+                        : `translateX(${(scrollProgress - 0.5) * 200}px)`;
+    
+                    // Set opacity: if scrollProgress >= threshold, set opacity to 1
+                    image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
+                });
             });
         };
-
+    
         // Add the scroll event listener
         window.addEventListener('scroll', handleScroll);
-
+    
         // Clean up the event listener when the component unmounts
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [isMounted]);
+    
 
     // Ensure component doesn't render server-side
     if (!isMounted) {
