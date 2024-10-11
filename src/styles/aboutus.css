@@ -76,6 +76,12 @@
 .scroll-container::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
 }
+.left-image, .right-image {
+    will-change: transform, opacity; /* Optimize performance by informing the browser in advance */
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Smoother transition */
+    opacity: 0; /* Set initial state to avoid a jump */
+    transform: translateX(100px); /* Set initial transform state to avoid flicker */
+}
 
   
 /* Large devices (desktops, 769px and up) */

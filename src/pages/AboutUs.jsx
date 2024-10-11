@@ -138,43 +138,50 @@ function AboutUs() {
             leftImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
     
-                // Smooth transition with requestAnimationFrame
-                requestAnimationFrame(() => {
-                    // Smooth transform and opacity based on scroll progress
-                    image.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
-                    image.style.transform = isMobile 
-                        ? `translateX(${(0.01 - scrollProgress) * 300}px)` 
-                        : `translateX(${(0.5 - scrollProgress) * 200}px)`;
-                    
-                    // Set opacity: if scrollProgress >= threshold, set opacity to 1
-                    image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
-                });
+                // Animate the left image based on scroll progress
+                image.style.transform = isMobile 
+                    ? `translateX(${(0.01 - scrollProgress) * 300}px)` 
+                    : `translateX(${(0.5 - scrollProgress) * 200}px)`;
+                
+                // Set opacity: if scrollProgress >= threshold, set opacity to 1
+                image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
     
             rightImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
     
-                requestAnimationFrame(() => {
-                    // Smooth transform and opacity based on scroll progress
-                    image.style.transition = 'transform 0.2s ease-out, opacity 0.2s ease-out';
-                    image.style.transform = isMobile 
-                        ? `translateX(${(scrollProgress - 0.01) * 300}px)` 
-                        : `translateX(${(scrollProgress - 0.5) * 200}px)`;
+                // Animate the right image based on scroll progress
+                image.style.transform = isMobile 
+                    ? `translateX(${(scrollProgress - 0.01) * 300}px)` 
+                    : `translateX(${(scrollProgress - 0.5) * 200}px)`;
     
-                    // Set opacity: if scrollProgress >= threshold, set opacity to 1
-                    image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
-                });
+                // Set opacity: if scrollProgress >= threshold, set opacity to 1
+                image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
         };
     
+        // Debounce scroll events for smoother performance
+        let debounceTimeout;
+        const debouncedScroll = () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                handleScroll();
+            }, 10); // Adjust the delay if needed (10ms is usually smooth)
+        };
+    
         // Add the scroll event listener
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', debouncedScroll);
+    
+        // Initial call to set the positions correctly
+        handleScroll();
     
         // Clean up the event listener when the component unmounts
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', debouncedScroll);
+            clearTimeout(debounceTimeout);
         };
     }, [isMounted]);
+    
     
 
     // Ensure component doesn't render server-side
