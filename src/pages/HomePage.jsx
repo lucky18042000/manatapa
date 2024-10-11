@@ -144,7 +144,7 @@ function HomePage() {
         };
     
         // Adjust thresholds for mobile vs laptop
-        const isMobile = window.innerWidth <= 768; // You can adjust this breakpoint
+        const isMobile = window.innerWidth <= 768;
         const threshold = isMobile ? 0.05 : 0.2;  // Trigger earlier on mobile (10%) and normal on larger screens (20%)
     
         // Scroll-triggered animation for left and right images
@@ -157,8 +157,10 @@ function HomePage() {
                 const scrollProgress = calculateScrollProgress(image);
     
                 // Animate the left image based on scroll progress
-                image.style.transform = isMobile ? `translateX(${(0.05 - scrollProgress) * 200}px)`:`translateX(${(0.5 - scrollProgress) * 200}px)`;
-    
+                image.style.transform = isMobile 
+                    ? `translateX(${(0.01 - scrollProgress) * 300}px)` 
+                    : `translateX(${(0.5 - scrollProgress) * 200}px)`;
+                
                 // Set opacity: if scrollProgress >= threshold, set opacity to 1
                 image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
@@ -167,19 +169,34 @@ function HomePage() {
                 const scrollProgress = calculateScrollProgress(image);
     
                 // Animate the right image based on scroll progress
-                image.style.transform = isMobile ? `translateX(${(scrollProgress - 0.05) * 200}px)`:`translateX(${(scrollProgress - 0.5) * 200}px)`;
+                image.style.transform = isMobile 
+                    ? `translateX(${(scrollProgress - 0.01) * 300}px)` 
+                    : `translateX(${(scrollProgress - 0.5) * 200}px)`;
     
                 // Set opacity: if scrollProgress >= threshold, set opacity to 1
                 image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
         };
     
+        // Debounce scroll events for smoother performance
+        let debounceTimeout;
+        const debouncedScroll = () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                handleScroll();
+            }, 10); // Adjust the delay if needed (10ms is usually smooth)
+        };
+    
         // Add the scroll event listener
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', debouncedScroll);
+    
+        // Initial call to set the positions correctly
+        handleScroll();
     
         // Clean up the event listener when the component unmounts
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', debouncedScroll);
+            clearTimeout(debounceTimeout);
         };
     }, [isMounted]);
     
