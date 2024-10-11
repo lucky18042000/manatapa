@@ -4,7 +4,7 @@ const Preloader = () => {
     return (
         <div className="preloader">
             <video
-                className="preloader-video"
+                className="preloader-video w-full h-full"
                 autoPlay
                 muted
                 loop

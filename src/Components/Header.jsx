@@ -160,7 +160,10 @@ function Header() {
                 </div>
             </CustomModal>
             <CustomModal isOpen={openMenu} onClose={() => setOpenMenu(!openMenu)}>
-                <div className='w-[307px] flex flex-col justify-center items-center bg-[#A80018] py-[44px]'>
+                <div className='w-[307px] flex flex-col gap-3 justify-center items-center bg-[#A80018] py-[44px]'>
+                    <Link href={'/'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                        Home
+                    </Link>
                     <Link href={'/Stills'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
                         Stills
                     </Link>

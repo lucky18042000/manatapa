@@ -112,54 +112,54 @@ function AboutUs() {
     }, [isMounted]);
     useEffect(() => {
         if (!isMounted) return;
-    
+
         // Helper function to calculate scroll progress
         const calculateScrollProgress = (element) => {
             const rect = element.getBoundingClientRect();
             const elementTop = rect.top;
             const elementHeight = rect.height;
             const windowHeight = window.innerHeight;
-    
+
             // Calculate the scroll progress as a value between 0 and 1
             const scrollProgress = Math.min(Math.max((windowHeight - elementTop) / (windowHeight + elementHeight), 0), 1);
             return scrollProgress;
         };
-    
+
         // Adjust thresholds for mobile vs laptop
         const isMobile = window.innerWidth <= 768;
         const threshold = isMobile ? 0.05 : 0.2;  // Trigger earlier on mobile (10%) and normal on larger screens (20%)
-    
+
         // Scroll-triggered animation for left and right images
         const leftImages = document.querySelectorAll('.left-image');
         const rightImages = document.querySelectorAll('.right-image');
-    
+
         // Function to handle scrolling and animate based on progress
         const handleScroll = () => {
             leftImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
-    
+
                 // Animate the left image based on scroll progress
-                image.style.transform = isMobile 
-                    ? `translateX(${(0.01 - scrollProgress) * 300}px)` 
+                image.style.transform = isMobile
+                    ? `translateX(${(0.01 - scrollProgress) * 300}px)`
                     : `translateX(${(0.5 - scrollProgress) * 200}px)`;
-                
+
                 // Set opacity: if scrollProgress >= threshold, set opacity to 1
                 image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
-    
+
             rightImages.forEach(image => {
                 const scrollProgress = calculateScrollProgress(image);
-    
+
                 // Animate the right image based on scroll progress
-                image.style.transform = isMobile 
-                    ? `translateX(${(scrollProgress - 0.01) * 300}px)` 
+                image.style.transform = isMobile
+                    ? `translateX(${(scrollProgress - 0.01) * 300}px)`
                     : `translateX(${(scrollProgress - 0.5) * 200}px)`;
-    
+
                 // Set opacity: if scrollProgress >= threshold, set opacity to 1
                 image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
         };
-    
+
         // Debounce scroll events for smoother performance
         let debounceTimeout;
         const debouncedScroll = () => {
@@ -168,21 +168,21 @@ function AboutUs() {
                 handleScroll();
             }, 10); // Adjust the delay if needed (10ms is usually smooth)
         };
-    
+
         // Add the scroll event listener
         window.addEventListener('scroll', debouncedScroll);
-    
+
         // Initial call to set the positions correctly
         handleScroll();
-    
+
         // Clean up the event listener when the component unmounts
         return () => {
             window.removeEventListener('scroll', debouncedScroll);
             clearTimeout(debounceTimeout);
         };
     }, [isMounted]);
-    
-    
+
+
 
     // Ensure component doesn't render server-side
     if (!isMounted) {
@@ -196,13 +196,21 @@ function AboutUs() {
                 <h1 className={`aboutussection1Title ${roslindaleFont.className}`}>
                     About Us
                 </h1>
-                <img className='aboutussection1Image' src="" alt="" />
+                <video
+                    className='aboutussection1Image'
+                    src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Laptop%20About%20us.mp4?alt=media&token=b66a2247-2029-4ae6-b843-9bc80803d694"
+                    alt=""
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                />
                 <p className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
             </div>
-            <div className='aboutussection2'>
+            <div className='aboutussection2 rotate-[-2deg] overflow-hidden '>
                 <div
                     ref={scrollContainerRef}
-                    className='scroll-container flex gap-2 rotate-[-2deg] overflow-hidden'
+                    className='scroll-container flex gap-2  overflow-hidden '
                     style={{
                         scrollBehavior: 'smooth',
                         overflow: 'hidden', // Hide scrollbar
@@ -212,7 +220,7 @@ function AboutUs() {
                         [...stills, ...stills].map((item, index) => (
                             <img
                                 key={index}
-                                className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px]'
+                                className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px]  lg:rounded-[12px] bg-[#E6DADB] '
                                 src={item?.img}
                                 alt=""
                             />
@@ -220,18 +228,51 @@ function AboutUs() {
                     ) : null}
                 </div>
             </div>
-            {/* <div className='aboutussection3'>
-                <div className='absolute lg:left-[-100px] left-[-100px] h-full flex items-center'>
-                    <img className='lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612' alt="" />
+            <div className='homepagesection4'>
+                <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
+                    <img
+                        className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
+                        src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Container%20(2).png?alt=media&token=708901eb-464a-4273-b517-f469d3f02b29'
+                        alt="" />
                 </div>
                 <div className=' flex flex-col justify-center items-center w-[413px]' >
-                    <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Where we Work</h1>
-                    <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
+                    <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium lg:text-[20px] text-[10px]  text-[#A80018]'>
+                        NEW YORK
+                        <span>
+                            <svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
+                            </svg>
+
+                        </span>
+                        LONDON
+                    </p>
+
+                    <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
+                    {/* <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
+                    <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p> */}
+                    <div className='flex items-center lg:gap-5 gap-2 lg:mt-[61px] mt-[20px]'>
+                        <div className='flex flex-col items-center'>
+                            <p className='lg:text-[14px] text-[#A80018] text-[10px]'>Boston</p>
+                            <p className='lg:text-[18px] font-semibold text-[#A80018] text-[12px]'>Krushesh patel</p>
+                        </div>
+                        <div className='flex flex-col items-center'>
+                            <p className='lg:text-[14px] text-[#A80018] text-[10px]'>Atlanta</p>
+                            <p className='lg:text-[18px] font-semibold text-[#A80018] text-[12px]'>Sunny Patel</p>
+                        </div>
+                        <div className='flex flex-col items-center'>
+                            <p className='lg:text-[14px] text-[#A80018] text-[10px]'>Missouri</p>
+                            <p className='lg:text-[18px] font-semibold text-[#A80018] text-[12px]'>Indu Patel</p>
+                        </div>
+                    </div>
                 </div>
-                <div className='absolute lg:right-[-100px] right-[-115px] h-full flex items-center'>
-                    <img className='lg:w-[600px] lg:h-[700px] w-[216px] h-[347px]  object-cover rotate-[2.8deg] rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612' alt="" />
+                <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
+                    <img
+                        className="right-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                        src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3ccc6c2ce83328c9b669_Header20Right-p-1080.jpg.png?alt=media&token=228c7852-cec5-4a4a-a6c8-9ba408fd0582"
+                        alt="Right Image"
+                    />
                 </div>
-            </div> */}
+            </div>
             <div className='aboutussection3 '>
                 <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
                     <img
