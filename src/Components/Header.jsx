@@ -68,7 +68,7 @@ function Header() {
                 console.error('Failed to send email. Error:', err);
             });
     };
-    
+
     return (
         <div className=' blurinheader lg:px-[64px] lg:py-[6px] px-[22px] py-[6px] '>
             <div className='flex justify-between items-center'>
@@ -84,7 +84,7 @@ function Header() {
                 </Link>
                 <div className=' gap-[10px] hidden md:flex lg:flex'>
                     <Link href={'/AboutUs'} className='material-bubble cursor-pointer'>ABOUT</Link>
-                    <p onClick={() => { setOpenContactForm(!openContactForm) }} className='material-bubble !text-white !bg-[#A80018] cursor-pointer'>CONTACT</p>
+                    <Link href={'/Contact'} className='material-bubble !text-white !bg-[#A80018] cursor-pointer'>CONTACT</Link>
                 </div>
                 <div className='lg:hidden md:hidden block'>
                     <p onClick={() => { setOpenMenu(!openMenu) }} className='material-bubble1 '>MENU</p>

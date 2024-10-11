@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import '@/styles/aboutus.css';
 import '@/styles/motions.css';
 import '@/styles/stills.css';
+import '@/styles/contact.css';
 import Preloader from "@/Components/Preloader";
 
 export default function App({ Component, pageProps }) {
