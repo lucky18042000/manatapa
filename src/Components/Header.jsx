@@ -170,7 +170,9 @@ function Header() {
                     <Link href={'/AboutUs'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
                         About
                     </Link>
-
+                    <Link href={'/Contact'} className={`text-center text-white text-[18px] ${roslindaleFont.className}`}>
+                        Contact
+                    </Link>
                 </div>
             </CustomModal >
         </div >
