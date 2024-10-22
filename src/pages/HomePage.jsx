@@ -349,7 +349,7 @@ function HomePage() {
                     <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
                         <img
                             className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
-                            src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header20Left-p-1080.jpg.png?alt=media&token=6ab2cded-a4c7-4a21-9602-e33866957612"
+                            src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Stills%2F6.png?alt=media&token=7d2fcb9f-dd86-44ee-a1da-5a506c1bc6e6"
                             alt="Left Image"
                         />
                     </div>

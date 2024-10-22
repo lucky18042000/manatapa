@@ -98,7 +98,7 @@ function Motions() {
                         <div class="card__content">
                             <div class="card__gloss"></div>
                             <div className='homepagesection5motion 3dtiltingcardeffect'>
-                                <div className='lg:w-[780px] lg:h-[480px] w-[349px] h-[295px] z-10'>
+                                <div className='lg:w-[780px] lg:h-[480px] w-[309px] h-[265px] z-10'>
                                     <a href={item?.ytLink} target='_blank' className="motion-cms-play">
                                         <svg width="20%" viewBox="0 0 20 23" fill="#FFF" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M19 9.76795C20.3333 10.5378 20.3333 12.4623 19 13.2321L3.25 22.3253C1.91667 23.0951 0.250001 22.1329 0.250001 20.5933L0.250002 2.40673C0.250002 0.867131 1.91667 -0.0951185 3.25 0.674682L19 9.76795Z" fill="#FFF"></path>
@@ -121,12 +121,12 @@ function Motions() {
                                         </svg>
 
                                     </a>
-                                    <img className='rounded-[24px] w-[349px] h-[295px] lg:w-[780px] lg:h-[480px] object-cover' src={item?.CenterImage} alt="" />
+                                    <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src={item?.CenterImage} alt="" />
                                 </div>
-                                <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[-10%] z-10'>
+                                <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[0%] z-10'>
                                     <img className='lg:rounded-[24px] rounded-[10px]' src={item?.leftImage} alt="" />
                                 </div>
-                                <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[-10%] -z-[10px]'>
+                                <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[0%] z-10'>
                                     <img className='lg:rounded-[24px] rounded-[10px] object-cover' src={item?.topRightCornerImage} alt="" />
                                 </div>
                                 <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[10%] lg:right-[20%] bottom-[-1%] right-[-0%] z-20'>

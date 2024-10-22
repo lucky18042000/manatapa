@@ -8,6 +8,7 @@ import gsap from 'gsap';
 import dynamic from 'next/dynamic';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 // Dynamically import the AboutUs component with SSR disabled
 const DynamicAboutUs = dynamic(() => import('@/pages/AboutUs'), { ssr: false });
@@ -25,7 +26,8 @@ function AboutUs() {
     const [isMounted, setIsMounted] = useState(false);
     const [aboutUs, setAboutUs] = useState([]);
     const aboutuspage = collection(db, 'homepageVideo');
-
+    const scrollContainerRef = useRef(null);
+    const autoScrollIntervalRef = useRef(null);
 
     const fetchAboutUs = async () => {
         try {
@@ -44,15 +46,44 @@ function AboutUs() {
         try {
             const querySnapshot = await getDocs(stillsdb);
             const links = querySnapshot.docs.map(doc => doc.data());
-            setStills(links);
+            if (links.length > 0) {
+                setStills((prevStills) => [...prevStills, ...links]); // Append new stills
+            } else {
+                // If no new stills, repeat existing images
+                setStills((prevStills) => [...prevStills, ...prevStills]); // Duplicate the existing stills
+            }
         } catch (error) {
-            console.error('Error fetching data: ', error);
+            console.error('Error fetching stills: ', error);
+            // Fallback: Reuse existing stills if fetch fails
+            setStills((prevStills) => [...prevStills, ...prevStills]); // Duplicate the existing stills
         }
+    };
+
+     // Function to auto-scroll within the container
+     const autoScroll = () => {
+        const scrollContainer = scrollContainerRef.current;
+        if (!scrollContainer) return;
+
+        let scrollAmount = 0;
+        const scrollSpeed = 1; // Adjust the scroll speed as per your requirement
+
+        const animateScroll = () => {
+            scrollAmount += scrollSpeed;
+            scrollContainer.scrollLeft = scrollAmount;
+
+            // Reset scroll when reaching the end
+            if (scrollAmount >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+                scrollAmount = 0;
+            }
+        };
+
+        autoScrollIntervalRef.current = setInterval(animateScroll, 16); // ~60 FPS (1000/16ms)
     };
     // Mark the component as mounted to ensure it's client-side only
     useEffect(() => {
         fetchAboutUs()
         fetchStills()
+        autoScroll()
         setIsMounted(true);
         if (!isMounted) return; // Ensure this code runs only on the client side
 
@@ -78,7 +109,6 @@ function AboutUs() {
         // });
 
     }, [isMounted]);
-    const scrollContainerRef = useRef(null);
 
     useEffect(() => {
         const scrollContainer = scrollContainerRef.current;
@@ -110,6 +140,7 @@ function AboutUs() {
             cancelAnimationFrame(autoScroll);
         };
     }, [isMounted]);
+    
     useEffect(() => {
         if (!isMounted) return;
 
@@ -207,26 +238,27 @@ function AboutUs() {
                 />
                 <p className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
             </div>
-            <div className='aboutussection2 rotate-[-2deg] overflow-hidden '>
-                <div
-                    ref={scrollContainerRef}
-                    className='scroll-container flex gap-2  overflow-hidden '
-                    style={{
-                        scrollBehavior: 'smooth',
-                        overflow: 'hidden', // Hide scrollbar
-                    }}
+            <div className='aboutussection2 rotate-[-2deg] overflow-hidden'>
+                <InfiniteScroll
+                    dataLength={stills.length}
+                    next={fetchStills}
+                    hasMore={true}
+                    loader={<h4>Loading...</h4>}
+                    className='scroll-container flex gap-2 overflow-hidden'
+                    scrollableTarget="scrollableDiv" // Important for targeting the scroll
+                    ref={scrollContainerRef} // Assign ref to the scroll container
                 >
-                    {stills && stills.length > 0 ? (
-                        [...stills, ...stills].map((item, index) => (
+                    {stills.length > 0 &&
+                        stills.map((item, index) => (
                             <img
                                 key={index}
-                                className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px]  lg:rounded-[12px] bg-[#E6DADB] '
+                                className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px] bg-[#E6DADB]'
                                 src={item?.img}
-                                alt=""
+                                alt="Still Image"
+                                loading="lazy"
                             />
-                        ))
-                    ) : null}
-                </div>
+                        ))}
+                </InfiniteScroll>
             </div>
             <div className='homepagesection4'>
                 <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
@@ -250,7 +282,7 @@ function AboutUs() {
                     <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
                     {/* <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
                     <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p> */}
-                    <div className='flex items-center lg:gap-5 gap-2 lg:mt-[61px] mt-[20px]'>
+                    <div className='flex items-center lg:gap-5 gap-4 lg:mt-[61px] mt-[20px]'>
                         <div className='flex flex-col items-center'>
                             <p className='lg:text-[14px] text-[#A80018] text-[10px]'>Boston</p>
                             <p className='lg:text-[18px] font-semibold text-[#A80018] text-[12px]'>Krushesh patel</p>
@@ -290,7 +322,7 @@ function AboutUs() {
                         LONDON
                     </p>
                     <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Where we Work</h1>
-                    <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
+                    <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] mt-[20px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
                 </div>
                 <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                     <img

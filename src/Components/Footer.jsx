@@ -13,7 +13,7 @@ function Footer() {
     return (
         <div className='bg-[#F6F1EB] lg:pt-[75px] z-50 pt-[35px] lg:pb-[39px] pb-[16px] lg:px-[92px] px-[24px] mt-[84px] lg:mt-[194px]'>
             <div className='flex w-full justify-between items-center'>
-                <img className='' src="/logo.png" alt="" srcset="" />
+                <img className='w-[88px] h-[88px] lg:w-[133px] lg:h-[133px]' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Mantapa%20logo-01.png?alt=media&token=490eca97-fbe1-47de-85ab-af082178925e" alt="" srcset="" />
                 <div className=' flex-col items-center lg:flex hidden'>
                     <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
                     <h1 className={`mt-[24px] bg-[#FFFFFF] rounded-[26px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[64px] px-[56px] py-[25px] ${roslindaleFont.className}`}>ARTH@MANTAPA.COM</h1>
