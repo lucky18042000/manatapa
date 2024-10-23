@@ -39,6 +39,7 @@ const scrambleText = (el, text, duration = 2) => {
         iterations += 1 / duration; // Increase iterations progressively
     }, 50); // Scramble speed (50ms interval)
 };
+
 function HomePage() {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -296,9 +297,27 @@ function HomePage() {
             }
         };
     }, []);
+
+
+    // Video load effect and scramble text trigger
     useEffect(() => {
-        scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
-    }, [isMounted]);
+        const videoElement = videoRef.current;
+
+        const handleVideoLoad = () => {
+            setIsVideoLoaded(true); // Update state once video is loaded
+            scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
+        };
+
+        if (videoElement) {
+            videoElement.addEventListener('loadeddata', handleVideoLoad);
+        }
+
+        return () => {
+            if (videoElement) {
+                videoElement.removeEventListener('loadeddata', handleVideoLoad);
+            }
+        };
+    }, []);
     return (
         <div className=''>
             <Header />

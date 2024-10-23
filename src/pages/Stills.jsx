@@ -76,11 +76,11 @@ function Stills() {
             </div>
 
             {/* Fixed div with brightness adjustment for corresponding image */}
-            <div className='fixed -z-10 top-[50%] right-10 transition-all duration-300'>
+            <div className='lg:fixed hidden -z-10 top-[50%] right-10 transition-all duration-300'>
                 {stills?.map((item, ind) => (
                     <img
                         key={ind}
-                        className={`w-[66px] h-[32px] mb-4 transition-all duration-500 ${ind % 2 === 0 ? 'lg:ml-5' : 'lg:mr-5'}`}
+                        className={`w-[66px] h-[32px] mb-4 transition-all duration-500 ${ind % 2 === 0 ? 'lg:ml-5 ml-0' : 'lg:mr-5 ml-0'}`}
                         src={item?.img}
                         alt=""
                     />
@@ -88,13 +88,13 @@ function Stills() {
             </div>
 
             {/* Main image section with alignment */}
-            <div className='flex flex-col lg:justify-center lg:items-center lg:ml-0 ml-4 lg:mt-[86px] mt-[50px]'>
+            <div className='flex flex-col lg:justify-center items-center  lg:mt-[86px] mt-[50px]'>
                 {stills?.map((item, ind) => (
                     <img
                         key={ind}
                         ref={(el) => (imgRefs.current[ind] = el)} // Store each image ref
                         data-index={ind} // Attach the index to each image for tracking
-                        className={`still-image lg:w-[869px] w-[260px] rounded-[32px] mb-6 transition-all duration-1000 ease-out ${ind % 2 === 0 ? 'slide-in-left lg:ml-40' : 'slide-in-right lg:mr-40'}`}
+                        className={`still-image lg:w-[869px] w-[260px] rounded-[32px] mb-6 transition-all duration-1000 ease-out ${ind % 2 === 0 ? 'slide-in-left lg:ml-40 ml-0' : 'slide-in-right lg:mr-40 mr-0'}`}
                         src={item?.img}
                         alt=""
                     />
