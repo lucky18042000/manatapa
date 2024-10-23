@@ -9,8 +9,10 @@ const Preloader = () => {
                 muted
                 loop
                 playsInline
+                preload="auto" // Ensures video preloads
             >
-                <source src="/preloader.webm" type="video/mp4" />
+                <source src="/preloader.mp4" type="video/mp4" /> {/* Correct MIME type */}
+                <source src="/preloader.webm" type="video/webm" /> {/* Optional WebM fallback */}
                 Your browser does not support the video tag.
             </video>
         </div>
