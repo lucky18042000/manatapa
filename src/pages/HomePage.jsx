@@ -37,7 +37,7 @@ const scrambleText = (el, text, duration = 2) => {
         }
 
         iterations += 1 / duration; // Increase iterations progressively
-    }, 50); // Scramble speed (50ms interval)
+    }, 10); // Scramble speed (50ms interval)
 };
 
 function HomePage() {
@@ -202,7 +202,9 @@ function HomePage() {
     }, [isMounted]);
 
 
-
+    const handleVideoLoad = () => {
+        setIsVideoLoaded(true);
+    };
 
 
 
@@ -318,6 +320,11 @@ function HomePage() {
             }
         };
     }, []);
+    useEffect(() => {
+        if (isVideoLoaded && textRef.current) {
+            scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
+        }
+    }, [isVideoLoaded]);
     return (
         <div className=''>
             <Header />
@@ -330,6 +337,7 @@ function HomePage() {
                     autoPlay
                     loop
                     muted
+                    onLoadedData={handleVideoLoad}
                 >
                     Your browser does not support the video tag.
                 </video>
