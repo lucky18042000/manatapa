@@ -37,7 +37,7 @@ const scrambleText = (el, text, duration = 2) => {
         }
 
         iterations += 1 / duration; // Increase iterations progressively
-    }, 10); // Scramble speed (50ms interval)
+    }, 30); // Scramble speed (50ms interval)
 };
 
 function HomePage() {
