@@ -1,53 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import localFont from 'next/font/local';
 import Header from '@/Components/Header';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import Footer from '@/Components/Footer';
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 const roslindaleFont = localFont({
     src: '../fonts/Roslindale-DisplayNarrowRegular-Testing.ttf',
     weight: '400',
     style: 'normal',
-    variable: '--font-roslindale'
+    variable: '--font-roslindale',
 });
-
-const scrambleText = (el, text, duration = 2) => {
-    if (!el || !text) return; // Ensure element and text are defined
-
-    const chars = "!<>-_\\/[]{}—=+*^?#________";
-    let iterations = 0;
-
-    const interval = setInterval(() => {
-        // Scramble the text
-        el.innerText = text
-            .split("")
-            .map((char, i) => {
-                if (i < iterations) {
-                    return text[i];
-                }
-                return chars[Math.floor(Math.random() * chars.length)];
-            })
-            .join("");
-
-        if (iterations >= text.length) {
-            clearInterval(interval);
-        }
-
-        iterations += 1 / duration; // Increase iterations progressively
-    }, 30); // Scramble speed (50ms interval)
-};
 
 function HomePage() {
     gsap.registerPlugin(ScrollTrigger);
 
     const [videoLinks, setVideoLinks] = useState([]);
-    const [zoomoutImages, setZoomImages] = useState([])
+    const [zoomoutImages, setZoomImages] = useState([]);
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const videoRef = useRef(null);
+    const textRef = useRef(null);
+
     const homepageVideoCollectionRef = collection(db, 'homepageVideo');
     const homepageZoomOutImagesCollectionRef = collection(db, 'homepageZoomOutImages');
-    const [isVideoLoaded, setIsVideoLoaded] = useState(false); // State to track video load status
 
     const fetchVideoData = async () => {
         try {
@@ -58,6 +35,7 @@ function HomePage() {
             console.error('Error fetching data: ', error);
         }
     };
+
     const fetchZoomOutImages = async () => {
         try {
             const querySnapshot = await getDocs(homepageZoomOutImagesCollectionRef);
@@ -67,35 +45,16 @@ function HomePage() {
             console.error('Error fetching data: ', error);
         }
     };
+
     useEffect(() => {
         fetchVideoData();
         fetchZoomOutImages();
     }, []);
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
-            // Your GSAP animations go here
-        }
-    }, []);
-    useEffect(() => {
-        const loadGSAP = async () => {
-            if (typeof window !== 'undefined') {
-                const { gsap } = await import('gsap');
-                const { ScrollTrigger } = await import('gsap/dist/ScrollTrigger');
-                gsap.registerPlugin(ScrollTrigger);
-                // Add your GSAP animation logic here
-            }
-        };
-        loadGSAP();
-    }, []);
-
-
-    const videoRef = useRef(null);
-    const textRef = useRef(null);
 
     useEffect(() => {
-        // Animate the video from the center to full size
-        gsap.fromTo(videoRef.current,
+        // Zoom video on load
+        gsap.fromTo(
+            videoRef.current,
             { scale: 0.5, transformOrigin: 'center center' },
             { scale: 1, duration: 1, ease: 'power2.out' }
         );
@@ -124,11 +83,9 @@ function HomePage() {
     }, []);
     const main = useRef(); // Reference for the container element
     const [isMounted, setIsMounted] = useState(false);
-
     useEffect(() => {
         setIsMounted(true);
     }, []);
-
     useEffect(() => {
         if (!isMounted) return;
 
@@ -202,131 +159,48 @@ function HomePage() {
     }, [isMounted]);
 
 
-    const handleVideoLoad = () => {
-        setIsVideoLoaded(true);
-    };
-
-
-
-
-    const mapNumberRange = (n, a, b, c, d) => {
-        return ((n - a) * (d - c)) / (b - a) + c;
-    };
-    const initCard = (card) => {
-        const cardContent = card.querySelector('.card__content');
-        const gloss = card.querySelector('.card__gloss');
-
-        requestAnimationFrame(() => {
-            gloss.classList.add('card__gloss--animatable');
-        });
-
-        const handleMouseMove = (e) => {
-            const pointerX = e.clientX;
-            const pointerY = e.clientY;
-
-            const cardRect = card.getBoundingClientRect();
-
-            const halfWidth = cardRect.width / 2;
-            const halfHeight = cardRect.height / 2;
-
-            const cardCenterX = cardRect.left + halfWidth;
-            const cardCenterY = cardRect.top + halfHeight;
-
-            const deltaX = pointerX - cardCenterX;
-            const deltaY = pointerY - cardCenterY;
-
-            const distanceToCenter = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-            const maxDistance = Math.max(halfWidth, halfHeight);
-
-            const degree = mapNumberRange(distanceToCenter, 0, maxDistance, 0, 10);
-
-            const rx = mapNumberRange(deltaY, 0, halfWidth, 0, 1);
-            const ry = mapNumberRange(deltaX, 0, halfHeight, 0, 1);
-
-            cardContent.style.transform = `perspective(400px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
-
-            gloss.style.transform = `translate(${-ry * 100}%, ${-rx * 100}%) scale(2.4)`;
-
-            gloss.style.opacity = `${mapNumberRange(
-                distanceToCenter,
-                0,
-                maxDistance,
-                0,
-                0.6
-            )}`;
-        };
-
-        const handleMouseLeave = () => {
-            cardContent.style = null;
-            gloss.style.opacity = 0;
-        };
-
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-
-        // Cleanup event listeners
-        return () => {
-            card.removeEventListener('mousemove', handleMouseMove);
-            card.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    };
-
     useEffect(() => {
-        const cardElements = document.querySelectorAll('.card');
-        cardElements.forEach((cardEl) => initCard(cardEl));
-    }, []);
-
-
-
-    useEffect(() => {
-        const videoElement = videoRef.current;
+        const video = videoRef.current;
 
         const handleVideoLoad = () => {
-            setIsVideoLoaded(true); // Update state once video is loaded
-
-            // Trigger the custom scramble effect
-            scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
+            setIsVideoLoaded(true); // Set video loaded state to true when loaded
         };
 
-        if (videoElement) {
-            videoElement.addEventListener('loadeddata', handleVideoLoad);
+        if (video) {
+            video.addEventListener('loadeddata', handleVideoLoad);
         }
 
         return () => {
-            if (videoElement) {
-                videoElement.removeEventListener('loadeddata', handleVideoLoad);
-            }
-        };
-    }, []);
-
-
-    // Video load effect and scramble text trigger
-    useEffect(() => {
-        const videoElement = videoRef.current;
-
-        const handleVideoLoad = () => {
-            setIsVideoLoaded(true); // Update state once video is loaded
-            scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
-        };
-
-        if (videoElement) {
-            videoElement.addEventListener('loadeddata', handleVideoLoad);
-        }
-
-        return () => {
-            if (videoElement) {
-                videoElement.removeEventListener('loadeddata', handleVideoLoad);
+            if (video) {
+                video.removeEventListener('loadeddata', handleVideoLoad);
             }
         };
     }, []);
     useEffect(() => {
         if (isVideoLoaded && textRef.current) {
-            scrambleText(textRef.current, "Your, Majestic Matrimonial Miracles.");
+            const textElement = textRef.current;
+
+            const animateText = (element) => {
+                const words = element.innerText.split(' ');
+                element.innerHTML = ''; // Clear original content
+    
+                words.forEach((word, index) => {
+                    const span = document.createElement('span');
+                    span.innerText = word + ' ';
+                    span.classList.add('word'); // Add class for styling/animation
+                    span.style.animationDelay = `${index * 0.1}s`; // Delay for stagger effect
+                    element.appendChild(span);
+                });
+
+                // Add the animation class
+                element.classList.add('animate-text');
+            };
+
+            animateText(textElement);
         }
     }, [isVideoLoaded]);
     return (
-        <div className=''>
+        <div>
             <Header />
             <div className="homepagesection1">
                 <video
@@ -337,16 +211,13 @@ function HomePage() {
                     autoPlay
                     loop
                     muted
-                    onLoadedData={handleVideoLoad}
                 >
                     Your browser does not support the video tag.
                 </video>
 
-                {/* Conditionally show text once the video is fully loaded */}
                 {isVideoLoaded && (
                     <p ref={textRef} className={`homepagesection1text uppercase ${roslindaleFont.className}`}>
-                        {/* Placeholder text */}
-                        Your, Majestic <br /> Matrimonial Miracles.
+                        Your, Majestic Matrimonial Miracles.
                     </p>
                 )}
             </div>

@@ -25,7 +25,8 @@ function AboutUs() {
     const [isMounted, setIsMounted] = useState(false);
     const [aboutUs, setAboutUs] = useState([]);
     const aboutuspage = collection(db, 'homepageVideo');
-
+    const titleRef = useRef(null);
+    const paraRef = useRef(null);
 
     const fetchAboutUs = async () => {
         try {
@@ -39,6 +40,51 @@ function AboutUs() {
     const stillsdb = collection(db, 'aboutus');
     const [stills, setStills] = useState([]);
     const imgRefs = useRef([]); // Store references to each image
+    useEffect(() => {
+        const animateText = (element) => {
+            if (!element) return;
+
+            // Split text into words
+            const words = element.innerText.split(' ');
+            element.innerHTML = ''; // Clear original content
+
+            words.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.innerText = word + ' ';
+                span.classList.add('word'); // Add class for styling/animation
+                span.style.animationDelay = `${index * 0.1}s`; // Delay for stagger effect
+                element.appendChild(span);
+            });
+        };
+
+        // Trigger animation for title and paragraph
+        animateText(titleRef.current);
+        animateText(paraRef.current);
+
+        // Observe the elements to apply animations when they enter the viewport
+        const observerOptions = {
+            root: null,
+            threshold: 0.5, // Trigger when 50% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate'); // Add class to start animation
+                    observer.unobserve(entry.target); // Stop observing after animation starts
+                }
+            });
+        }, observerOptions);
+
+        if (titleRef.current) observer.observe(titleRef.current);
+        if (paraRef.current) observer.observe(paraRef.current);
+
+        // Cleanup observer on component unmount
+        return () => {
+            if (titleRef.current) observer.unobserve(titleRef.current);
+            if (paraRef.current) observer.unobserve(paraRef.current);
+        };
+    }, [isMounted]);
 
     const fetchStills = async () => {
         try {
@@ -193,9 +239,10 @@ function AboutUs() {
         <div>
             <Header />
             <div className='aboutussection1 section'>
-                <h1 className={`aboutussection1Title ${roslindaleFont.className}`}>
+                <h1 ref={titleRef} className={`aboutussection1Title ${roslindaleFont.className}`}>
                     About Us
                 </h1>
+
                 <video
                     className='aboutussection1Image'
                     src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Laptop%20About%20us.mp4?alt=media&token=b66a2247-2029-4ae6-b843-9bc80803d694"
@@ -205,7 +252,9 @@ function AboutUs() {
                     muted
                     playsInline
                 />
-                <p className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
+
+                <p ref={paraRef} className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
+
             </div>
             <div className='aboutussection2 rotate-[-2deg] overflow-hidden '>
                 <div
