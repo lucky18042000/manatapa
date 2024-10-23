@@ -211,6 +211,7 @@ function HomePage() {
                     autoPlay
                     loop
                     muted
+                    preload="auto" // Ensures video preloads
                 >
                     Your browser does not support the video tag.
                 </video>
