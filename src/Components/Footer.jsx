@@ -16,7 +16,11 @@ function Footer() {
                 <img className='w-[88px] h-[88px] lg:w-[133px] lg:h-[133px]' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Mantapa%20logo-01.png?alt=media&token=490eca97-fbe1-47de-85ab-af082178925e" alt="" srcset="" />
                 <div className=' flex-col items-center lg:flex hidden'>
                     <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
-                    <h1 className={`mt-[24px] bg-[#FFFFFF] rounded-[26px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[64px] px-[56px] py-[25px] ${roslindaleFont.className}`}>ARTH@MANTAPA.COM</h1>
+                    <a href="mailto:ARTH@MANTAPA.COM">
+                        <h1 className={`mt-[24px] bg-[#FFFFFF] rounded-[26px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[64px] px-[56px] py-[25px] ${roslindaleFont.className}`}>
+                            ARTH@MANTAPA.COM
+                        </h1>
+                    </a>
                 </div>
                 <ul className='uppercase flex flex-col gap-[14px]'>
                     <Link href={'/Stills'} className='text-right text-[#A80018] lg:text-[14px] text-[12px] leading-[11px]'>STILLS</Link>
@@ -26,9 +30,14 @@ function Footer() {
                 </ul>
             </div>
             <div className=' flex-col items-center flex lg:hidden mt-[80px] w-full'>
-                    <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
-                    <h1 className={`mt-[14px] bg-[#FFFFFF] rounded-[10px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[24px] text-center w-full py-[15px] ${roslindaleFont.className}`}>ARTH@MANTAPA.COM</h1>
+                <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
+                <div onClick={() => window.location.href = "mailto:ARTH@MANTAPA.COM"}>
+                    <h1 className={`mt-[14px] bg-[#FFFFFF] rounded-[10px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[24px] text-center w-full py-[15px] ${roslindaleFont.className}`}>
+                        ARTH@MANTAPA.COM
+                    </h1>
                 </div>
+
+            </div>
             {/* <p className='w-full flex justify-center items-center gap-2 mt-[134px] text-[#A80018] text-[10px] leading-[11px] text-right'>DESIGN & DEV <span ><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="4" cy="4" r="4" fill="#A80018" />
             </svg>

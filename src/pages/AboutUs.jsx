@@ -371,7 +371,7 @@ function AboutUs() {
                         LONDON
                     </p>
                     <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Where we Work</h1>
-                    <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
+                    <p className='lg:text-[18px] text-[14px]  text-[#A80018] leading-[19px] lg:leading-[29px] lg:mt-[61px] mt-[24px] w-[254px] lg:w-full text-center capitalize'>From the bustling streets of New York to the historic charm of London, we are across the USA and UK, soon to embrace the vibrant and diverse landscapes of India.</p>
                 </div>
                 <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                     <img
