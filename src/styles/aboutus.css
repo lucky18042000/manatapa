@@ -68,17 +68,14 @@
     /* Space for padding on top and bottom */
 }
 
-.scroll-container {
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
+.slick-slide > div {
+    padding: 0 10px; /* Adjust this value for spacing */
 }
 
-.scroll-container::-webkit-scrollbar {
-    display: none;
-    /* Safari and Chrome */
+.slick-list {
+    margin: 0 -10px; /* Negative margin to align with padding */
 }
+
 
 .left-image,
 .right-image {

@@ -8,6 +8,7 @@ import gsap from 'gsap';
 import dynamic from 'next/dynamic';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
+import Slider from 'react-slick';
 
 // Dynamically import the AboutUs component with SSR disabled
 const DynamicAboutUs = dynamic(() => import('@/pages/AboutUs'), { ssr: false });
@@ -27,7 +28,47 @@ function AboutUs() {
     const aboutuspage = collection(db, 'homepageVideo');
     const titleRef = useRef(null);
     const paraRef = useRef(null);
-
+    const settings = {
+        autoplay: true,        // Do we want it to autoplay? true or false
+        centerMode: true,
+        speed: 1000,          // How fast is the transition 
+        arrows: false,          // Do you want to show arrows to trigger each slide
+        accessibility: true,   // Enables tabbing and arrow key navigation 
+        autoplaySpeed: 2000,
+        cssEase: "linear",
+        // dots: true,            // Enables the dots below to show how many slides
+        fade: false,           // Changes the animate from slide to fade if true
+        infinite: true,       // When true, means that it will scroll in a circle
+        pauseOnHover: true,   // When true means the autoplay pauses when hovering
+        pauseOnDotsHover: true, // Pauses the autoplay when hovering over the dots
+        slidesToShow: 3, // Adjust based on design
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
     const fetchAboutUs = async () => {
         try {
             const querySnapshot = await getDocs(aboutuspage);
@@ -256,26 +297,17 @@ function AboutUs() {
                 <p ref={paraRef} className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
 
             </div>
-            <div className='aboutussection2 rotate-[-2deg] overflow-hidden '>
-                <div
-                    ref={scrollContainerRef}
-                    className='scroll-container flex gap-2  overflow-hidden '
-                    style={{
-                        scrollBehavior: 'smooth',
-                        overflow: 'hidden', // Hide scrollbar
-                    }}
-                >
-                    {stills && stills.length > 0 ? (
-                        [...stills, ...stills].map((item, index) => (
-                            <img
-                                key={index}
-                                className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px]  lg:rounded-[12px] bg-[#E6DADB] '
-                                src={item?.img}
-                                alt=""
-                            />
-                        ))
-                    ) : null}
-                </div>
+            <div className='aboutussection2 rotate-[-2deg] w-full'>
+                <Slider {...settings} className="w-full ">
+                    {stills && stills.length > 0 && stills.map((item, index) => (
+                        <img
+                            key={index}
+                            className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px] rounded-[12px] bg-[#E6DADB]'
+                            src={item?.img}
+                            alt=""
+                        />
+                    ))}
+                </Slider>
             </div>
             <div className='homepagesection4'>
                 <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">

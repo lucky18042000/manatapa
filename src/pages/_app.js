@@ -5,7 +5,8 @@ import '@/styles/motions.css';
 import '@/styles/stills.css';
 import '@/styles/contact.css';
 import Preloader from "@/Components/Preloader";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
