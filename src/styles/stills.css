@@ -53,6 +53,26 @@
     transition: filter 0.3s ease;
 }
 
+.still-image {
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 0.5s ease-out, transform 1s ease-out;
+}
+
+.slide-in-left {
+    transform: translateX(-200px); /* Start from the left */
+}
+
+.slide-in-right {
+    transform: translateX(200px); /* Start from the right */
+}
+
+/* When the image becomes visible, move it into place */
+.still-image.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
     .slide-in-left {
@@ -126,3 +146,6 @@
         transform: translateY(0);
     }
 }
+
+
+

@@ -356,6 +356,7 @@ input[type=number] {
     text-align: center;
     font-weight: 600;
     line-height: 98px;
+    width: 70%;
   }
 
   .homepagesection2 {

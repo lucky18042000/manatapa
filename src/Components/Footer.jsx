@@ -29,7 +29,7 @@ function Footer() {
                     <Link href={'/Contact'} className='text-right text-[#A80018] lg:text-[14px] text-[12px] leading-[11px]'>contact</Link>
                 </ul>
             </div>
-            <div className=' flex-col items-center flex lg:hidden mt-[80px] w-full'>
+            <div className=' flex-col items-center flex lg:hidden mt-[40px] w-full'>
                 <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
                 <div onClick={() => window.location.href = "mailto:ARTH@MANTAPA.COM"}>
                     <h1 className={`mt-[14px] bg-[#FFFFFF] rounded-[10px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[24px] text-center w-full py-[15px] ${roslindaleFont.className}`}>
