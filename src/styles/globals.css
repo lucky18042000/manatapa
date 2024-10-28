@@ -38,11 +38,7 @@ html {
   align-items: center;
 }
 
-.preloader-video {
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
-  object-fit: cover; /* Ensure the video covers the whole screen */
-}
+
 
 .blurinheader {
   -webkit-backdrop-filter: blur(16px);
@@ -79,6 +75,11 @@ input[type=number] {
 
 /* Small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {
+  .preloader-video {
+    width: 100%; /* Full viewport width */
+    height: 100%; /* Full viewport height */
+    object-fit: fill; /* Ensure the video covers the whole screen */
+  }
   .material-bubble {
     display: none;
   }
@@ -297,6 +298,11 @@ input[type=number] {
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
+  .preloader-video {
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    object-fit: cover; /* Ensure the video covers the whole screen */
+  }
   .motion-cms-playmobile {
     display: none;
   }
