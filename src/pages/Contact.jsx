@@ -41,7 +41,7 @@ function Contact() {
                         <h1 className={`contactsection1Titlemobile ${roslindaleFont.className}`}>
                             Contact Us
                         </h1>
-                        <img className='contactsection1Image' src="https://s3-alpha-sig.figma.com/img/13bf/d1b7/62256803f8fb41f01cb958a92dfb9a19?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=deLFYT4G2VJCQ-m8Jze8qxgde7euyh9AsReZbblefk2SCap~AYweJGmjBy1S1ptIQllyB~ztstAbtzIHOIz5EKzLtj6bpIBjWNP2VZKQnb5yv-iUyg1bX6xHGQ8h34hz7dbGWRiqHDjQ782wQPokbVz2PSzZsuM-WU2DflAACgn6268li54JE5zfRQsRN0ZMuRKFqi6gD6kqSgG6Ai6y8pmHE1IfyfJBcecRDGMAiwfqN~WhEACwdcaKT0AzccjtRFFpbz7oVMWFkzOSA7OneXpR31Q6SZ4ZI7aABHSvdbNc8pT5yzVpMPswPa40Xn6fYD8j9ewCgnVykiZHLqAeSQ__" alt="" />
+                        <img className='contactsection1Image' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/62256803f8fb41f01cb958a92dfb9a19.png?alt=media&token=0d1214d0-120f-4e41-b90c-80d4d77c959b" alt="" />
 
                     </div>
                     <div className='flex flex-col items-center w-full'>
