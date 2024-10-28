@@ -221,6 +221,13 @@ function HomePage() {
         };
     }, []);
     useEffect(() => {
+        // fetchMotions();
+
+        // Initialize the 3D effect on each card
+        const cardElements = document.querySelectorAll('.card');
+        cardElements.forEach((cardEl) => initCard(cardEl));
+    }, [isMounted]);
+    useEffect(() => {
         if (isVideoLoaded && textRef.current) {
             const textElement = textRef.current;
 
@@ -241,21 +248,12 @@ function HomePage() {
             };
 
             // Set a 3-second delay before animating the text
-            const delayTimeout = setTimeout(() => {
                 animateText(textElement);
-            }, 3000);
 
             // Clear timeout if component unmounts before delay is completed
-            return () => clearTimeout(delayTimeout);
         }
     }, [isVideoLoaded]);
-    useEffect(() => {
-        // fetchMotions();
 
-        // Initialize the 3D effect on each card
-        const cardElements = document.querySelectorAll('.card');
-        cardElements.forEach((cardEl) => initCard(cardEl));
-    }, [isMounted]);
     return (
         <div>
             <Header />
