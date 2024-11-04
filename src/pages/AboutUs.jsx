@@ -29,12 +29,17 @@ function AboutUs() {
     const titleRef = useRef(null);
     const paraRef = useRef(null);
     const settings = {
-        autoplay: true,        // Do we want it to autoplay? true or false
+        speed: 5000,
+        autoplaySpeed: 0,
+        arrows: false,
+        slidesToScroll: 4,
+        // easing: "linear",
+        autoplay: true,     
         centerMode: true,
-        speed: 1000,          // How fast is the transition 
+        // speed: 1000,           
         arrows: false,          // Do you want to show arrows to trigger each slide
         accessibility: true,   // Enables tabbing and arrow key navigation 
-        autoplaySpeed: 2000,
+        // autoplaySpeed: 2000,
         cssEase: "linear",
         // dots: true,            // Enables the dots below to show how many slides
         fade: false,           // Changes the animate from slide to fade if true
@@ -42,7 +47,7 @@ function AboutUs() {
         pauseOnHover: true,   // When true means the autoplay pauses when hovering
         pauseOnDotsHover: true, // Pauses the autoplay when hovering over the dots
         slidesToShow: 3, // Adjust based on design
-        slidesToScroll: 1,
+        // slidesToScroll: 1,
         responsive: [
             {
                 breakpoint: 1024,

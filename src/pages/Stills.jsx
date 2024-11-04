@@ -20,16 +20,18 @@ function Stills() {
     const imgRefs = useRef([]); // Store references to each image
     const titleRef = useRef(null);
     const paraRef = useRef(null);
-
     const fetchStills = async () => {
         try {
             const querySnapshot = await getDocs(stillsdb);
-            const links = querySnapshot.docs.map(doc => doc.data());
+            const links = querySnapshot.docs
+                .map(doc => doc.data())
+                .sort((a, b) => a.number - b.number); // Sorting by 'number' field
             setStills(links);
         } catch (error) {
             console.error('Error fetching data: ', error);
         }
     };
+    
 
     useEffect(() => {
         fetchStills();
@@ -126,7 +128,7 @@ function Stills() {
                 {stills?.map((item, ind) => (
                     <img
                         key={ind}
-                        className={`w-[66px] h-[32px] mb-4 transition-all duration-500 ${activeIndex === ind ? 'bright' : 'dim'
+                        className={`w-[66px] h-[42px] rounded-md mb-4 transition-all duration-500 ${activeIndex === ind ? 'bright' : 'dim'
                             } ${ind % 2 === 0 ? 'lg:ml-5 ml-0' : 'lg:mr-5 ml-0'}`}
                         src={item?.img}
                         alt=""
