@@ -31,7 +31,7 @@ function Stills() {
             console.error('Error fetching data: ', error);
         }
     };
-    
+
 
     useEffect(() => {
         fetchStills();
@@ -110,7 +110,25 @@ function Stills() {
             });
         };
     }, [stills]);
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const updateVideoSource = () => {
+            if (window.innerWidth < 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        };
 
+        // Set initial video source
+        updateVideoSource();
+
+        // Update video source on window resize
+        window.addEventListener('resize', updateVideoSource);
+
+        // Cleanup event listener on component unmount
+        return () => window.removeEventListener('resize', updateVideoSource);
+    }, []);
     return (
         <div>
             <Header />
@@ -123,18 +141,20 @@ function Stills() {
                 </p>
             </div>
 
-            {/* Fixed div with brightness adjustment for corresponding image */}
-            <div className='lg:fixed lg:block hidden -z-10 right-10 top-1/2 transform -translate-y-1/2 transition-all duration-300 overflow-y-auto max-h-[80vh]'>
-                {stills?.map((item, ind) => (
-                    <img
-                        key={ind}
-                        className={`w-[66px] h-[42px] rounded-md mb-4 transition-all duration-500 ${activeIndex === ind ? 'bright' : 'dim'
-                            } ${ind % 2 === 0 ? 'lg:ml-5 ml-0' : 'lg:mr-5 ml-0'}`}
-                        src={item?.img}
-                        alt=""
-                    />
-                ))}
-            </div>
+            {!isMobile && (
+                <div className='lg:fixed lg:-z-10 lg:right-10 lg:top-1/2 lg:transform lg:-translate-y-1/2 lg:transition-all lg:duration-300 lg:overflow-y-auto max-h-[80vh]'>
+                    {stills?.map((item, ind) => (
+                        <img
+                            key={ind}
+                            className={`lg:w-[66px] lg:h-[42px] lg:rounded-md lg:mb-4 lg:transition-all lg:duration-500 ${activeIndex === ind ? 'bright' : 'dim'
+                                } ${ind % 2 === 0 ? 'lg:ml-5 ml-0' : 'lg:mr-5 ml-0'}`}
+                            src={item?.img}
+                            alt=""
+                        />
+                    ))}
+                </div>
+            )}
+
 
 
 
