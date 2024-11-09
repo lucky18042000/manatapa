@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Preloader = () => {
     const [videoSrc, setVideoSrc] = useState(null); // Start as null to avoid black screen
+    const [isMuted, setIsMuted] = useState(true); // Track muted state
+    const videoRef = useRef(null); // Reference to the video element
 
     useEffect(() => {
         const updateVideoSource = () => {
             if (window.innerWidth < 768) {
                 setVideoSrc('/Mobilepreloader.mp4');
             } else {
-                setVideoSrc('/preloader.webm');
+                setVideoSrc('/preloader.mp4');
             }
         };
 
@@ -22,25 +24,46 @@ const Preloader = () => {
         return () => window.removeEventListener('resize', updateVideoSource);
     }, []);
 
-    console.log(videoSrc, 'videoSrc'); // Log to ensure the correct source is set
+    const toggleMute = () => {
+        setIsMuted(prev => !prev);
+        if (videoRef.current) {
+            videoRef.current.muted = !videoRef.current.muted;
+        }
+    };
 
     return (
         <div className="preloader">
-            {videoSrc && ( // Render video only if videoSrc is set
+            {videoSrc && (
                 <video
+                    ref={videoRef}
                     className="preloader-video lg:w-full lg:h-full w-[326px] h-[400px] lg:object-cover"
                     autoPlay
-                    muted
+                    muted={isMuted}
                     loop
                     playsInline
                     preload="auto"
                 >
                     <source src={videoSrc} type="video/mp4" />
-                    {/* Optional WebM fallback if available */}
                     <source src={videoSrc.replace('.mp4', '.webm')} type="video/webm" />
                     Your browser does not support the video tag.
                 </video>
             )}
+            <button 
+                onClick={toggleMute} 
+                style={{
+                    position: 'absolute',
+                    bottom: '10px',
+                    right: '10px',
+                    padding: '5px 10px',
+                    background: 'rgba(0, 0, 0, 0.6)',
+                    color: '#fff',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    border: 'none'
+                }}
+            >
+                {isMuted ? '🔇' : '🔊'}
+            </button>
         </div>
     );
 };

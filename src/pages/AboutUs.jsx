@@ -336,7 +336,8 @@ function AboutUs() {
                     <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
                     {/* <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
                     <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p> */}
-                    <div className='flex lg:flex-row flex-col items-center lg:gap-5 gap-2 lg:mt-[61px] mt-[20px]'>
+                    <h1 className='lg:mt-[61px] mt-[20px] lg:text-[18px] font-semibold text-[#A80018] text-[12px]'>Associates  </h1>
+                    <div className='flex lg:flex-row flex-col items-center lg:gap-5 gap-2 lg:mt-[20px] mt-[12px] '>
                         <div className='flex flex-col items-center'>
                             <p className='lg:text-[14px] text-[#A80018] text-[10px]'>Boston</p>
                             <p className='lg:text-[18px] font-semibold text-[#A80018] text-[12px]'>Krushesh patel</p>
