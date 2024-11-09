@@ -232,25 +232,43 @@ function HomePage() {
             const textElement = textRef.current;
 
             const animateText = (element) => {
+                if (!element) return;
+
                 const words = element.innerText.split(' ');
-                element.innerHTML = ''; // Clear original content
+                element.innerHTML = '';
 
                 words.forEach((word, index) => {
                     const span = document.createElement('span');
                     span.innerText = word + ' ';
-                    span.classList.add('word'); // Add class for styling/animation
-                    span.style.animationDelay = `${index * 0.1}s`; // Delay for stagger effect
+                    span.classList.add('word');
+                    span.style.animationDelay = `${index * 0.2}s`;
                     element.appendChild(span);
                 });
-
-                // Add the animation class
-                element.classList.add('animate-text');
             };
 
             // Set a 3-second delay before animating the text
-                animateText(textElement);
+            animateText(textElement);
+            const observerOptions = {
+                root: null,
+                threshold: 0.5,
+            };
 
-            // Clear timeout if component unmounts before delay is completed
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            if (textElement) observer.observe(textElement);
+            // if (paraRef.current) observer.observe(paraRef.current);
+
+            return () => {
+                if (textElement) observer.unobserve(textElement);
+                // if (paraRef.current) observer.unobserve(paraRef.current);
+            };
         }
     }, [isVideoLoaded]);
 
@@ -272,7 +290,7 @@ function HomePage() {
                 </video>
 
                 {isVideoLoaded && (
-                    <p ref={textRef} className={`homepagesection1text uppercase ${roslindaleFont.className}`}>
+                    <p ref={textRef} className={` uppercase ${roslindaleFont.className} homepagesection1text`}>
                         Your, Majestic Matrimonial Miracles.
                     </p>
                 )}

@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      {loading ? <Preloader /> : <Component {...pageProps} />}
+      {false ? <Preloader /> : <Component {...pageProps} />}
     </>
   );
 }

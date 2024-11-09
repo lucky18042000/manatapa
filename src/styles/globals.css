@@ -485,26 +485,32 @@ input[type=number] {
 
 .word {
   opacity: 0;
-  display: inline-block;
-  /* width: 99%; */
   transform: translateY(20px);
-  animation: fadeInUp 0.8s forwards;
+  display: inline-block;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  
 }
 
+.word.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homepagesection1text.animate .word {
+  animation: fadeInUp 0.8s forwards;
+  margin-right: 15px;
+}
 @keyframes fadeInUp {
-  to {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+
+  100% {
       opacity: 1;
       transform: translateY(0);
   }
 }
-
-/* You can also add this class for the container to trigger the animation */
-.animate-text {
-  display: inline;
-    padding: 0px 50px;
-
-}
-
 
 .card {
   padding: 10px;
