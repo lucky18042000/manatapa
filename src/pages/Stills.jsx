@@ -80,27 +80,33 @@ function Stills() {
     }, []);
 
     useEffect(() => {
-        // Intersection Observer to animate images on scroll in and out
         const observer = new IntersectionObserver(
             (entries) => {
-                entries.forEach(entry => {
+                entries.forEach((entry) => {
+                    const index = entry.target.getAttribute('data-index');
+    
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible'); // Add class when in view
+                        // Add class for visibility animation
+                        entry.target.classList.add('visible');
+    
+                        // Set the active index
+                        setActiveIndex(Number(index));
                     } else {
-                        entry.target.classList.remove('visible'); // Remove class when out of view (for reverse animation)
+                        // Remove class for reverse animation when out of view
+                        entry.target.classList.remove('visible');
                     }
                 });
             },
-            { threshold: 0.2 } // Trigger when 50% of the image is visible
+            { threshold: 0.5 } // Adjust as needed for both animations and active index updates
         );
-
-        // Observe each image
+    
+        // Observe each image element
         imgRefs.current.forEach((imgRef) => {
             if (imgRef) {
                 observer.observe(imgRef);
             }
         });
-
+    
         // Cleanup observer on unmount
         return () => {
             imgRefs.current.forEach((imgRef) => {
@@ -110,6 +116,7 @@ function Stills() {
             });
         };
     }, [stills]);
+    
     const [isMobile, setIsMobile] = useState(false)
     useEffect(() => {
         const updateVideoSource = () => {
