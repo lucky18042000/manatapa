@@ -15,17 +15,20 @@ const roslindaleFont = localFont({
 function Stills() {
     const stillsdb = collection(db, 'stills');
     const [stills, setStills] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(null); // Track the active index for fixed images
+    const [activeIndex, setActiveIndex] = useState(null);
 
-    const imgRefs = useRef([]); // Store references to each image
+    const imgRefs = useRef([]); // Main images
+    const fixedImgRefs = useRef([]); // Fixed sidebar images
+    const fixedContainerRef = useRef(null); // Container of fixed images
     const titleRef = useRef(null);
     const paraRef = useRef(null);
+
     const fetchStills = async () => {
         try {
             const querySnapshot = await getDocs(stillsdb);
             const links = querySnapshot.docs
                 .map(doc => doc.data())
-                .sort((a, b) => a.number - b.number); // Sorting by 'number' field
+                .sort((a, b) => a.id - b.id); // Sort by 'id' field as a number
             setStills(links);
         } catch (error) {
             console.error('Error fetching data: ', error);
@@ -56,10 +59,7 @@ function Stills() {
         animateText(titleRef.current);
         animateText(paraRef.current);
 
-        const observerOptions = {
-            root: null,
-            threshold: 0.5,
-        };
+        const observerOptions = { root: null, threshold: 0.5 };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach((entry) => {
@@ -84,11 +84,11 @@ function Stills() {
             (entries) => {
                 entries.forEach((entry) => {
                     const index = entry.target.getAttribute('data-index');
-    
+
                     if (entry.isIntersecting) {
                         // Add class for visibility animation
                         entry.target.classList.add('visible');
-    
+
                         // Set the active index
                         setActiveIndex(Number(index));
                     } else {
@@ -97,16 +97,16 @@ function Stills() {
                     }
                 });
             },
-            { threshold: 0.5 } // Adjust as needed for both animations and active index updates
+            { threshold: 0.1 } // Adjust as needed for both animations and active index updates
         );
-    
+
         // Observe each image element
         imgRefs.current.forEach((imgRef) => {
             if (imgRef) {
                 observer.observe(imgRef);
             }
         });
-    
+
         // Cleanup observer on unmount
         return () => {
             imgRefs.current.forEach((imgRef) => {
@@ -116,8 +116,24 @@ function Stills() {
             });
         };
     }, [stills]);
-    
-    const [isMobile, setIsMobile] = useState(false)
+    // Adjust scrolling behavior for fixed div
+    useEffect(() => {
+        if (activeIndex !== null && fixedImgRefs.current[activeIndex]) {
+            const fixedContainer = fixedContainerRef.current;
+            const activeImage = fixedImgRefs.current[activeIndex];
+            const containerRect = fixedContainer.getBoundingClientRect();
+            const activeRect = activeImage.getBoundingClientRect();
+
+            // Check if the active image is close to top or bottom of the visible container
+            if (activeRect.top < containerRect.top + 20) {
+                fixedContainer.scrollTop -= containerRect.top - activeRect.top + 20;
+            } else if (activeRect.bottom > containerRect.bottom - 20) {
+                fixedContainer.scrollTop += activeRect.bottom - containerRect.bottom + 20;
+            }
+        }
+    }, [activeIndex]);
+
+    const [isMobile, setIsMobile] = useState(false);
     useEffect(() => {
         const updateVideoSource = () => {
             if (window.innerWidth < 768) {
@@ -136,6 +152,7 @@ function Stills() {
         // Cleanup event listener on component unmount
         return () => window.removeEventListener('resize', updateVideoSource);
     }, []);
+
     return (
         <div>
             <Header />
@@ -149,10 +166,14 @@ function Stills() {
             </div>
 
             {!isMobile && (
-                <div className='lg:fixed lg:-z-10 lg:right-10 lg:top-1/2 lg:transform lg:-translate-y-1/2 lg:transition-all lg:duration-300 lg:overflow-y-auto max-h-[80vh]'>
+                <div
+                    ref={fixedContainerRef}
+                    className='lg:fixed lg:-z-10 lg:right-10 lg:top-1/2 lg:transform lg:-translate-y-1/2 lg:transition-all lg:duration-300 lg:overflow-y-hidden max-h-[80vh]'
+                >
                     {stills?.map((item, ind) => (
                         <img
                             key={ind}
+                            ref={(el) => (fixedImgRefs.current[ind] = el)}
                             className={`lg:w-[66px] lg:h-[42px] lg:rounded-md lg:mb-4 lg:transition-all lg:duration-500 ${activeIndex === ind ? 'bright' : 'dim'
                                 } ${ind % 2 === 0 ? 'lg:ml-5 ml-0' : 'lg:mr-5 ml-0'}`}
                             src={item?.img}
@@ -162,10 +183,6 @@ function Stills() {
                 </div>
             )}
 
-
-
-
-            {/* Main image section with alignment */}
             <div className='flex flex-col lg:justify-center items-center lg:mt-[86px] mt-[50px]'>
                 {stills?.map((item, ind) => (
                     <img

@@ -53,18 +53,23 @@
     transition: filter 0.3s ease;
 }
 
+.still-image-container {
+    overflow: hidden; /* Ensure overflow is hidden */
+}
+
 .still-image {
     opacity: 0;
-    transform: translateX(0);
-    transition: opacity 0.5s ease-out, transform 1s ease-out;
+    transform: translateX(100%); /* Start off-screen */
+    transition: transform 1s ease-out, opacity 1s ease-out;
 }
 
-.slide-in-left {
-    transform: translateX(-200px); /* Start from the left */
+.slide-left .still-image {
+    transform: translateX(-100%); /* Start off-screen to the left */
 }
 
-.slide-in-right {
-    transform: translateX(200px); /* Start from the right */
+.animate-slide {
+    opacity: 1;
+    transform: translateX(0); /* Move to original position */
 }
 
 /* When the image becomes visible, move it into place */
