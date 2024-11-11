@@ -409,7 +409,7 @@ function HomePage() {
                                     </svg>
 
                                 </a>
-                                <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=08b40ad0-8dca-40b0-91f3-97bd3e4bb346" alt="" />
+                                <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=06b8e32b-d135-4083-9e64-630caa81caf2" alt="" />
                             </div>
                             <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[0%] z-10'>
                                 <img className='lg:rounded-[24px] rounded-[10px]' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=08b40ad0-8dca-40b0-91f3-97bd3e4bb346' alt="" />
@@ -449,10 +449,10 @@ function HomePage() {
                                         </defs>
                                     </svg>
                                 </a>
-                                <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=08b40ad0-8dca-40b0-91f3-97bd3e4bb346'} alt="" />
+                                <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=06b8e32b-d135-4083-9e64-630caa81caf2'} alt="" />
                             </div>
                             <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[0%] z-10'>
-                                <img className='lg:rounded-[24px] rounded-[10px]' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=08b40ad0-8dca-40b0-91f3-97bd3e4bb346'} alt="" />
+                                <img className='lg:rounded-[24px] rounded-[10px]' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6bb55f59b65ba50249_amelia-small-2%2520(1).jpg.png?alt=media&token=be251981-7a03-4794-9485-55e85c896282'} alt="" />
                             </div>
                             <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[0%] z-10'>
                                 <img className='lg:rounded-[24px] rounded-[10px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa'} alt="" />

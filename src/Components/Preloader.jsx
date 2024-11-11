@@ -48,8 +48,8 @@ const Preloader = () => {
                     Your browser does not support the video tag.
                 </video>
             )}
-            <button 
-                onClick={toggleMute} 
+            <button
+                onClick={toggleMute}
                 style={{
                     position: 'absolute',
                     bottom: '10px',
