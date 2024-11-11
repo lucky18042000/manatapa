@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }) {
     };
 
     // Simulate loading delay for demonstration
-    setTimeout(handleStop, 10000); // Ensure preloader stays for at least 1 second
+    setTimeout(handleStop, 8000); // Ensure preloader stays for at least 1 second
 
     return () => {
       // Cleanup if needed
