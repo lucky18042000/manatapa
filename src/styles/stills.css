@@ -1,4 +1,9 @@
 @media only screen and (max-width: 768px) {
+    .still-image {
+        opacity: 0;
+        transform: translateX(30%); /* Start off-screen */
+        transition: transform 1s ease-out, opacity 1s ease-out;
+    }
     .stillsection1 {
         margin-top: 50px;
         display: flex;
@@ -57,11 +62,7 @@
     overflow: hidden; /* Ensure overflow is hidden */
 }
 
-.still-image {
-    opacity: 0;
-    transform: translateX(100%); /* Start off-screen */
-    transition: transform 1s ease-out, opacity 1s ease-out;
-}
+
 
 .slide-left .still-image {
     transform: translateX(-100%); /* Start off-screen to the left */
@@ -80,14 +81,18 @@
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
-    .slide-in-left {
+    /* .slide-in-left {
         transform: translateX(-200px);
     }
 
     .slide-in-right {
         transform: translateX(200px);
+    } */
+    .still-image {
+        opacity: 0;
+        transform: translateX(100%); /* Start off-screen */
+        transition: transform 1s ease-out, opacity 1s ease-out;
     }
-
     .stillsection1 {
         margin-top: 150px;
         display: flex;
