@@ -6,6 +6,7 @@ import { db } from '@/lib/firebaseConfig';
 import Footer from '@/Components/Footer';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import Link from 'next/link';
 
 const roslindaleFont = localFont({
     src: '../fonts/Roslindale-DisplayNarrowRegular-Testing.ttf',
@@ -311,9 +312,9 @@ function HomePage() {
                         <img className='homepagesection2img hidden lg:block lg:!w-[118px] lg:h-[90px]' src={zoomoutImages?.image3} alt="" />
                     </p>
                     <div className='w-full flex flex-col justify-center items-center'>
-                        <p className='lg:w-[60%] w-[90%]  text-[#A80018] capitalize text-[16px] lg:text-[20px] mt-[24px] lg:mt-[72px]'>Mantapa is the heart's symphony, harmonizing the ephemeral beauty of tradition with the eternal essence of love. We sculpt memories with the delicate brushstrokes of innovation, infusing each frame with the soulful melody of cherished</p>
-                        <p className='material-bubble lg:mt-[29px]'>Read More...</p>
-                        <p className='material-bubble1 mt-[31px]'>Read More...</p>
+                        <p className='lg:w-[60%] w-[90%]  text-[#A80018] capitalize text-[16px] lg:text-[20px] mt-[24px] lg:mt-[72px]'>Mantapa is the heart's symphony, harmonizing the ephemeral beauty of tradition with the eternal essence of love. We sculpt memories with the delicate brushstrokes of innovation, infusing each frame with the soulful melody of cherished moments.</p>
+                        <Link href={'AboutUs'} className='material-bubble lg:mt-[29px]'>Read More...</Link>
+                        <Link href={'AboutUs'} className='material-bubble1 mt-[31px]'>Read More...</Link>
                     </div>
                 </div>
             </div>
@@ -332,12 +333,12 @@ function HomePage() {
                         >
                             Heartfelt <br className="lg:hidden block" /> Captures
                         </h1>
-                        <p className="material-bubble lg:mt-[61px] !w-max uppercase">
+                        <Link href={'Stills'} className="material-bubble lg:mt-[61px] !w-max uppercase">
                             Visual archive
-                        </p>
-                        <p className="material-bubble1 mt-[24px] !w-max uppercase">
+                        </Link>
+                        <Link href={'Stills'} className="material-bubble1 mt-[24px] !w-max uppercase">
                             Visual archive
-                        </p>
+                        </Link>
                     </div>
                     <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img
@@ -366,8 +367,8 @@ function HomePage() {
                         </p>
 
                         <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
-                        <p className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</p>
-                        <p className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</p>
+                        <Link href={'Stills'} className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</Link>
+                        <Link href={'Stills'} className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</Link>
                     </div>
                     <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img
@@ -465,8 +466,8 @@ function HomePage() {
                     </div>
                 </div>
                 <div className='w-full flex flex-col justify-center items-center'>
-                    <p className='material-bubble lg:mt-[29px]'>WATCH VIDEO</p>
-                    <p className='material-bubble1 mt-[42px]'>WATCH VIDEO</p>
+                    <Link href={'Motions'} className='material-bubble lg:mt-[29px]'>WATCH VIDEO</Link>
+                    <Link href={'Motions'} className='material-bubble1 mt-[42px]'>WATCH VIDEO</Link>
 
                 </div>
             </div>

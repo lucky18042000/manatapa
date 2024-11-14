@@ -16,9 +16,9 @@ function Footer() {
                 <img className='w-[88px] h-[88px] lg:w-[133px] lg:h-[133px]' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Mantapa%20logo-01.png?alt=media&token=490eca97-fbe1-47de-85ab-af082178925e" alt="" srcset="" />
                 <div className=' flex-col items-center lg:flex hidden'>
                     <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
-                    <a href="mailto:ARTH@MANTAPA.COM">
-                        <h1 className={`mt-[24px] bg-[#FFFFFF] rounded-[26px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[64px] px-[56px] py-[25px] ${roslindaleFont.className}`}>
-                            ARTH@MANTAPA.COM
+                    <a href="mailto:support@mantapaweddings.com">
+                        <h1 className={`mt-[24px] uppercase bg-[#FFFFFF] rounded-[26px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[42px] px-[56px] py-[25px] ${roslindaleFont.className}`}>
+                            support@mantapaweddings.com
                         </h1>
                     </a>
                 </div>
@@ -31,9 +31,9 @@ function Footer() {
             </div>
             <div className=' flex-col items-center flex lg:hidden mt-[40px] w-full'>
                 <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
-                <div onClick={() => window.location.href = "mailto:ARTH@MANTAPA.COM"}>
-                    <h1 className={`mt-[14px] bg-[#FFFFFF] rounded-[10px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[24px] text-center w-full py-[15px] ${roslindaleFont.className}`}>
-                        ARTH@MANTAPA.COM
+                <div onClick={() => window.location.href = "mailto:support@mantapaweddings.com"}>
+                    <h1 className={`mt-[14px] px-[8px] uppercase bg-[#FFFFFF] rounded-[10px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[14px] text-center w-full py-[15px] ${roslindaleFont.className}`}>
+                        support@mantapaweddings.com
                     </h1>
                 </div>
 
