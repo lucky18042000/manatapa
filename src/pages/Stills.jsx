@@ -16,6 +16,7 @@ function Stills() {
     const stillsdb = collection(db, 'stills');
     const [stills, setStills] = useState([]);
     const [activeIndex, setActiveIndex] = useState(null);
+    const [loadedIndexes, setLoadedIndexes] = useState([]);
 
     const imgRefs = useRef([]); // Main images
     const fixedImgRefs = useRef([]); // Fixed sidebar images
@@ -83,40 +84,33 @@ function Stills() {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    const index = entry.target.getAttribute('data-index');
+                    const index = entry.target.getAttribute("data-index");
 
                     if (entry.isIntersecting) {
-                        // Add class for visibility animation
-                        entry.target.classList.add('visible');
-
-                        // Set the active index
+                        entry.target.classList.add("visible");
                         setActiveIndex(Number(index));
+
+                        // Mark image as loaded for lazy loading
+                        setLoadedIndexes((prev) => [...new Set([...prev, Number(index)])]);
                     } else {
-                        // Remove class for reverse animation when out of view
-                        entry.target.classList.remove('visible');
+                        entry.target.classList.remove("visible");
                     }
                 });
             },
-            { threshold: 0.1 } // Adjust as needed for both animations and active index updates
+            { threshold: 0.1 } // Trigger animation when 10% of the image is visible
         );
 
-        // Observe each image element
         imgRefs.current.forEach((imgRef) => {
-            if (imgRef) {
-                observer.observe(imgRef);
-            }
+            if (imgRef) observer.observe(imgRef);
         });
 
-        // Cleanup observer on unmount
         return () => {
             imgRefs.current.forEach((imgRef) => {
-                if (imgRef) {
-                    observer.unobserve(imgRef);
-                }
+                if (imgRef) observer.unobserve(imgRef);
             });
         };
     }, [stills]);
-    // Adjust scrolling behavior for fixed div
+
     useEffect(() => {
         if (activeIndex !== null && fixedImgRefs.current[activeIndex]) {
             const fixedContainer = fixedContainerRef.current;
@@ -183,15 +177,16 @@ function Stills() {
                 </div>
             )}
 
-            <div className='flex flex-col lg:justify-center items-center lg:mt-[86px] mt-[50px]'>
+            <div className="flex flex-col lg:justify-center items-center lg:mt-[86px] mt-[50px]">
                 {stills?.map((item, ind) => (
                     <img
                         key={ind}
                         ref={(el) => (imgRefs.current[ind] = el)} // Store each image ref
                         data-index={ind} // Attach the index to each image for tracking
-                        className={`still-image lg:w-[869px] w-[260px] rounded-[32px] mb-6 transition-all duration-1000 ease-out ${ind % 2 === 0 ? 'slide-in-left lg:ml-40 ml-0' : 'slide-in-right lg:mr-40 mr-0'
+                        loading="lazy" // Enable browser-level lazy loading
+                        className={`still-image lg:w-[869px] w-[260px] rounded-[32px] mb-6 ${ind % 2 === 0 ? "slide-in-left lg:ml-40 ml-0" : "slide-in-right lg:mr-40 mr-0"
                             }`}
-                        src={item?.img}
+                        src={loadedIndexes.includes(ind) ? item?.img : ""} // Load image dynamically
                         alt=""
                     />
                 ))}

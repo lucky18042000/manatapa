@@ -312,7 +312,7 @@ function HomePage() {
                         <img className='homepagesection2img hidden lg:block lg:!w-[118px] lg:h-[90px]' src={zoomoutImages?.image3} alt="" />
                     </p>
                     <div className='w-full flex flex-col justify-center items-center'>
-                        <p className='lg:w-[60%] w-[90%]  text-[#A80018] capitalize text-[16px] lg:text-[20px] mt-[24px] lg:mt-[72px]'>Mantapa is the heart's symphony, harmonizing the ephemeral beauty of tradition with the eternal essence of love. We sculpt memories with the delicate brushstrokes of innovation, infusing each frame with the soulful melody of cherished moments.</p>
+                        <p className='lg:w-[60%] w-[86%]  text-[#A80018] capitalize text-[16px] lg:text-[20px] mt-[24px] lg:mt-[72px]'>Mantapa is the heart's symphony, harmonizing the ephemeral beauty of tradition with the eternal essence of love. We sculpt memories with the delicate brushstrokes of innovation, infusing each frame with the soulful melody of cherished moments.</p>
                         <Link href={'AboutUs'} className='material-bubble lg:mt-[29px]'>Read More...</Link>
                         <Link href={'AboutUs'} className='material-bubble1 mt-[31px]'>Read More...</Link>
                     </div>
