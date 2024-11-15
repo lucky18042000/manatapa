@@ -391,8 +391,8 @@ function AboutUs() {
                 <h1 className={`text-[36px] lg:text-[84.9px] text-center text-[#A80018] leading-[98px] font-bold ${roslindaleFont.className}`}>Nature of Mantapa</h1>
                 <div className='flex lg:flex-row flex-col gap-[65px] mt-[54px]'>
                     {/* <img className='w-[256px] lg:w-[600px] h-[290px] lg:h-[700px]  object-cover rounded-[32px] -z-10' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/dsdsds.png?alt=media&token=4a8804fb-428b-42c1-bf14-c2feeb1c64f7' alt="" /> */}
-                    <p className={` lg:w-full text-center text-[18px] text-[#A80018] leading-[29px] lg:mt-[61px] capitalize ${roslindaleFont.className}`}>
-                        At Mantapa, we weave the essence of Indian weddings into cinematic narratives that touch the heart. Our story began in India, where our passion for storytelling was ignited. This journey took us through advanced studies in the UK and the USA, each chapter refining our craft and deepening our connection to the art of <br className='lg:block hidden' /> visual storytelling.
+                    <p className={` lg:w-[98%] text-center text-[18px] text-[#A80018] leading-[29px] lg:mt-[61px] capitalize ${roslindaleFont.className}`}>
+                        At Mantapa, we weave the essence of Indian weddings into cinematic narratives that touch the heart. Our story began in India, where our passion for storytelling was ignited. This journey took us through advanced studies in the UK and the USA, each chapter refining our craft and deepening our connection to the art of visual storytelling.
                         <hr className='py-2 border-none' />
                         Our work is driven by a desire to capture the soul of each wedding. We focus on the genuine moments and intimate emotions that define your celebration. With a keen eye for detail and a commitment to using the finest equipment, we craft films that highlight the beauty of each moment with a subtle yet powerful elegance.
                         <hr className='py-2 border-none' />
