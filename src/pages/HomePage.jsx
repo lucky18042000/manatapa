@@ -96,14 +96,15 @@ function HomePage() {
         fetchZoomOutImages();
     }, []);
 
-    useEffect(() => {
-        // Zoom video on load
-        gsap.fromTo(
-            videoRef.current,
-            { scale: 0.5, transformOrigin: 'center center' },
-            { scale: 1, duration: 1, ease: 'power2.out' }
-        );
-    }, []);
+    // useEffect(() => {
+    //     if (isVideoLoaded) {// Zoom video on load
+    //         gsap.fromTo(
+    //             videoRef.current,
+    //             { scale: 0.5, transformOrigin: 'center center' },
+    //             { scale: 1, duration: 1, ease: 'power2.out' }
+    //         );
+    //     }
+    // }, []);
     useEffect(() => {
         // Apply the ScrambleText animation to the text element
         gsap.fromTo(
@@ -208,16 +209,32 @@ function HomePage() {
         const video = videoRef.current;
 
         const handleVideoLoad = () => {
-            setIsVideoLoaded(true); // Set video loaded state to true when loaded
+            video.classList.add("loaded");
+
+            setIsVideoLoaded(true);
+
+            // Trigger GSAP animation
+            gsap.fromTo(
+                video,
+                { scale: 0, transformOrigin: "center center" },
+                { scale: 1, duration: 1, ease: "power2.out" }
+            );
         };
 
+        // Add event listener to ensure animation starts only when video is loaded
         if (video) {
-            video.addEventListener('loadeddata', handleVideoLoad);
+            if (video.readyState >= 2) {
+                // Video is already loaded
+                handleVideoLoad();
+            } else {
+                video.addEventListener("loadeddata", handleVideoLoad);
+            }
         }
 
+        // Cleanup event listener on component unmount
         return () => {
             if (video) {
-                video.removeEventListener('loadeddata', handleVideoLoad);
+                video.removeEventListener("loadeddata", handleVideoLoad);
             }
         };
     }, []);
@@ -279,7 +296,7 @@ function HomePage() {
             <div className="homepagesection1">
                 <video
                     ref={videoRef}
-                    className="homepagesection1video border"
+                    className="homepagesection1video"
                     poster={videoLinks?.thumbnail}
                     src={videoLinks?.video}
                     autoPlay
@@ -292,7 +309,10 @@ function HomePage() {
                 </video>
 
                 {isVideoLoaded && (
-                    <p ref={textRef} className={` uppercase ${roslindaleFont.className} homepagesection1text`}>
+                    <p
+                        ref={textRef}
+                        className={`uppercase ${roslindaleFont.className} homepagesection1text`}
+                    >
                         Your, Majestic Matrimonial Miracles.
                     </p>
                 )}
@@ -367,8 +387,8 @@ function HomePage() {
                         </p>
 
                         <h1 className={`lg:text-[84.9px] text-[26px]  text-[#A80018] lg:leading-[98px] leading-[24px] font-bold text-center ${roslindaleFont.className}`}>Mantapa's  <br className='lg:hidden block ' /> Visionaries</h1>
-                        <Link href={'Stills'} className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</Link>
-                        <Link href={'Stills'} className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</Link>
+                        <Link href={'AboutUs'} className='material-bubble lg:mt-[61px] !w-max uppercase'>Visual archive</Link>
+                        <Link href={'AboutUs'} className='material-bubble1 mt-[24px] !w-max uppercase'>Visual archive</Link>
                     </div>
                     <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img

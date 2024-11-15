@@ -295,6 +295,18 @@ input[type=number] {
   }
 
 }
+/* Initially hide the video */
+.homepagesection1video {
+  opacity: 0; /* Hidden initially */
+  visibility: hidden; /* Prevent any flickering */
+  transition: opacity 0.5s ease-out; /* Optional smooth fade-in */
+}
+
+/* Make the video visible after animation starts */
+.homepagesection1video.loaded {
+  opacity: 1;
+  visibility: visible;
+}
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
