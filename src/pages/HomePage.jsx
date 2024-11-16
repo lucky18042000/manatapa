@@ -371,8 +371,8 @@ function HomePage() {
                 <div className='homepagesection4'>
                     <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
                         <img
-                            className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-contain rotate-[-2.8deg] rounded-[32px] -z-10"
-                            src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Container%20(2).png?alt=media&token=708901eb-464a-4273-b517-f469d3f02b29'
+                            className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
+                            src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Arth%20PNG.png?alt=media&token=d0133f28-6279-49a0-b7c7-aa1ce6f96f5c'
                             alt="" />
                     </div>
                     <div className=' flex flex-col justify-center items-center w-[413px]' >
@@ -392,8 +392,8 @@ function HomePage() {
                     </div>
                     <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img
-                            className="right-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-contain rotate-[2.8deg] rounded-[32px] -z-10"
-                            src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3ccc6c2ce83328c9b669_Header20Right-p-1080.jpg.png?alt=media&token=228c7852-cec5-4a4a-a6c8-9ba408fd0582"
+                            className="right-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                            src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Priyansh%20PNG%202.png?alt=media&token=6ec859b0-9f56-4b27-956f-3c884727ed94"
                             alt="Right Image"
                         />
                     </div>
