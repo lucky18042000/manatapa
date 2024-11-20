@@ -87,7 +87,7 @@ input[type="number"] {
   }
 
   .material-bubble1 {
-    z-index: 15;
+    z-index: 1;
     background-color: transparent;
     color: #a80018;
     /* Adjusted for darken($darkblue, 10%) */
