@@ -69,8 +69,10 @@ function Motions() {
     const fetchMotions = async () => {
         try {
             const querySnapshot = await getDocs(motionApis);
-            const links = querySnapshot.docs.map(doc => doc.data());
-            setMotionData(links);
+            const links = querySnapshot.docs
+                .map(doc => doc.data())
+                .sort((a, b) => a.id - b.id); // Sort by 'id' field as a number
+                setMotionData(links);
         } catch (error) {
             console.error('Error fetching data: ', error);
         }
