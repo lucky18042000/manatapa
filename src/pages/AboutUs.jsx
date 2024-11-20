@@ -368,11 +368,13 @@ function AboutUs() {
                         alt="" />
                 </div>
                 <div className='-z-10 flex flex-col justify-center items-center w-[413px]' >
-                    <p className='pb-[42px] lg:!w-max uppercase inline-flex items-center gap-3 font-medium text-[20px]  text-[#A80018]'>
+                <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium lg:text-[20px] text-[10px]  text-[#A80018]'>
                         NEW YORK
-                        <span><svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
-                        </svg>
+                        <span>
+                            <svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27 6.5L0 13L5.90104e-07 0L27 6.5Z" fill="#A80018" />
+                            </svg>
+
                         </span>
                         LONDON
                     </p>

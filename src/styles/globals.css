@@ -3,18 +3,17 @@
 @tailwind utilities;
 
 :root {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/white-plaster-texture%202.png?alt=media&token=7a7719a9-51dc-4a56-af6c-fa58e2e387fa');
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/white-plaster-texture%202.png?alt=media&token=7a7719a9-51dc-4a56-af6c-fa58e2e387fa");
   background-repeat: repeat-y;
 }
-
 
 html {
   scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px '#A80018';
-  background-color: #F5F5F5;
+  -webkit-box-shadow: inset 0 0 6px "#A80018";
+  background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar {
@@ -23,7 +22,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #A80018;
+  background-color: #a80018;
 }
 .preloader {
   position: fixed;
@@ -38,8 +37,6 @@ html {
   align-items: center;
 }
 
-
-
 .blurinheader {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
@@ -49,7 +46,8 @@ html {
   top: 0;
   z-index: 100;
 }
-.left-image, .right-image {
+.left-image,
+.right-image {
   /* opacity: 0; */
   transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
@@ -69,24 +67,29 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
 /* Small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {
+  .homepagesection1text.animate .word {
+    animation: fadeInUp 0.8s forwards;
+    /* margin-right: 16px; */
+  }
   .preloader-video {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .material-bubble {
     display: none;
   }
 
   .material-bubble1 {
+    z-index: 15;
     background-color: transparent;
-    color: #A80018;
+    color: #a80018;
     /* Adjusted for darken($darkblue, 10%) */
     border: 1px;
     padding: 8px 12px;
@@ -111,7 +114,7 @@ input[type=number] {
     left: 0;
     width: 100%;
     height: 100%;
-    border: 1px solid #A80018;
+    border: 1px solid #a80018;
     /* Adjusted for darken($darkblue, 10%) */
     transition: opacity 0.3s, border 0.3s;
   }
@@ -127,7 +130,7 @@ input[type=number] {
     left: 0;
     width: 200px;
     height: 200px;
-    background-color: #A80018;
+    background-color: #a80018;
     /* Adjusted for lighten($darkblue, 10%) */
     border-color: transparent;
     border-radius: 50%;
@@ -180,7 +183,7 @@ input[type=number] {
     font-size: 24px;
     display: inline-flex;
     gap: 8px;
-    color: #A80018;
+    color: #a80018;
     line-height: 24.5px;
   }
 
@@ -293,7 +296,6 @@ input[type=number] {
     overflow: hidden;
     transform: translateZ(64px);
   }
-
 }
 /* Initially hide the video */
 .homepagesection1video {
@@ -310,6 +312,10 @@ input[type=number] {
 
 /* Large devices (desktops, 769px and up) */
 @media only screen and (min-width: 769px) {
+  .homepagesection1text.animate .word {
+    animation: fadeInUp 0.8s forwards;
+    margin-right: 16px;
+  }
   .preloader-video {
     width: 100vw; /* Full viewport width */
     height: 100vh; /* Full viewport height */
@@ -324,12 +330,12 @@ input[type=number] {
     font-size: 64px;
     line-height: 48px;
     text-align: center;
-    color: #FFF;
+    color: #fff;
   }
 
   .material-bubble {
     background-color: transparent;
-    color: #A80018;
+    color: #a80018;
     /* Adjusted for darken($darkblue, 10%) */
     border: 1px;
     padding: 10px 14px;
@@ -383,7 +389,7 @@ input[type=number] {
     font-size: 64px;
     display: inline-flex;
     gap: 21px;
-    color: #A80018;
+    color: #a80018;
   }
 
   .homepagesection2img {
@@ -429,7 +435,6 @@ input[type=number] {
     }
   }
 
-
   .homepagesection3 {
     width: 100%;
     height: 1200px;
@@ -449,7 +454,6 @@ input[type=number] {
   }
 
   .homepagesection5 {
-
     width: 100%;
     padding-top: 64px;
     padding-bottom: 64px;
@@ -475,7 +479,7 @@ input[type=number] {
     backdrop-filter: blur(12px);
     color: var(--pale);
     transform-style: preserve-3d;
-    background-color: rgba(14, 16, 18, .5);
+    background-color: rgba(14, 16, 18, 0.5);
     border-radius: 50%;
     flex-direction: column;
     justify-content: center;
@@ -490,9 +494,6 @@ input[type=number] {
     overflow: hidden;
     transform: translateZ(64px);
   }
-
-
-
 }
 
 .word {
@@ -500,7 +501,6 @@ input[type=number] {
   transform: translateY(20px);
   display: inline-block;
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-  
 }
 
 .word.animate {
@@ -508,19 +508,16 @@ input[type=number] {
   transform: translateY(0);
 }
 
-.homepagesection1text.animate .word {
-  animation: fadeInUp 0.8s forwards;
-  margin-right: 15px;
-}
+
 @keyframes fadeInUp {
   0% {
-      opacity: 0;
-      transform: translateY(20px);
+    opacity: 0;
+    transform: translateY(20px);
   }
 
   100% {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -530,13 +527,12 @@ input[type=number] {
   overflow: hidden;
 
   height: 100%;
-
 }
 
 .card__image {
   aspect-ratio: 16 / 12;
   width: 100%;
-  
+
   object-fit: cover;
 }
 
@@ -572,10 +568,12 @@ input[type=number] {
   left: 0;
   top: 0;
   border-radius: 50%;
-  background: radial-gradient(circle,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 50%,
-      rgba(255, 255, 255, 0) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
   position: absolute;
   will-change: opacity;
 }
@@ -597,7 +595,7 @@ input[type=number] {
   left: 0;
   width: 100%;
   height: 100%;
-  border: 1px solid #A80018;
+  border: 1px solid #a80018;
   /* Adjusted for darken($darkblue, 10%) */
   transition: opacity 0.3s, border 0.3s;
 }
@@ -613,7 +611,7 @@ input[type=number] {
   left: 0;
   width: 200px;
   height: 200px;
-  background-color: #A80018;
+  background-color: #a80018;
   /* Adjusted for lighten($darkblue, 10%) */
   border-color: transparent;
   border-radius: 50%;

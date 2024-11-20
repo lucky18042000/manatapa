@@ -105,33 +105,34 @@ function HomePage() {
     //         );
     //     }
     // }, []);
-    useEffect(() => {
-        // Apply the ScrambleText animation to the text element
-        gsap.fromTo(
-            textRef.current,
-            { opacity: 0 }, // Initial state
-            {
-                opacity: 1, // End state
-                duration: 2,
-                scrambleText: {
-                    text: "Your, Majestic Matrimonial Miracles.", // The target text
-                    chars: "lowerCase", // Scramble effect with lowercase letters
-                    speed: 0.6, // Speed of the scramble
-                },
-                scrollTrigger: {
-                    trigger: textRef.current,
-                    start: 'top 80%', // Start when the text is 80% into the viewport
-                    end: 'bottom 50%',
-                    scrub: 1, // Smooth scrubbing effect
-                },
-            }
-        );
-    }, []);
+    // useEffect(() => {
+    //     // Apply the ScrambleText animation to the text element
+    //     gsap.fromTo(
+    //         textRef.current,
+    //         { opacity: 0 }, // Initial state
+    //         {
+    //             opacity: 1, // End state
+    //             duration: 2,
+    //             scrambleText: {
+    //                 text: "Your, Majestic Matrimonial Miracles.", // The target text
+    //                 chars: "lowerCase", // Scramble effect with lowercase letters
+    //                 speed: 0.6, // Speed of the scramble
+    //             },
+    //             scrollTrigger: {
+    //                 trigger: textRef.current,
+    //                 start: 'top 80%', // Start when the text is 80% into the viewport
+    //                 end: 'bottom 50%',
+    //                 scrub: 1, // Smooth scrubbing effect
+    //             },
+    //         }
+    //     );
+    // }, []);
     const main = useRef(); // Reference for the container element
     const [isMounted, setIsMounted] = useState(false);
     useEffect(() => {
         setIsMounted(true);
     }, []);
+
     useEffect(() => {
         if (!isMounted) return;
 
@@ -245,6 +246,7 @@ function HomePage() {
         const cardElements = document.querySelectorAll('.card');
         cardElements.forEach((cardEl) => initCard(cardEl));
     }, [isMounted]);
+    
     useEffect(() => {
         if (isVideoLoaded && textRef.current) {
             const textElement = textRef.current;
