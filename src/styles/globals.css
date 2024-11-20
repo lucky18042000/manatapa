@@ -169,6 +169,7 @@ input[type="number"] {
     text-align: center;
     font-weight: 600;
     line-height: 43px;
+    width: 80%;
   }
 
   .homepagesection2 {
