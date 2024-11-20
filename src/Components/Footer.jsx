@@ -18,9 +18,9 @@ function Footer() {
                 </Link>
                 <div className=' flex-col items-center lg:flex hidden'>
                     <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
-                    <a href="mailto:support@mantapaweddings.com">
+                    <a href="mailto:contact@mantapaweddings.com">
                         <h1 className={`mt-[24px] uppercase bg-[#FFFFFF] rounded-[26px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[42px] px-[56px] py-[25px] ${roslindaleFont.className}`}>
-                            support@mantapaweddings.com
+                            contact@mantapaweddings.com
                         </h1>
                     </a>
                 </div>
@@ -33,9 +33,9 @@ function Footer() {
             </div>
             <div className=' flex-col items-center flex lg:hidden mt-[40px] w-full'>
                 <p className='text-[#A80018] text-[16px]'>GET IN TOUCH</p>
-                <div onClick={() => window.location.href = "mailto:support@mantapaweddings.com"}>
+                <div onClick={() => window.location.href = "mailto:contact@mantapaweddings.com"}>
                     <h1 className={`mt-[14px] px-[8px] uppercase bg-[#FFFFFF] rounded-[10px] border-[#A8001880] text-[#A80018] font-semibold border border-dashed text-[14px] text-center w-full py-[15px] ${roslindaleFont.className}`}>
-                        support@mantapaweddings.com
+                        contact@mantapaweddings.com
                     </h1>
                 </div>
 
