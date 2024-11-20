@@ -21,7 +21,7 @@ function Contact() {
 
     const sendEmail = (e) => {
         e.preventDefault(); // Prevent default form submission
-        emailjs.send('service_6qgdkwi', 'template_2wcl128', conatctData, '_AqFyLIuk2rfH6qWK')
+        emailjs.send('service_r3870ps', 'template_2wcl128', conatctData, '_AqFyLIuk2rfH6qWK')
             .then((response) => {
                 console.log('Email successfully sent!', response.status, response.text);
                 // Clear the form after sending
