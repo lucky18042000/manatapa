@@ -374,7 +374,7 @@ function HomePage() {
                     <div className="absolute lg:left-[-100px] left-[30px] h-full flex items-center">
                         <img
                             className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] z-10"
-                            src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/647e3cc83822b06137a15c00_Header%201%20Left-p-1080.jpg.png?alt=media&token=905abf1d-7e1c-45c4-8a5d-b052333d4ec1'
+                            src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Arth%20PNG.png?alt=media&token=d0133f28-6279-49a0-b7c7-aa1ce6f96f5c'
                             alt="" />
                     </div>
                     <div className=' flex flex-col justify-center items-center w-[413px]' >
