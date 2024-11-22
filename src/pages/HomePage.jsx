@@ -344,7 +344,7 @@ function HomePage() {
                 <div className="homepagesection3" >
                     <div className="absolute  lg:left-[-100px] left-[30px] h-full flex items-center">
                         <img
-                            className="left-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] z-10"
+                            className="left-image lg:w-[600px] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] z-10"
                             src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Stills%2F20.jpg?alt=media&token=6bd2e88c-9ef8-4df3-94d5-28690a675296"
                             alt="Left Image"
                         />
@@ -364,7 +364,7 @@ function HomePage() {
                     </div>
                     <div className="absolute  lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img
-                            className="right-image lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] z-10"
+                            className="right-image lg:w-[600px] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] z-10"
                             src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/10be9f9f60b5813c7746dd129aea3a82.jpeg?alt=media&token=e3dd27c8-8d5b-4d5b-b10e-58bbf6b8e7cd"
                             alt="Right Image"
                         />
@@ -373,7 +373,7 @@ function HomePage() {
                 <div className='homepagesection4'>
                     <div className="absolute lg:left-[-100px] left-[30px] h-full flex items-center">
                         <img
-                            className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] z-10"
+                            className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] z-10"
                             src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Arth%20PNG.png?alt=media&token=d0133f28-6279-49a0-b7c7-aa1ce6f96f5c'
                             alt="" />
                     </div>
@@ -394,7 +394,7 @@ function HomePage() {
                     </div>
                     <div className="absolute lg:right-[-100px] right-[15px] h-full flex items-center">
                         <img
-                            className="right-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] z-10"
+                            className="right-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] z-10"
                             src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Priyansh%20PNG%202.png?alt=media&token=6ec859b0-9f56-4b27-956f-3c884727ed94"
                             alt="Right Image"
                         />

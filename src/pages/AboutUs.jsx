@@ -317,7 +317,7 @@ function AboutUs() {
             <div className='homepagesection4'>
                 <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
                     <img
-                        className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
+                        className="left-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
                         src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Arth%20PNG.png?alt=media&token=d0133f28-6279-49a0-b7c7-aa1ce6f96f5c'
                         alt="" />
                 </div>
@@ -354,7 +354,7 @@ function AboutUs() {
                 </div>
                 <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                     <img
-                        className="right-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                        className="right-image bg-[#DBCBD1] lg:w-[600px] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
                         src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/Priyansh%20PNG%202.png?alt=media&token=6ec859b0-9f56-4b27-956f-3c884727ed94"
                         alt="Right Image"
                     />
@@ -363,7 +363,7 @@ function AboutUs() {
             <div className='aboutussection3 '>
                 <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
                     <img
-                        className="left-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
+                        className="left-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[-2.8deg] rounded-[32px] -z-10"
                         src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/6.png?alt=media&token=02a0ca4b-e024-4eec-890f-b60abac9990c'
                         alt="" />
                 </div>
@@ -383,7 +383,7 @@ function AboutUs() {
                 </div>
                 <div className="absolute z-10 lg:right-[-100px] right-[15px] h-full flex items-center">
                     <img
-                        className="right-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[216px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
+                        className="right-image lg:w-[600px] bg-[#E6DADB] lg:h-[700px] w-[250px] h-[347px] object-cover rotate-[2.8deg] rounded-[32px] -z-10"
                         src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/7.png?alt=media&token=f91f083f-3038-4178-8c31-37d3968c4e25"
                         alt="Right Image"
                     />
