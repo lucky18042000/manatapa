@@ -488,8 +488,8 @@ function HomePage() {
                     </div>
                 </div>
                 <div className='w-full flex flex-col justify-center items-center'>
-                    <Link href={'Motions'} className='material-bubble lg:mt-[29px]'>WATCH VIDEO</Link>
-                    <Link href={'Motions'} className='material-bubble1 mt-[42px]'>WATCH VIDEO</Link>
+                    <Link href={'Motions'} className='material-bubble lg:mt-[29px]'>WATCH VIDEOS</Link>
+                    <Link href={'Motions'} className='material-bubble1 mt-[42px]'>WATCH VIDEOS</Link>
 
                 </div>
             </div>
