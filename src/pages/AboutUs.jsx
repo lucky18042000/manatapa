@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebaseConfig';
 import Slider from 'react-slick';
+import Marquee from 'react-marquee-slider';
 
 // Dynamically import the AboutUs component with SSR disabled
 const DynamicAboutUs = dynamic(() => import('@/pages/AboutUs'), { ssr: false });
@@ -29,51 +30,42 @@ function AboutUs() {
     const titleRef = useRef(null);
     const paraRef = useRef(null);
     const settings = {
-        speed: 5000,
-        autoplaySpeed: 0,
-        arrows: false,
-        slidesToScroll: 4,
-        // easing: "linear",
-        autoplay: true,     
-        centerMode: true,
-        // speed: 1000,           
-        arrows: false,          // Do you want to show arrows to trigger each slide
-        accessibility: true,   // Enables tabbing and arrow key navigation 
-        // autoplaySpeed: 2000,
-        cssEase: "linear",
-        // dots: true,            // Enables the dots below to show how many slides
-        fade: false,           // Changes the animate from slide to fade if true
-        infinite: true,       // When true, means that it will scroll in a circle
-        pauseOnHover: true,   // When true means the autoplay pauses when hovering
-        pauseOnDotsHover: true, // Pauses the autoplay when hovering over the dots
-        slidesToShow: 3, // Adjust based on design
-        // slidesToScroll: 1,
+        infinite: true,         // Enables infinite looping
+        autoplay: true,         // Automatically scrolls the slider
+        speed: 200,           // Controls the transition duration (longer for smooth motion)
+        autoplaySpeed: 100,       // No pause between slides
+        cssEase: "linear",      // Ensures a continuous scrolling animation
+        slidesToShow: 3,        // Number of slides visible at a time
+        slidesToScroll: 1,      // Number of slides to scroll at a time (still set to 1, but we smooth it out with speed)
+        arrows: false,          // Hides navigation arrows
+        dots: false,            // Disables dot indicators
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
+                    slidesToScroll: 1,
+                },
             },
             {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2
-                }
+                    slidesToScroll: 1,
+                },
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
+
+
+
     const fetchAboutUs = async () => {
         try {
             const querySnapshot = await getDocs(aboutuspage);
@@ -148,60 +140,10 @@ function AboutUs() {
         setIsMounted(true);
         if (!isMounted) return; // Ensure this code runs only on the client side
 
-        // const sections = gsap.utils.toArray('.section'); // Adjust this if you have specific class names for sections
-
-        // sections.forEach(section => {
-        //     gsap.fromTo(
-        //         section,
-        //         { y: 100 },
-        //         {
-        //             y: 0,
-        //             duration: 10,
-        //             scrollTrigger: {
-        //                 trigger: section,
-        //                 start: 'top 50%',
-        //                 end: 'bottom 50%',
-        //                 scrub: true,
-        //                 onEnter: () => gsap.to(section, { y: 0 }),
-        //                 onLeaveBack: () => gsap.to(section, { y: -100 }),
-        //             },
-        //         }
-        //     );
-        // });
-
     }, [isMounted]);
+
     const scrollContainerRef = useRef(null);
 
-    useEffect(() => {
-        const scrollContainer = scrollContainerRef.current;
-        const scrollSpeed = 2; // Adjust this value to change the scroll speed
-        let scrollAmount = 0;
-
-        // Duplicate the stills to create an infinite scroll illusion
-        const duplicatedStills = [...stills, ...stills];
-
-        const autoScroll = () => {
-            if (scrollContainer) {
-                scrollAmount += scrollSpeed;
-                scrollContainer.scrollLeft = scrollAmount;
-
-                // If the scroll reaches the halfway point (original length), reset it to the start
-                if (scrollAmount >= scrollContainer.scrollWidth / 2) {
-                    scrollAmount = 0; // Reset scroll position
-                }
-
-                requestAnimationFrame(autoScroll);
-            }
-        };
-
-        // Start the auto-scroll
-        autoScroll();
-
-        return () => {
-            // Cleanup if necessary
-            cancelAnimationFrame(autoScroll);
-        };
-    }, [isMounted]);
     useEffect(() => {
         if (!isMounted) return;
 
@@ -303,17 +245,20 @@ function AboutUs() {
 
             </div>
             <div className='aboutussection2 rotate-[-2deg] w-full'>
-                <Slider {...settings} className="w-full ">
-                    {stills && stills.length > 0 && stills.map((item, index) => (
-                        <img
-                            key={index}
-                            className='lg:w-[360px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px] rounded-[12px] bg-[#E6DADB]'
-                            src={item?.img}
-                            alt=""
-                        />
-                    ))}
-                </Slider>
+                <Marquee velocity={80} minScale={0.7} resetAfterTries={200}>
+                    {Array.isArray(stills) &&
+                        stills.map((item, index) => (
+                            <img
+                                key={index}
+                                className="lg:w-[360px] w-[269px] h-[179px] lg:h-[256px] lg:rounded-[12px] rounded-[12px] bg-[#E6DADB] mx-2"
+                                src={item?.img}
+                                alt=""
+                            />
+                        ))}
+                </Marquee>
+
             </div>
+
             <div className='homepagesection4'>
                 <div className="absolute z-10 lg:left-[-100px] left-[30px] h-full flex items-center">
                     <img
@@ -368,7 +313,7 @@ function AboutUs() {
                         alt="" />
                 </div>
                 <div className='-z-10 flex flex-col justify-center items-center w-[413px]' >
-                <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium lg:text-[20px] text-[10px]  text-[#A80018]'>
+                    <p className='pb-[42px] !w-max uppercase inline-flex items-center gap-3 font-medium lg:text-[20px] text-[10px]  text-[#A80018]'>
                         NEW YORK
                         <span>
                             <svg width="27" height="13" viewBox="0 0 27 13" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -148,6 +148,17 @@
         padding: 0px 150px;
     }
 }
+.slick-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out !important;
+}
+.slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
 
 .word {
     opacity: 0;
