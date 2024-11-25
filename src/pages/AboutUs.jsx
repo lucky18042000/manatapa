@@ -217,11 +217,32 @@ function AboutUs() {
     }, [isMounted]);
 
 
+    const [velocity, setVelocity] = useState(50);
 
+    useEffect(() => {
+        const updateVelocity = () => {
+            if (window.innerWidth <= 768) {
+                // Slow down for mobile devices
+                setVelocity(20);
+            } else {
+                // Default speed for larger screens
+                setVelocity(50);
+            }
+        };
+
+        updateVelocity(); // Initial check
+        window.addEventListener("resize", updateVelocity);
+
+        return () => {
+            window.removeEventListener("resize", updateVelocity);
+        };
+    }, [isMounted]);
     // Ensure component doesn't render server-side
     if (!isMounted) {
         return null;
     }
+
+
 
     return (
         <div>
@@ -244,8 +265,8 @@ function AboutUs() {
                 <p ref={paraRef} className={`aboutussection1para ${roslindaleFont.className}`}>Mantapa, the brainchild of visionary individuals Arth and Priyansh Patel, transcends conventional wedding cinematography by intricately weaving the ephemeral splendor of Indian matrimonial rituals with the nuanced artistry of filmmaking and design.</p>
 
             </div>
-            <div className='aboutussection2 rotate-[-2deg] w-full'>
-                <Marquee velocity={80} minScale={0.7} resetAfterTries={200}>
+            <div className="aboutussection2 rotate-[-2deg] w-full">
+                <Marquee velocity={velocity} minScale={0.7} resetAfterTries={200}>
                     {Array.isArray(stills) &&
                         stills.map((item, index) => (
                             <img
@@ -256,7 +277,6 @@ function AboutUs() {
                             />
                         ))}
                 </Marquee>
-
             </div>
 
             <div className='homepagesection4'>
