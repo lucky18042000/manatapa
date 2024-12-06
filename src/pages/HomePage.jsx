@@ -41,7 +41,7 @@ const initCard = (card) => {
         const degree = mapNumberRange(distanceToCenter, 0, maxDistance, 0, 10);
         const rx = mapNumberRange(deltaY, 0, halfWidth, 0, 1);
         const ry = mapNumberRange(deltaX, 0, halfHeight, 0, 1);
-        cardContent.style.transform = `perspective(400px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
+        // cardContent.style.transform = `perspective(400px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
         gloss.style.transform = `translate(${-ry * 100}%, ${-rx * 100}%) scale(2.4)`;
         gloss.style.opacity = `${mapNumberRange(distanceToCenter, 0, maxDistance, 0, 0.6)}`;
     };
@@ -181,6 +181,49 @@ function HomePage() {
                 // Set opacity: if scrollProgress >= threshold, set opacity to 1
                 image.style.opacity = scrollProgress >= threshold ? 1 : scrollProgress / threshold;
             });
+
+            const cardEffect = document.querySelector('.homepagesection5');
+            const children_div = document.querySelectorAll('.tiltingcardeffect>div');
+            const children = document.querySelectorAll('.tiltingcardeffect img');
+
+            cardEffect.addEventListener('mousemove', (e) => {
+                const rect = cardEffect.getBoundingClientRect();
+                const x = e.clientX - rect.left; // Mouse position relative to cardEffect
+                const y = e.clientY - rect.top;
+
+                children_div.forEach((children, index) => {
+                    const offsetX = ((x / rect.width) - 0.5) * 20 * (index + 1); // Adjust strength per child
+                    const offsetY = ((y / rect.height) - 0.5) * 20 * (index + 1);
+
+                    //translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(-0.29216deg) rotateY(-1.80592deg) rotateZ(0deg) skew(0deg, 0deg)
+                    // child.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${index * 10}px) scale3d(1, 1, 1) rotateX(${offsetX}deg) rotateY(${offsetY}deg) rotateZ(0deg) skew(0deg, 0deg)`;
+                    children.style.overflow = 'hidden';
+                    children.style.transition = "all 0.2s";
+                    children.style.transform = `translate3d(0px, 0px, 0px) scale(1) rotateX(${offsetX/2}deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
+                });
+
+                // Calculate the translate3d values for each child
+                children.forEach((child, index) => {
+                    const offsetX = ((x / rect.width) - 0.5) * 20 * (index + 1); // Adjust strength per child
+                    const offsetY = ((y / rect.height) - 0.5) * 20 * (index + 1);
+
+                    //translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(-0.29216deg) rotateY(-1.80592deg) rotateZ(0deg) skew(0deg, 0deg)
+                    // child.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${index * 10}px) scale3d(1, 1, 1) rotateX(${offsetX}deg) rotateY(${offsetY}deg) rotateZ(0deg) skew(0deg, 0deg)`;
+                    child.style.transition = "all 0.2s";
+                    child.style.transform = `translate3d(${offsetX}px, 0px, ${index * 10}px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
+                });
+            });
+
+            cardEffect.addEventListener('mouseleave', () => {
+                // Reset the children to their original position
+                children_div.forEach((child) => {
+                    child.style.transform = `translate3d(0, 0, 0)`;
+                });
+                children.forEach((child) => {
+                    child.style.transform = `translate3d(0, 0, 0) scale(1)`;
+                });
+            });
+
         };
 
         // Debounce scroll events for smoother performance
@@ -409,8 +452,8 @@ function HomePage() {
                 {false && <div className="card">
                     <div className="card__content">
                         <div class="card__gloss"></div>
-                        <div className='homepagesection5motion 3dtiltingcardeffect'>
-                            <div className='lg:w-[780px] lg:h-[480px] w-[309px] h-[265px] z-10'>
+                        <div className='homepagesection5motion tiltingcardeffect'>
+                            <div className='lg:w-[780px] lg:h-[480px] w-[309px] h-[265px] z-10 rounded-lg'>
                                 <a href={''} target='_blank' className="motion-cms-play">
                                     <svg width="20%" viewBox="0 0 20 23" fill="#FFF" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M19 9.76795C20.3333 10.5378 20.3333 12.4623 19 13.2321L3.25 22.3253C1.91667 23.0951 0.250001 22.1329 0.250001 20.5933L0.250002 2.40673C0.250002 0.867131 1.91667 -0.0951185 3.25 0.674682L19 9.76795Z" fill="#FFF"></path>
@@ -435,13 +478,13 @@ function HomePage() {
                                 </a>
                                 <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src="https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=06b8e32b-d135-4083-9e64-630caa81caf2" alt="" />
                             </div>
-                            <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[0%] z-10'>
+                            <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[0%] z-10 rounded-lg'>
                                 <img className='lg:rounded-[24px] rounded-[10px]' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=08b40ad0-8dca-40b0-91f3-97bd3e4bb346' alt="" />
                             </div>
-                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[0%] z-10'>
+                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[0%] z-10 rounded-lg'>
                                 <img className='lg:rounded-[24px] rounded-[10px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa' alt="" />
                             </div>
-                            <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[10%] lg:right-[20%] bottom-[-1%] right-[-0%] z-20'>
+                            <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[10%] lg:right-[20%] bottom-[-1%] right-[-0%] z-20 rounded-lg'>
                                 <img className='lg:rounded-[24px] rounded-[10px] object-cover' src='https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f' alt="" />
                             </div>
                         </div>
@@ -450,8 +493,8 @@ function HomePage() {
                 <div className="card">
                     <div className="card__content">
                         <div className="card__gloss"></div>
-                        <div className="homepagesection5motion 3dtiltingcardeffect">
-                            <div className='lg:w-[780px] lg:h-[480px] w-[309px] h-[265px] z-10'>
+                        <div className="homepagesection5motion tiltingcardeffect">
+                            <div className='lg:w-[780px] lg:h-[480px] w-[309px] h-[265px] z-10 rounded-[20px]'>
                                 <a href={'https://www.youtube.com/watch?v=SdW9PiqX2Nc'} target='_blank' className="motion-cms-play">
                                     <svg width="20%" viewBox="0 0 20 23" fill="#FFF" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M19 9.76795C20.3333 10.5378 20.3333 12.4623 19 13.2321L3.25 22.3253C1.91667 23.0951 0.250001 22.1329 0.250001 20.5933L0.250002 2.40673C0.250002 0.867131 1.91667 -0.0951185 3.25 0.674682L19 9.76795Z" fill="#FFF"></path>
@@ -475,13 +518,13 @@ function HomePage() {
                                 </a>
                                 <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=06b8e32b-d135-4083-9e64-630caa81caf2'} alt="" />
                             </div>
-                            <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[0%] z-10'>
+                            <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[22%] top-[40%] left-[0%] z-10 rounded-[20px]'>
                                 <img className='lg:rounded-[24px] rounded-[10px]' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6bb55f59b65ba50249_amelia-small-2%2520(1).jpg.png?alt=media&token=be251981-7a03-4794-9485-55e85c896282'} alt="" />
                             </div>
-                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[0%] z-10'>
+                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-16%] lg:right-[23%] top-[-15%] right-[0%] z-0 rounded-[20px]'>
                                 <img className='lg:rounded-[24px] rounded-[10px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa'} alt="" />
                             </div>
-                            <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[10%] lg:right-[20%] bottom-[-1%] right-[-0%] z-20'>
+                            <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[-5%] lg:right-[24%] bottom-[-1%] right-[-0%] z-20 rounded-[20px]'>
                                 <img className='lg:rounded-[24px] rounded-[10px]' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f'} alt="" />
                             </div>
                         </div>
