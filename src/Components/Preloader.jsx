@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 
 const Preloader = () => {
     const [videoSrc, setVideoSrc] = useState(null); // Start as null to avoid black screen
-    const [isMuted, setIsMuted] = useState(false); // Start as unmuted
+    const [isMuted, setIsMuted] = useState(true); // Track muted state
     const videoRef = useRef(null); // Reference to the video element
 
     useEffect(() => {
