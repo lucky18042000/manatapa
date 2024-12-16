@@ -235,7 +235,7 @@ function HomePage() {
                     // child.style.transform = `translate3d(${offsetX}px, 0px, ${index * 10}px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
 
                     // const offsetX = relX * 50;
-                    child.style.objectPosition = `${50 + 200}% 50%`;
+                    child.style.objectPosition = `50% 50%`;
                 });
             });
 
