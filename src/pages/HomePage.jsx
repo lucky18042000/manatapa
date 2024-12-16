@@ -26,6 +26,10 @@ const initCard = (card) => {
         gloss.classList.add('card__gloss--animatable');
     });
 
+    // requestAnimationFrame(() => {
+    //     cardContent.classList.add('card__gloss--animatable');
+    // });
+
     const handleMouseMove = (e) => {
         const pointerX = e.clientX;
         const pointerY = e.clientY;
@@ -41,8 +45,21 @@ const initCard = (card) => {
         const degree = mapNumberRange(distanceToCenter, 0, maxDistance, 0, 10);
         const rx = mapNumberRange(deltaY, 0, halfWidth, 0, 1);
         const ry = mapNumberRange(deltaX, 0, halfHeight, 0, 1);
-        // cardContent.style.transform = `perspective(400px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
-        gloss.style.transform = `translate(${-ry * 100}%, ${-rx * 100}%) scale(2.4)`;
+        // cardContent.style.transform = `perspective(1000px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
+        // // cardContent.style.transform = `perspective(400px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
+        // gloss.style.transform = `translate(${-ry * 100}%, ${-rx * 100}%) scale(2.4)`;
+        // gloss.style.opacity = `${mapNumberRange(distanceToCenter, 0, maxDistance, 0, 0.6)}`;
+
+        cardContent.style.willChange = 'transform';
+        cardContent.style.transform = `perspective(1000px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
+        // cardContent.style.transform = `perspective(1000px) translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotate3d(${-rx}, ${ry}, 0, ${degree}deg) skew(0deg, 0deg)`;
+
+        // cardContent.style.transform = `translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(20deg) rotateY(-0.0016deg) rotateZ(0deg) skew(0deg, 0deg)`;
+        cardContent.style.transformStyle = `preserve-3d`;
+        // style=" transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(20deg) rotateY(-0.0016deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+
+        // cardContent.style.transform = `rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
+        gloss.style.transform = `perspective(600px)  translate(${-ry * 100}%, ${-rx * 100}%) scale(2.4)`;
         gloss.style.opacity = `${mapNumberRange(distanceToCenter, 0, maxDistance, 0, 0.6)}`;
     };
 
@@ -199,7 +216,11 @@ function HomePage() {
                     // child.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${index * 10}px) scale3d(1, 1, 1) rotateX(${offsetX}deg) rotateY(${offsetY}deg) rotateZ(0deg) skew(0deg, 0deg)`;
                     children.style.overflow = 'hidden';
                     children.style.transition = "all 0.2s";
-                    children.style.transform = `translate3d(0px, 0px, 0px) scale(1) rotateX(${offsetX/2}deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
+                    // children.style.transform = `translate3d(0px, 0px, 0px) scale(1) rotateX(${offsetX/2}deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
+
+                    // children.style.transform = `translate3d(${offsetX}px, 0px, 0px) scale(1) rotateX(0deg) rotateY(${offsetY}deg)`;
+                    children.style.transform = `translate3d(${offsetX}px, 0px, ${index * 10}px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
+                    children.style.willChange = 'transform';
                 });
 
                 // Calculate the translate3d values for each child
@@ -209,8 +230,12 @@ function HomePage() {
 
                     //translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(-0.29216deg) rotateY(-1.80592deg) rotateZ(0deg) skew(0deg, 0deg)
                     // child.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${index * 10}px) scale3d(1, 1, 1) rotateX(${offsetX}deg) rotateY(${offsetY}deg) rotateZ(0deg) skew(0deg, 0deg)`;
-                    child.style.transition = "all 0.2s";
-                    child.style.transform = `translate3d(${offsetX}px, 0px, ${index * 10}px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
+
+                    // child.style.transition = "all 0.2s";
+                    // child.style.transform = `translate3d(${offsetX}px, 0px, ${index * 10}px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`;
+
+                    // const offsetX = relX * 50;
+                    child.style.objectPosition = `${50 + 200}% 50%`;
                 });
             });
 
@@ -462,12 +487,12 @@ function HomePage() {
                                 <a href={''} target='_blank' className="motion-cms-playmobile">
                                     <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g filter="url(#filter0_b_491_185)">
-                                            <rect width="52.53" height="52.7758" rx="26.265" fill="#0E1012" fill-opacity="0.5" />
+                                            <rect width="52.53" height="52.7758" rx="26.265" fill="#0E1012" fillOpacity="0.5" />
                                             <path d="M32.0703 26.3968C32.7736 26.8031 32.7736 27.8189 32.0703 28.2252L23.7622 33.0249C23.0589 33.4312 22.1797 32.9233 22.1797 32.1107L22.1797 22.5113C22.1797 21.6987 23.0589 21.1908 23.7622 21.5971L32.0703 26.3968Z" fill="#F3F6FA" />
                                         </g>
                                         <defs>
-                                            <filter id="filter0_b_491_185" x="-5.99999" y="-5.99999" width="64.5293" height="64.7754" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <filter id="filter0_b_491_185" x="-5.99999" y="-5.99999" width="64.5293" height="64.7754" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                                                 <feGaussianBlur in="BackgroundImageFix" stdDeviation="3" />
                                                 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_491_185" />
                                                 <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_491_185" result="shape" />
@@ -495,20 +520,21 @@ function HomePage() {
                         <div className="card__gloss"></div>
                         <div className="homepagesection5motion tiltingcardeffect">
                             <div className='lg:w-[780px] lg:h-[480px] w-[309px] h-[265px] z-10 rounded-[20px]'>
+                            {/* <div className='lg:w-[780px] lg:h-[480px] w-[309px] h-[265px] z-10'> */}
                                 <a href={'https://www.youtube.com/watch?v=SdW9PiqX2Nc'} target='_blank' className="motion-cms-play">
                                     <svg width="20%" viewBox="0 0 20 23" fill="#FFF" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M19 9.76795C20.3333 10.5378 20.3333 12.4623 19 13.2321L3.25 22.3253C1.91667 23.0951 0.250001 22.1329 0.250001 20.5933L0.250002 2.40673C0.250002 0.867131 1.91667 -0.0951185 3.25 0.674682L19 9.76795Z" fill="#FFF"></path>
                                     </svg>
                                 </a>
-                                <a href={''} target='_blank' className="motion-cms-playmobile">
+                                <a href={'https://www.youtube.com/watch?v=SdW9PiqX2Nc'} target='_blank' className="motion-cms-playmobile">
                                     <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g filter="url(#filter0_b_491_185)">
-                                            <rect width="52.53" height="52.7758" rx="26.265" fill="#0E1012" fill-opacity="0.5" />
+                                            <rect width="52.53" height="52.7758" rx="26.265" fill="#0E1012" fillOpacity="0.5" />
                                             <path d="M32.0703 26.3968C32.7736 26.8031 32.7736 27.8189 32.0703 28.2252L23.7622 33.0249C23.0589 33.4312 22.1797 32.9233 22.1797 32.1107L22.1797 22.5113C22.1797 21.6987 23.0589 21.1908 23.7622 21.5971L32.0703 26.3968Z" fill="#F3F6FA" />
                                         </g>
                                         <defs>
-                                            <filter id="filter0_b_491_185" x="-5.99999" y="-5.99999" width="64.5293" height="64.7754" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <filter id="filter0_b_491_185" x="-5.99999" y="-5.99999" width="64.5293" height="64.7754" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                                                 <feGaussianBlur in="BackgroundImageFix" stdDeviation="3" />
                                                 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_491_185" />
                                                 <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_491_185" result="shape" />
@@ -518,15 +544,16 @@ function HomePage() {
                                 </a>
                                 <img className='rounded-[24px] w-[309px] h-[265px] lg:w-[780px] lg:h-[480px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/636012bd2248e8047dc4d4e4_amelia-cover-p-1080.jpg.png?alt=media&token=06b8e32b-d135-4083-9e64-630caa81caf2'} alt="" />
                             </div>
-                            <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[22%] top-[40%] left-[0%] z-10 rounded-[20px]'>
+                            <div className='lg:w-[247px] w-[117px] h-[77px] lg:h-[175px] absolute lg:top-[150px] lg:left-[15%] top-[40%] left-[0%] z-10 rounded-[20px]'>
                                 <img className='lg:rounded-[24px] rounded-[10px]' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6bb55f59b65ba50249_amelia-small-2%2520(1).jpg.png?alt=media&token=be251981-7a03-4794-9485-55e85c896282'} alt="" />
                             </div>
-                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-16%] lg:right-[23%] top-[-15%] right-[0%] z-0 rounded-[20px]'>
+                            <div className='lg:w-[223px] w-[111px] h-[77px] lg:h-[154px] absolute lg:top-[-10%] lg:right-[15%] top-[-15%] right-[0%] z-10 rounded-[20px]'>
                                 <img className='lg:rounded-[24px] rounded-[10px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe66153918a719590b8a_amelia-small-1%2520(1).jpg.png?alt=media&token=cd4b5333-d45d-435c-bede-c895713a40aa'} alt="" />
                             </div>
-                            <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[-5%] lg:right-[24%] bottom-[-1%] right-[-0%] z-20 rounded-[20px]'>
-                                <img className='lg:rounded-[24px] rounded-[10px]' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f'} alt="" />
+                            <div className='lg:w-[223px] lg:h-[154px] w-[111px] h-[77px] absolute lg:bottom-[10%] lg:right-[20%] bottom-[-1%] right-[-0%] z-20 rounded-[20px]'>
+                                <img className='lg:rounded-[24px] rounded-[10px] object-cover' src={'https://firebasestorage.googleapis.com/v0/b/mantapa-22cfd.appspot.com/o/638dbe6fdd44deb587cacf33_amelia-small-3%2520(1).jpg.png?alt=media&token=295a4906-2dc5-4ec0-82d6-934fc5cdd97f'} alt="" />
                             </div>
+
                         </div>
                     </div>
                 </div>
