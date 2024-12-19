@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CustomModal from './CustomModal';
 import localFont from 'next/font/local';
 import emailjs from 'emailjs-com';
+import { useRouter } from 'next/router';
 
 const roslindaleFont = localFont({
     src: '../fonts/Roslindale-DisplayNarrowRegular-Testing.ttf',
@@ -14,6 +15,7 @@ const roslindaleFont = localFont({
 function Header() {
     const [openContactForm, setOpenContactForm] = useState(false)
     const [openMenu, setOpenMenu] = useState(false)
+    const router = useRouter();
 
     const [conatctData, setConatctData] = useState({
         name: '',
@@ -76,15 +78,15 @@ function Header() {
                     <img className='w-[39px] h-[42px] ' src="/logo.png" alt="mantapalogo" />
                 </Link>
                 <div className='flex gap-[10px]'>
-                    <Link href={'/Stills'} className='material-bubble cursor-pointer'>STILLS</Link>
-                    <Link href={'/Motions'} className='material-bubble cursor-pointer'>MOTION</Link>
+                    <Link href={'/Stills'} className={`material-bubble cursor-pointer ${router.pathname == '/Stills' ? "!text-white !bg-[#A80018]" : ""}`}>STILLS</Link>
+                    <Link href={'/Motions'} className={`material-bubble cursor-pointer ${router.pathname == '/Motions' ? "!text-white !bg-[#A80018]" : ""}`}>MOTION</Link>
                 </div>
                 <Link href={'/'} className='hidden md:block lg:block'>
                     <img className='w-[52px] h-[52px] cursor-pointer' src="/logo.png" alt="mantapalogo" />
                 </Link>
                 <div className=' gap-[10px] hidden md:flex lg:flex'>
-                    <Link href={'/AboutUs'} className='material-bubble cursor-pointer'>ABOUT</Link>
-                    <Link href={'/Contact'} className='material-bubble !text-white !bg-[#A80018] cursor-pointer'>CONTACT</Link>
+                    <Link href={'/AboutUs'} className={`material-bubble cursor-pointer ${router.pathname == '/AboutUs' ? "!text-white !bg-[#A80018]" : ""}`}>ABOUT</Link>
+                    <Link href={'/Contact'} className={`material-bubble cursor-pointer ${router.pathname == '/Contact' ? "!text-white !bg-[#A80018]" : ""}`}>CONTACT</Link>
                 </div>
                 <div className='lg:hidden md:hidden block'>
                     <p onClick={() => { setOpenMenu(!openMenu) }} className='material-bubble1 '>MENU</p>
