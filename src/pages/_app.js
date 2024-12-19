@@ -13,26 +13,28 @@ const PRELOADER_DELAY = 8000;
 
 export default function App({ Component, pageProps }) {
     const [loading, setLoading] = useState(false);
+    const [preloaderShown, setPreloaderShown] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         // Handle the initial load
         // if (router.pathname === "/") {
-            setLoading(true);
-            const timeout = setTimeout(() => setLoading(false), PRELOADER_DELAY);
-            return () => clearTimeout(timeout); // Cleanup timeout
+        setLoading(true);
+        const timeout = setTimeout(() => setLoading(false), PRELOADER_DELAY);
+        return () => clearTimeout(timeout); // Cleanup timeout
         // }
     }, [router.pathname]);
 
     useEffect(() => {
         const handleRouteChangeStart = (url) => {
-            if (url === "/") {
+            if (!preloaderShown) {
                 setLoading(true);
             }
         };
 
         const handleRouteChangeComplete = () => {
             setLoading(false);
+            setPreloaderShown(true);
         };
 
         // const handleRouteChangeComplete = (url) => {
@@ -54,7 +56,7 @@ export default function App({ Component, pageProps }) {
         };
     }, [router]);
 
-    return loading ? (
+    return loading && !preloaderShown ? (
         <Preloader />
     ) : (
         <Component {...pageProps} />
