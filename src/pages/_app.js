@@ -17,11 +17,11 @@ export default function App({ Component, pageProps }) {
 
     useEffect(() => {
         // Handle the initial load
-        if (router.pathname === "/") {
+        // if (router.pathname === "/") {
             setLoading(true);
             const timeout = setTimeout(() => setLoading(false), PRELOADER_DELAY);
             return () => clearTimeout(timeout); // Cleanup timeout
-        }
+        // }
     }, [router.pathname]);
 
     useEffect(() => {
@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }) {
         };
     }, [router]);
 
-    return loading && router.pathname === "/" ? (
+    return loading ? (
         <Preloader />
     ) : (
         <Component {...pageProps} />
