@@ -4,12 +4,14 @@ import debounce from 'lodash.debounce';
 const Preloader = () => {
     const [videoSrc, setVideoSrc] = useState(null);
     const [gifSrc, setGifSrc] = useState(null);
+    const [audioSrc, setAudioSrc] = useState('/bg-audio-preloader.mp3');
     const [isMuted, setIsMuted] = useState(false);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [canPlayWithSound, setCanPlayWithSound] = useState(false);
     const videoRef = useRef(null);
 
     useEffect(() => {
+        // setAudioSrc("/bg-audio-preloader.mp3");
         const updateVideoSource = () => {
             const src = window.innerWidth < 768 ? '/Mobilepreloader.mp4' : '/preloader.mp4';
             if (src !== videoSrc) {
@@ -80,7 +82,12 @@ const Preloader = () => {
                     Your browser does not support the video tag.
                 </video>
             )} */}
-            <img src={gifSrc} alt='preloader' className={`preloader-image lg:w-full lg:h-full w-full h-full`} /> 
+            <img src={gifSrc} alt='preloader' className={`preloader-image lg:w-full lg:h-full w-full h-full`} />
+            <audio autoPlay>
+                {/* <source src="horse.ogg" type="audio/ogg" /> */}
+                <source src={`${audioSrc}`} type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
             {/* ${isVideoLoaded ? 'hidden' : ''} */}
             {/* {!isVideoLoaded && <div className="loading-spinner">Loading...</div>} Show spinner */}
             <button
