@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 
 const Preloader = () => {
     const [videoSrc, setVideoSrc] = useState(null);
+    const [gifSrc, setGifSrc] = useState(null);
     const [isMuted, setIsMuted] = useState(false);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [canPlayWithSound, setCanPlayWithSound] = useState(false);
@@ -17,13 +18,22 @@ const Preloader = () => {
             }
         };
 
+        const updateGifSource = () => {
+            const src = window.innerWidth < 768 ? '/Mobilepreloader.gif' : '/preloader.gif';
+            if (src !== gifSrc) {
+                setGifSrc(src);
+                // setIsVideoLoaded(false);
+            }
+        }
+
         updateVideoSource();
+        updateGifSource();
 
         const debouncedResizeHandler = debounce(updateVideoSource, 200);
         window.addEventListener('resize', debouncedResizeHandler);
 
         return () => window.removeEventListener('resize', debouncedResizeHandler);
-    }, [videoSrc]);
+    }, [videoSrc, gifSrc]);
 
     const handleLoadedMetadata = () => {
         setIsVideoLoaded(true);
@@ -52,7 +62,7 @@ const Preloader = () => {
 
     return (
         <div className="preloader">
-            {videoSrc && (
+            {/* {videoSrc && (
                 <video
                     ref={videoRef}
                     className={`preloader-video lg:w-full lg:h-full w-[326px] h-[400px] lg:object-cover ${
@@ -69,8 +79,10 @@ const Preloader = () => {
                     <source src={videoSrc.replace('.mp4', '.webm')} type="video/webm" />
                     Your browser does not support the video tag.
                 </video>
-            )}
-            {!isVideoLoaded && <div className="loading-spinner">Loading...</div>} {/* Show spinner */}
+            )} */}
+            <img src={gifSrc} alt='preloader' className={`preloader-image lg:w-full lg:h-full w-full h-full`} /> 
+            {/* ${isVideoLoaded ? 'hidden' : ''} */}
+            {/* {!isVideoLoaded && <div className="loading-spinner">Loading...</div>} Show spinner */}
             <button
                 onClick={toggleMute}
                 style={{
