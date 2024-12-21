@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import debounce from 'lodash.debounce';
 
 const Preloader = () => {
+    const audioRef = useRef(null);
     const [videoSrc, setVideoSrc] = useState(null);
     const [gifSrc, setGifSrc] = useState(null);
     const [audioSrc, setAudioSrc] = useState('/bg-audio-preloader.mp3');
@@ -12,6 +13,7 @@ const Preloader = () => {
 
     useEffect(() => {
         // setAudioSrc("/bg-audio-preloader.mp3");
+
         const updateVideoSource = () => {
             const src = window.innerWidth < 768 ? '/Mobilepreloader.mp4' : '/preloader.mp4';
             if (src !== videoSrc) {
@@ -64,12 +66,13 @@ const Preloader = () => {
 
     return (
         <div className="preloader">
-            {/* {videoSrc && (
+            {videoSrc && (
                 <video
                     ref={videoRef}
-                    className={`preloader-video lg:w-full lg:h-full w-[326px] h-[400px] lg:object-cover ${
-                        isVideoLoaded ? '' : 'hidden'
-                    }`}
+                    className={`preloader-video lg:w-full lg:h-full w-[326px] h-[400px] lg:object-cover hidden`}
+                    // ${
+                    //     isVideoLoaded ? '' : 'hidden'
+                    // }
                     autoPlay
                     muted={isMuted}
                     loop
@@ -81,13 +84,13 @@ const Preloader = () => {
                     <source src={videoSrc.replace('.mp4', '.webm')} type="video/webm" />
                     Your browser does not support the video tag.
                 </video>
-            )} */}
+            )}
             <img src={gifSrc} alt='preloader' className={`preloader-image lg:w-full lg:h-full w-full h-full`} />
-            <audio autoPlay>
-                {/* <source src="horse.ogg" type="audio/ogg" /> */}
-                <source src={`${audioSrc}`} type="audio/mpeg" />
+            
+            {/* <audio autoPlay ref={audioRef} loop>
+                <source src={audioSrc} type="audio/mpeg" />
                 Your browser does not support the audio element.
-            </audio>
+            </audio> */}
             {/* ${isVideoLoaded ? 'hidden' : ''} */}
             {/* {!isVideoLoaded && <div className="loading-spinner">Loading...</div>} Show spinner */}
             <button
