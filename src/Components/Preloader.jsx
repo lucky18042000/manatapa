@@ -2,18 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import debounce from 'lodash.debounce';
 
 const Preloader = () => {
-    const audioRef = useRef(null);
     const [videoSrc, setVideoSrc] = useState(null);
-    const [gifSrc, setGifSrc] = useState(null);
-    const [audioSrc, setAudioSrc] = useState('/bg-audio-preloader.mp3');
-    const [isMuted, setIsMuted] = useState(false);
+    const [isMuted, setIsMuted] = useState(true);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [canPlayWithSound, setCanPlayWithSound] = useState(false);
     const videoRef = useRef(null);
 
     useEffect(() => {
-        // setAudioSrc("/bg-audio-preloader.mp3");
-
         const updateVideoSource = () => {
             const src = window.innerWidth < 768 ? '/Mobilepreloader.mp4' : '/preloader.mp4';
             if (src !== videoSrc) {
@@ -22,22 +17,13 @@ const Preloader = () => {
             }
         };
 
-        const updateGifSource = () => {
-            const src = window.innerWidth < 768 ? '/Mobilepreloader.gif' : '/preloader.gif';
-            if (src !== gifSrc) {
-                setGifSrc(src);
-                // setIsVideoLoaded(false);
-            }
-        }
-
         updateVideoSource();
-        updateGifSource();
 
         const debouncedResizeHandler = debounce(updateVideoSource, 200);
         window.addEventListener('resize', debouncedResizeHandler);
 
         return () => window.removeEventListener('resize', debouncedResizeHandler);
-    }, [videoSrc, gifSrc]);
+    }, [videoSrc]);
 
     const handleLoadedMetadata = () => {
         setIsVideoLoaded(true);
@@ -69,10 +55,8 @@ const Preloader = () => {
             {videoSrc && (
                 <video
                     ref={videoRef}
-                    className={`preloader-video lg:w-full lg:h-full w-[326px] h-[400px] lg:object-cover hidden`}
-                    // ${
-                    //     isVideoLoaded ? '' : 'hidden'
-                    // }
+                    className={`preloader-video lg:w-full lg:h-full w-[326px] h-[400px] lg:object-cover ${isVideoLoaded ? '' : 'hidden'
+                        }`}
                     autoPlay
                     muted={isMuted}
                     loop
@@ -85,13 +69,6 @@ const Preloader = () => {
                     Your browser does not support the video tag.
                 </video>
             )}
-            <img src={gifSrc} alt='preloader' className={`preloader-image lg:w-full lg:h-full w-full h-full`} />
-            
-            {/* <audio autoPlay ref={audioRef} loop>
-                <source src={audioSrc} type="audio/mpeg" />
-                Your browser does not support the audio element.
-            </audio> */}
-            {/* ${isVideoLoaded ? 'hidden' : ''} */}
             {/* {!isVideoLoaded && <div className="loading-spinner">Loading...</div>} Show spinner */}
             <button
                 onClick={toggleMute}
